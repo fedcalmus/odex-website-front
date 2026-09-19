@@ -1,0 +1,64 @@
+@use "abstracts" as tokens;
+
+// Figma 194:16875 — 420 tall; title at y=88, then the lead, then the conditions strip.
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--color-surface-canvas); // shows while the photo loads
+}
+
+.image {
+  z-index: -2;
+  object-fit: cover;
+}
+
+// Light veil at the top → the page ground (surface/2 at 98%) at the foot.
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgb(6 9 10 / 30%) 0%,
+    rgb(6 9 10 / 62%) 45%,
+    rgb(23 33 36 / 98%) 100%
+  );
+}
+
+.inner {
+  @include tokens.page-container;
+  display: flex;
+  flex-direction: column;
+  gap: 14px; // Figma value
+  padding-top: tokens.space("2xl");
+  padding-bottom: 72px; // the search band overlaps the last 44px
+
+  @include tokens.respond-to("lg") {
+    min-height: 420px;
+    padding-top: 88px; // Figma value
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; // Figma value
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-on-photo);
+  text-wrap: balance;
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 620px; // Figma value
+  color: var(--color-text-secondary);
+}

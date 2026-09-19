@@ -1,0 +1,100 @@
+@use "abstracts" as tokens;
+
+// Figma 194:16271 — surface/canvas (#0b1011), 48px top padding, 48px side padding.
+.footer {
+  padding-top: tokens.space("2xl");
+  background-color: var(--color-surface-canvas);
+}
+
+.columns {
+  @include tokens.page-container(48px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: tokens.space("xl") tokens.space("lg");
+  padding-bottom: 44px; // Figma value
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: 408px repeat(3, minmax(0, 1fr));
+    gap: 40px; // Figma value
+  }
+}
+
+.brand {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px; // Figma value
+
+  @include tokens.respond-to("lg") {
+    grid-column: auto;
+  }
+}
+
+.brandLink {
+  border-radius: tokens.radius("xs");
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.description {
+  @include tokens.text("body-small");
+  max-width: 340px;
+  color: var(--color-text-muted);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; // Figma value
+}
+
+.columnTitle {
+  @include tokens.text("micro-caps");
+  color: var(--color-text-faint);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+}
+
+.link {
+  @include tokens.text("body-small");
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.cta {
+  @include tokens.page-container(48px);
+  padding-bottom: 28px; // Figma value
+}
+
+.legal {
+  @include tokens.page-container(48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  padding-top: 20px; // Figma values
+  padding-bottom: tokens.space("lg");
+  border-top: 1px solid var(--color-border-card);
+}
+
+.copyright {
+  @include tokens.text("meta");
+  color: var(--color-text-faint);
+}

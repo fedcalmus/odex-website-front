@@ -1,0 +1,96 @@
+@use "abstracts" as tokens;
+
+// Figma 67:857 — 1358×82, radius 18, surface/0, hairline, 13px padding; four
+// 56px segments at radius 12 on surface/1 plus a 128×56 lime button.
+.band {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px; // Figma value
+  padding: 12px 13px; // Figma values
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-0);
+  box-shadow: tokens.$shadow-card;
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) 128px;
+  }
+}
+
+.segment {
+  display: flex;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+  min-height: tokens.$target-field;
+  padding: 9px tokens.space("md"); // Figma: 9 / 16
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-3);
+  }
+
+  &:focus-within {
+    @include tokens.focus-ring;
+    outline-offset: 0;
+  }
+}
+
+.segmentLabel {
+  @include tokens.text("micro-caps");
+  color: var(--color-text-faint);
+}
+
+// The select is unstyled chrome: the segment draws the box, this just shows the value.
+.select {
+  @include tokens.text("body");
+  @include tokens.truncate;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0; // the segment draws the focus ring
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  appearance: none;
+
+  option {
+    background-color: var(--color-surface-1);
+    color: var(--color-text-primary);
+  }
+}
+
+.submit {
+  @include tokens.text("h3");
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.space("xs");
+  min-height: tokens.$target-field;
+  padding-inline: tokens.space("lg");
+  border-radius: tokens.radius("md"); // Figma: r12 here, not the marketplace pill
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-brand-primary-hover);
+  }
+
+  &:active {
+    background-color: var(--color-brand-primary-pressed);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+
+  @include tokens.respond-to("lg") {
+    grid-column: auto;
+    padding-inline: tokens.space("md");
+  }
+}

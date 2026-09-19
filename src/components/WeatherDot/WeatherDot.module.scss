@@ -1,0 +1,27 @@
+@use "abstracts" as tokens;
+
+.dot {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: tokens.radius("full");
+}
+
+.clear {
+  background-color: var(--color-weather-clear);
+}
+
+.cloud {
+  background-color: var(--color-weather-cloud);
+}
+
+.rain {
+  background-color: var(--color-weather-rain);
+}
+
+.snow {
+  background-color: var(--color-weather-snow);
+}
+
+.wind {
+  background-color: var(--color-weather-wind);
+}

@@ -1,0 +1,75 @@
+@use "abstracts" as tokens;
+
+.grid {
+  display: grid;
+  gap: 20px; // Figma value — not on the spacing scale
+  grid-template-columns: minmax(0, 1fr);
+  list-style: none;
+}
+
+// 440 × 3 at a 1360 container.
+.cols3 {
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// 321 × 4 at a 1344 container, 325 × 4 at 1360.
+.cols4 {
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include tokens.respond-to("xl") {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+// Seven portrait tiles: a swipeable strip until seven fit across (177 × 7 at 1358).
+.strip {
+  grid-auto-flow: column;
+  grid-auto-columns: 160px;
+  grid-template-columns: none;
+  overflow-x: auto;
+  padding-bottom: tokens.space("md"); // room for the tiles' drop shadow, which overflow would otherwise clip
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+
+  > li {
+    scroll-snap-align: start;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include tokens.respond-to("xl") {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0;
+  }
+}
+
+// Discovery: 336 × 3 in a 1048 column beside the 280 sidebar (the sidebar only
+// exists from lg, so 2-up is right until xl).
+.results {
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include tokens.respond-to("xl") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// List view: one card per row. Same card, no separate design — capped so the
+// media doesn't stretch absurdly wide.
+.list {
+  max-width: 720px;
+}

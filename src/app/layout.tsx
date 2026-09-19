@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
-import { Roboto, Roboto_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Noto_Sans_Armenian, Roboto, Roboto_Mono } from "next/font/google";
+import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.scss";
 
 // Mardoto (the licensed Armenian face) isn't available in this environment
@@ -9,7 +10,16 @@ import "./globals.scss";
 const fontSans = Roboto({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
+});
+
+// Roboto's latin subset has no Armenian glyphs. Without this the whole site —
+// which is Armenian copy — would render in whatever the OS falls back to.
+// Second in the font stack (see abstracts/_typography.scss); drop it when
+// Mardoto lands.
+const fontArmenian = Noto_Sans_Armenian({
+  variable: "--font-armenian",
+  subsets: ["armenian"],
 });
 
 const fontMono = Roboto_Mono({
@@ -19,13 +29,32 @@ const fontMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Odex",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: "Outdoor events marketplace, Armenia.",
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "hy_AM",
+  },
+  twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0e1413", // the header bar (surface/nav)
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontMono.variable}`}>
+    <html
+      lang="hy"
+      className={`${fontSans.variable} ${fontArmenian.variable} ${fontMono.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

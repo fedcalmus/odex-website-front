@@ -1,0 +1,45 @@
+@use "abstracts" as tokens;
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; // Figma value
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 6px; // Figma value
+}
+
+.count {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.left {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.alert {
+  color: var(--color-brand-accent);
+}
+
+.track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: tokens.radius("xs");
+  background-color: var(--color-surface-pressed);
+}
+
+.fill {
+  height: 100%;
+  border-radius: tokens.radius("xs");
+  background-color: var(--color-brand-primary);
+}
+
+.fillAlert {
+  background-color: var(--color-brand-accent);
+}

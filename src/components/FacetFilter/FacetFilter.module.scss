@@ -1,0 +1,31 @@
+@use "abstracts" as tokens;
+
+// Figma "Regions": surface/0, hairline, radius 16, padding 20, 14px rhythm.
+.facet {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; // Figma value
+  min-width: 0;
+  padding: 20px; // Figma value
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+}
+
+// A <legend> can't be a flex item; `float` pulls it into the flow so the card's gap applies.
+.title {
+  @include tokens.text("label");
+  float: left;
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 0;
+  color: var(--color-text-primary);
+}
+
+.options {
+  display: flex;
+  clear: both;
+  flex-direction: column;
+  gap: 14px; // Figma value
+  list-style: none;
+}

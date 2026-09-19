@@ -1,0 +1,74 @@
+@use "abstracts" as tokens;
+
+// Figma 67:837. Copy stacks with a 10px gap; the link sits right, aligned to
+// the bottom of the copy (baseline of the last line). Below md the link drops
+// beneath the copy and the title steps down to 26px.
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: tokens.space("sm");
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: tokens.space("lg");
+  }
+}
+
+.copy {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 10px; // Figma value — not on the spacing scale
+  min-width: 0;
+}
+
+.eyebrow {
+  @include tokens.text("overline");
+  color: var(--color-text-faint);
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.description {
+  @include tokens.text("body");
+  color: var(--color-text-muted);
+}
+
+.link {
+  @include tokens.text("label");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+  white-space: nowrap;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-brand-primary-hover);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.arrow {
+  transition: transform 0.15s ease;
+}
+
+.link:hover .arrow {
+  transform: translateX(3px);
+}

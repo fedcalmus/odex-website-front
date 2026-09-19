@@ -1,0 +1,20 @@
+@use "abstracts" as tokens;
+
+// Figma 62:821 — 30px pill, 12px side padding, 8px gaps, dark chip at 82%.
+.pill {
+  @include tokens.text("meta");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  height: 30px;
+  padding-inline: tokens.space("sm");
+  border-radius: tokens.radius("full");
+  background-color: var(--color-overlay-chip);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.date {
+  @include tokens.text("micro-caps");
+  color: var(--color-text-muted);
+}

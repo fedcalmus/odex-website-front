@@ -3,6 +3,8 @@ import "../src/styles/main.scss";
 
 const preview: Preview = {
   parameters: {
+    // App Router mocks: NavLink / SortSelect / FilterPanel read the pathname and router.
+    nextjs: { appDirectory: true, navigation: { pathname: "/events" } },
     backgrounds: {
       options: {
         odexCanvas: { name: "Odex canvas", value: "#101817" },

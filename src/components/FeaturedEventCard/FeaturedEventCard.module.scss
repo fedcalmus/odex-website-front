@@ -1,0 +1,61 @@
+@use "abstracts" as tokens;
+
+// Figma 71:932 — 320 wide, radius 18, glass fill, 16px rhythm, 20/22 padding.
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  padding: 20px 22px 22px; // Figma values
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-panel-glass);
+  box-shadow: tokens.$shadow-card;
+}
+
+.eyebrow {
+  @include tokens.text("micro");
+  color: var(--color-brand-primary);
+}
+
+.event {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; // Figma value
+}
+
+.title {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.meta {
+  @include tokens.text("meta");
+  color: var(--color-text-muted);
+}
+
+.capacity {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Figma value
+}
+
+.track {
+  flex: 1 1 0;
+  height: 4px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-track);
+}
+
+.fill {
+  height: 100%;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+}
+
+.free {
+  @include tokens.text("caption");
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

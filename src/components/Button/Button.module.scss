@@ -56,16 +56,19 @@
   padding-inline: tokens.space("sm");
 }
 
+// Medium and Large are confirmed from the marketplace homepage instances
+// (featured-event "Ամրագրել տեղը", hero CTA): Web/Action 14 Medium, 24px / 28px
+// side padding. Small stays on the nearest scale step until it's measured.
 .md {
-  @include tokens.text("label");
+  @include tokens.text("action");
   height: 48px;
-  padding-inline: tokens.space("md");
+  padding-inline: 24px; // Figma value — not on the spacing scale (md = 16, lg = 24 is 1px-off for Large)
 }
 
 .lg {
-  @include tokens.text("label-large");
+  @include tokens.text("action");
   height: 56px; // = target/field, the outdoor touch-target size
-  padding-inline: tokens.space("lg");
+  padding-inline: 28px; // Figma value — not on the spacing scale
 }
 
 // Variants
@@ -83,8 +86,9 @@
 }
 
 .secondary {
-  background-color: transparent;
-  border-color: var(--color-border-strong);
+  // Figma "Button (web)" secondary (Load more): chip fill + chip rim.
+  background-color: var(--color-surface-chip);
+  border-color: var(--color-border-chip);
   color: var(--color-text-primary);
 
   &:hover:not(:disabled) {

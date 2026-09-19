@@ -1,0 +1,18 @@
+@use "abstracts" as tokens;
+
+// Figma: surface/3, pill, padding 4 / 10 / 4 / 8, 5px gap, 11px label.
+.tag {
+  @include tokens.text("caption");
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; // Figma value
+  padding: tokens.space("2xs") 10px tokens.space("2xs") tokens.space("xs");
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-3);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.plain {
+  padding-inline-start: 10px;
+}

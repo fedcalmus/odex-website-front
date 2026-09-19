@@ -1,0 +1,54 @@
+@use "abstracts" as tokens;
+
+// Figma "Toolbar": 32 above, 24 below, 20px between the filter bar and the controls.
+.toolbar {
+  @include tokens.page-container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px; // Figma value
+  padding-top: tokens.space("xl");
+  padding-bottom: tokens.space("lg");
+}
+
+.applied {
+  flex: 1 1 320px;
+}
+
+// Figma "Body": sidebar 280, 32px gutter, 96 below.
+.body {
+  @include tokens.page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-bottom: tokens.space("4xl");
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: 280px minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.sidebar {
+  display: none;
+
+  @include tokens.respond-to("lg") {
+    position: sticky;
+    top: 100px; // clears the 76px sticky header
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Figma value
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; // Figma value
+  min-width: 0;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // Figma value
+}

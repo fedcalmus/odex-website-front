@@ -1,0 +1,12 @@
+@use "abstracts" as tokens;
+
+.guides {
+  display: grid;
+  gap: tokens.space("md");
+  width: 100%;
+  list-style: none;
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,103 @@
+@use "abstracts" as tokens;
+
+// Figma 194:16214 — 1440×680. Copy at x=40 y=104 (720 wide); panels at x=1080
+// y=80 (320 wide, 10px apart).
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--color-surface-canvas); // shows while the photo loads
+}
+
+.image {
+  z-index: -2;
+  object-fit: cover;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-scrim-hero);
+}
+
+.inner {
+  @include tokens.page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-block: tokens.space("2xl");
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: minmax(0, 720px) 320px;
+    justify-content: space-between;
+    align-items: start;
+    min-height: 680px;
+    padding-top: 80px; // Figma value
+    padding-bottom: 80px;
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px; // Figma value
+
+  @include tokens.respond-to("lg") {
+    padding-top: tokens.space("lg"); // copy starts 24px below the panels (y=104 vs 80)
+  }
+}
+
+.eyebrow {
+  @include tokens.text("overline");
+  color: var(--color-brand-primary);
+}
+
+// Figma "Web/Hero" 68/1.06 Bold. Steps down so 68px never overflows a phone.
+.title {
+  @include tokens.text("hero");
+  font-size: tokens.px-to-rem(38);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(52);
+  }
+
+  @include tokens.respond-to("xl") {
+    font-size: tokens.px-to-rem(68);
+    text-wrap: initial; // the design's own line breaks take over
+  }
+}
+
+// Inline (flowing) below xl; the design's three hard-broken lines from xl up.
+.line {
+  @include tokens.respond-to("xl") {
+    display: block;
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 600px;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("md");
+}
+
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+  width: 100%;
+  max-width: 320px;
+
+  @include tokens.respond-to("lg") {
+    width: 320px;
+  }
+}

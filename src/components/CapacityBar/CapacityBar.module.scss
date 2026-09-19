@@ -1,0 +1,48 @@
+@use "abstracts" as tokens;
+
+// Figma 62:856 — 4px track (white 10%, not solid grey: an opaque track on dark
+// reads heavier than the fill and inverts the reading), then count + price.
+.capacity {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg"); // Figma: 20 — nearest step
+  width: 100%;
+}
+
+.track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-track);
+}
+
+.fill {
+  height: 100%;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+}
+
+.accent {
+  background-color: var(--color-brand-accent);
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: tokens.space("sm");
+}
+
+.count {
+  @include tokens.text("micro-caps");
+  flex: 1 1 0;
+  min-width: 0;
+  color: var(--color-text-muted);
+}
+
+// The largest figure in the card footer — the number the decision turns on.
+.price {
+  @include tokens.text("price");
+  flex-shrink: 0;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}

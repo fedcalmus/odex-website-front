@@ -117,3 +117,15 @@ export const Controlled: Story = {
     await expect(checkbox).toBeChecked();
   },
 };
+
+// Compact 18px box with a trailing facet count — the discovery filter panel row.
+export const FilterRow: Story = {
+  args: { size: "small", label: "Արշավ", meta: 24 },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("checkbox", { name: /Արշավ/ })).toBeInTheDocument();
+    await expect(canvas.getByText("24")).toBeVisible();
+  },
+};
+
+// A count of zero is shown as "0" — not hidden (the option is still selectable).
+export const FilterRowZero: Story = { args: { size: "small", label: "Օդային", meta: 0 } };

@@ -78,8 +78,58 @@
     var(--color-overlay-scrim-heavy) 100%
   );
 
+  // Marketplace surfaces & overlays (homepage). Glass/chip/dim are translucent
+  // on purpose: they sit over photography, so an opaque value would read as a
+  // flat slab on some photos and vanish on others.
+  --color-surface-nav: #{map.get(tokens.$slate, "925")}; // header bar — a step below the page ground
+  --color-surface-inverse: #{map.get(tokens.$slate, "000")}; // white chip over photography (guide card place chip)
+  --color-on-inverse: #{map.get(tokens.$slate, "975")};
+  --color-surface-panel-glass: rgb(19 28 30 / 72%); // hero panels over the photograph
+  --color-surface-track: rgb(255 255 255 / 10%); // capacity-bar track — white 10%, not solid grey
+  --color-overlay-chip: rgb(19 28 30 / 82%); // weather pill / sold-out badge — dark, never a bright pill
+  --color-overlay-dim: rgb(7 12 11 / 62%); // unavailable (sold-out) card media
+  --color-border-card: rgb(255 255 255 / 7%); // hairline on cards that sit on the page ground
+  --color-surface-chip: rgb(255 255 255 / 10%); // gear chips, applied-filter chips, the secondary web button
+  --color-border-chip: rgb(255 255 255 / 16%);
+  --color-overlay-glass: rgb(255 255 255 / 12%); // frosted control over the hero photograph (video play button)
+  --color-border-glass: rgb(255 255 255 / 22%);
+
+  // Weather condition dot — a coloured dot + the written condition, never an
+  // icon (unreadable at 12px). Amber = clear, grey = cloud, blue = rain,
+  // white = snow, mint = wind.
+  --color-weather-clear: #{map.get(tokens.$amber, "400")};
+  --color-weather-cloud: #{map.get(tokens.$slate, "200")};
+  --color-weather-rain: #{map.get(tokens.$state-info, "400")};
+  --color-weather-snow: #{map.get(tokens.$slate, "000")};
+  --color-weather-wind: #{map.get(tokens.$mint, "400")};
+
+  // Photo scrims. Card: covers of event/club cards (a card body sits beneath).
+  // Guide: caption sits directly on the photo, so it is heavier. Hero: runs
+  // sideways — dense behind the copy on the left, lighter over the mountain.
+  --gradient-scrim-card: linear-gradient(to bottom, rgb(7 12 11 / 0%) 0%, rgb(7 12 11 / 78%) 100%);
+  --gradient-scrim-guide: linear-gradient(
+    to bottom,
+    rgb(7 12 11 / 15%) 0%,
+    rgb(7 12 11 / 50%) 55%,
+    rgb(7 12 11 / 92%) 100%
+  );
+  --gradient-scrim-hero: linear-gradient(
+    90deg,
+    rgb(6 9 10 / 92%) 0%,
+    rgb(6 9 10 / 55%) 42%,
+    rgb(6 9 10 / 20%) 72%,
+    rgb(6 9 10 / 72%) 100%
+  );
+
+  // Text-legible tints of the state colours (state/300) — for LABELS on dark
+  // surfaces, where the 400 fill colours are meant for dots and icons.
+  --color-state-success-tint: #{map.get(tokens.$state-success, "300")};
+  --color-state-danger-tint: #{map.get(tokens.$state-danger, "300")};
+  --color-state-info-tint: #{map.get(tokens.$state-info, "300")};
+  --color-state-warning-tint: #{map.get(tokens.$state-warning, "300")};
+
   // State — tuned for dark grounds, not reused from any light-mode equivalent
-  --color-state-success: #{map.get(tokens.$state-success, "400")};
+  --color-state-success:#{map.get(tokens.$state-success, "400")};
   --color-state-success-subtle: #{map.get(tokens.$state-success, "800")};
   --color-state-warning: #{map.get(tokens.$state-warning, "400")};
   --color-state-warning-subtle: #{map.get(tokens.$state-warning, "800")};

@@ -1,0 +1,38 @@
+@use "abstracts" as tokens;
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("xs");
+  width: 100%;
+  padding: tokens.space("3xl") tokens.space("lg");
+  border: 1px dashed var(--color-border-strong);
+  border-radius: tokens.radius("card");
+  text-align: center;
+}
+
+.title {
+  @include tokens.text("h2");
+  color: var(--color-text-primary);
+}
+
+.description {
+  @include tokens.text("body");
+  color: var(--color-text-muted);
+}
+
+.action {
+  @include tokens.text("label");
+  margin-top: tokens.space("xs");
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

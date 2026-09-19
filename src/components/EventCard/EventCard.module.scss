@@ -1,0 +1,173 @@
+@use "abstracts" as tokens;
+
+// Figma "Event card" 194:16245 — surface/0, radius 18, Elevation/Card shadow,
+// 176px media, body padding 18/18/20 with a 12px rhythm.
+.card {
+  position: relative; // the title link stretches over the whole card
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-0);
+  box-shadow: tokens.$shadow-card;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  // Hover: the card lifts a hair and the photo eases in. On dark, "raised"
+  // reads through position and a lighter rim, not a heavier shadow.
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      tokens.$shadow-card,
+      0 0 0 1px var(--color-border-strong);
+  }
+}
+
+.media {
+  position: relative;
+  flex-shrink: 0;
+  height: 176px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim-card);
+  pointer-events: none;
+}
+
+// Sold out: the card stays visible (a vanishing event reads as a bug and
+// throws away demand) but the photo is dimmed.
+.dim {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay-dim);
+  pointer-events: none;
+}
+
+.weather {
+  position: absolute;
+  top: 17px; // Figma value
+  left: 17px;
+}
+
+.status {
+  position: absolute;
+  top: 17px;
+  right: 17px;
+}
+
+.body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  padding: 18px 18px 20px; // Figma values — not on the spacing scale
+}
+
+.club {
+  display: flex;
+  align-items: center;
+  gap: 9px; // Figma value
+  min-width: 0;
+}
+
+.logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+}
+
+.logoImage {
+  object-fit: cover;
+}
+
+.clubName {
+  @include tokens.text("meta");
+  @include tokens.truncate;
+  color: var(--color-text-muted);
+}
+
+.title {
+  @include tokens.text("card-title");
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+// Stretched link: one real link per card (the title names it), clickable
+// across the whole card, without nesting interactive content.
+.link {
+  transition: color 0.15s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: tokens.radius("card"); // the ring follows the card, not the link
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      @include tokens.focus-ring;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.card:hover .link {
+  color: var(--color-brand-primary);
+}
+
+.when {
+  @include tokens.text("body-small");
+  color: var(--color-text-muted);
+}
+
+.route {
+  @include tokens.text("body-small");
+  color: var(--color-text-faint);
+}
+
+.difficulty {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Figma value
+}
+
+// Difficulty carries its anchor on the card: "Միջին" alone is subjective,
+// "10–16 կմ · 1 000 մ" is not.
+.anchor {
+  @include tokens.text("micro-caps");
+  flex: 1 1 0;
+  min-width: 0;
+  color: var(--color-text-faint);
+}
+
+// Not a link → no lift/zoom on hover.
+.static {
+  &:hover {
+    transform: none;
+    box-shadow: tokens.$shadow-card;
+  }
+
+  &:hover .image {
+    transform: none;
+  }
+}

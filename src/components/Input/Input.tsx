@@ -3,7 +3,7 @@ import type { ComponentPropsWithRef, ReactNode } from "react";
 import { Icon } from "@/components/Icon";
 import styles from "./Input.module.scss";
 
-export type InputSize = "default" | "compact";
+export type InputSize = "default" | "compact" | "form";
 
 export interface InputProps extends Omit<ComponentPropsWithRef<"input">, "size"> {
   /**
@@ -15,8 +15,22 @@ export interface InputProps extends Omit<ComponentPropsWithRef<"input">, "size">
   /**
    * `default` is the 52px touch-first field (Figma "Mobile field").
    * `compact` is the 42px field used inside dense cards (Figma "Participant form").
+   * `form` is the 44px marketplace form field (Figma "Form field" 18:461): label
+   * above, radius 8, and a helper line that is ALWAYS present.
    */
   size?: InputSize;
+  /** Marks the field required: a red asterisk after the label, plus `required` for assistive tech. */
+  required?: boolean;
+  /**
+   * Label for an OPTIONAL field ("ոչ պարտադիր"). Required is marked, optional is
+   * labelled — otherwise the user is left counting asterisks.
+   */
+  optionalLabel?: string;
+  /**
+   * Helper text under the box. When set, the line ALWAYS reserves its height — an
+   * error takes over the same slot — so the form never jumps when validation fires.
+   */
+  helper?: string;
   /**
    * Validation message. Says what to do, not what went wrong. Turns the
    * border red, adds the alert icon and is tied to the input for AT.
@@ -35,11 +49,15 @@ export interface InputProps extends Omit<ComponentPropsWithRef<"input">, "size">
 const ICON_SIZE: Record<InputSize, number> = {
   default: 20,
   compact: 16,
+  form: 16,
 };
 
 export function Input({
   label,
   size = "default",
+  required,
+  optionalLabel,
+  helper,
   error,
   validated,
   disabled,
@@ -51,10 +69,11 @@ export function Input({
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const errorId = `${inputId}-error`;
+  const helperId = `${inputId}-helper`;
 
   const fieldClasses = [
     styles.field,
-    size === "compact" ? styles.compact : styles.default,
+    size === "compact" ? styles.compact : size === "form" ? styles.form : styles.default,
     className,
   ]
     .filter(Boolean)
@@ -80,6 +99,13 @@ export function Input({
       {label ? (
         <label htmlFor={inputId} className={styles.label}>
           {label}
+          {required ? (
+            <span className={styles.required} aria-hidden="true">
+              {" "}
+              *
+            </span>
+          ) : null}
+          {optionalLabel ? <span className={styles.optional}> {optionalLabel}</span> : null}
         </label>
       ) : null}
       <div className={boxClasses}>
@@ -87,13 +113,27 @@ export function Input({
           id={inputId}
           className={styles.control}
           disabled={disabled}
+          required={required}
           aria-invalid={error ? true : undefined}
-          aria-describedby={[describedBy, error ? errorId : null].filter(Boolean).join(" ") || undefined}
+          aria-describedby={
+            [describedBy, error ? errorId : helper ? helperId : null].filter(Boolean).join(" ") || undefined
+          }
           {...rest}
         />
         {status}
       </div>
-      {error ? (
+      {helper ? (
+        // Helper and error share ONE slot, so the field's height never changes.
+        error ? (
+          <p id={errorId} className={styles.error} role="alert">
+            {error}
+          </p>
+        ) : (
+          <p id={helperId} className={styles.helper}>
+            {helper}
+          </p>
+        )
+      ) : error ? (
         <p id={errorId} className={styles.error} role="alert">
           {error}
         </p>

@@ -1,0 +1,56 @@
+@use "abstracts" as tokens;
+
+.header {
+  border-bottom: 1px solid var(--color-border-default);
+  background-color: var(--color-surface-nav);
+}
+
+.bar {
+  @include tokens.page-container;
+  display: flex;
+  align-items: center;
+  gap: tokens.space("md");
+  height: 76px;
+
+  @include tokens.respond-to("xl") {
+    gap: 16px; // Figma value
+  }
+}
+
+.back {
+  @include tokens.text("nav");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.brand {
+  border-radius: tokens.radius("xs");
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.spacer {
+  flex: 1 1 0;
+}
+
+.secure {
+  @include tokens.text("caption");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-muted);
+}

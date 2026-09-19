@@ -1,0 +1,157 @@
+@use "abstracts" as tokens;
+
+// Figma "Club card" 68:904 — 321 wide, radius 18, cover 118, body padding 23/22.
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-0);
+  box-shadow: tokens.$shadow-card;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      tokens.$shadow-card,
+      0 0 0 1px var(--color-border-strong);
+  }
+}
+
+.cover {
+  position: relative;
+  flex-shrink: 0;
+  height: 118px;
+  overflow: hidden;
+}
+
+.coverImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .coverImage {
+  transform: scale(1.05);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim-card);
+  pointer-events: none;
+}
+
+.badge {
+  position: absolute;
+  top: 10px; // Figma value
+  right: 10px;
+}
+
+.body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 14px; // Figma value — not on the spacing scale
+  padding: 0 23px 22px;
+}
+
+// 56px logo overlapping the cover by 28px, ringed in the card colour so it
+// reads as sitting ON the card, not cut out of the photo.
+.logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  margin-top: -28px;
+  overflow: hidden;
+  border: 3px solid var(--color-surface-0);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-2);
+}
+
+.logoImage {
+  object-fit: cover;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; // Figma value
+  min-width: 0;
+}
+
+.nameRow {
+  @include tokens.text("card-title");
+  display: flex;
+  align-items: center;
+  gap: 6px; // Figma value
+  color: var(--color-text-primary);
+}
+
+.link {
+  @include tokens.truncate;
+  transition: color 0.15s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: tokens.radius("card"); // the ring follows the card, not the link
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      @include tokens.focus-ring;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.card:hover .link {
+  color: var(--color-brand-primary);
+}
+
+.verified {
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+}
+
+.classification {
+  @include tokens.text("micro-caps");
+  @include tokens.truncate;
+  color: var(--color-text-faint);
+}
+
+.description {
+  @include tokens.text("body-small");
+  color: var(--color-text-muted);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("lg");
+  margin-top: auto; // pins the stats to the bottom when sibling cards have longer copy
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("lg");
+}
+
+.arrow {
+  margin-inline-start: auto;
+  color: var(--color-brand-primary);
+  transition: transform 0.15s ease;
+}
+
+.card:hover .arrow {
+  transform: translateX(3px);
+}

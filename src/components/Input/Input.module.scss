@@ -133,3 +133,47 @@
     @include tokens.text("body-small");
   }
 }
+
+// Figma "Form field" 18:461: 44px control, radius 8, surface/1, label 13 Medium in
+// text/primary, helper 11 muted. Required = red asterisk; optional = a muted word.
+.form {
+  --input-bg: var(--color-surface-1);
+  gap: 7px; // Figma value
+
+  .label {
+    @include tokens.text("label");
+    color: var(--color-text-primary);
+  }
+
+  .box {
+    gap: tokens.space("xs");
+    height: 44px;
+    padding-inline: 14px; // Figma value
+    border-radius: tokens.radius("sm");
+  }
+
+  .control {
+    @include tokens.text("body-small");
+  }
+
+  // Same type style as the helper it replaces, so swapping them never changes the field's height.
+  .error {
+    @include tokens.text("caption");
+  }
+}
+
+.required {
+  color: var(--color-state-danger);
+}
+
+.optional {
+  @include tokens.text("caption");
+  margin-inline-start: tokens.space("2xs");
+  color: var(--color-text-muted);
+}
+
+.helper {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-muted);
+}

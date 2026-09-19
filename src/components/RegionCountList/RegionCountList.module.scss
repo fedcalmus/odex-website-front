@@ -1,0 +1,43 @@
+@use "abstracts" as tokens;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Figma value
+  border-radius: tokens.radius("xs");
+  transition: color 0.15s ease;
+
+  &:hover .name {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.pin {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.name {
+  @include tokens.text("body-small");
+  flex: 1 1 0;
+  min-width: 0;
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+}
+
+.count {
+  @include tokens.text("caption");
+  color: var(--color-text-faint);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,96 @@
+@use "abstracts" as tokens;
+
+// Figma "Filter panel": surface/2, hairline, radius 12, card shadow; sections
+// divided by hairlines.
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-2);
+  box-shadow: tokens.$shadow-card;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px; // Figma value
+  padding: tokens.space("md") 18px 14px; // Figma values
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.title {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.clear {
+  @include tokens.text("label");
+  color: var(--color-text-link);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-brand-primary-hover);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+// Collapsible groups: native <details>, open by default.
+.group {
+  padding: tokens.space("md") 18px;
+  border-bottom: 1px solid var(--color-border-default);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &[open] > .summary {
+    margin-bottom: tokens.space("md");
+  }
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.groupTitle {
+  @include tokens.text("label");
+  flex: 1 1 0;
+  color: var(--color-text-primary);
+}
+
+.chevron {
+  color: var(--color-text-muted);
+  transition: transform 0.15s ease;
+}
+
+.group:not([open]) .chevron {
+  transform: rotate(180deg);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  list-style: none;
+}

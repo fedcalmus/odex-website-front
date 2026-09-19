@@ -1,0 +1,16 @@
+@use "abstracts" as tokens;
+
+.loadMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px; // Figma value
+  width: 100%;
+  padding-top: tokens.space("md");
+}
+
+.status {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+  text-align: center;
+}

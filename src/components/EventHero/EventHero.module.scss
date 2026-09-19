@@ -1,0 +1,265 @@
+@use "abstracts" as tokens;
+
+// Figma 194:17522 — full-bleed, 520 tall. Weather + actions 40px from the top
+// corners; title block and gallery 40px from the bottom corners.
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 440px;
+  overflow: hidden;
+  padding: 96px 16px 24px;
+  background-color: var(--color-surface-canvas); // shows while the photo loads
+
+  @include tokens.respond-to("md") {
+    padding-inline: 24px;
+  }
+
+  @include tokens.respond-to("lg") {
+    min-height: 520px;
+    padding: 96px 40px 40px;
+  }
+}
+
+.image {
+  z-index: -2;
+  object-fit: cover;
+}
+
+// Fades from a light veil at the top into the page ground (surface/2 at 97%) at the foot.
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgb(6 9 10 / 42%) 0%,
+    rgb(6 9 10 / 55%) 50%,
+    rgb(23 33 36 / 97%) 100%
+  );
+}
+
+.weather {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+
+  @include tokens.respond-to("lg") {
+    top: 40px;
+    left: 40px;
+  }
+}
+
+.actions {
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  display: flex;
+  gap: 10px; // Figma value
+
+  @include tokens.respond-to("lg") {
+    top: 40px;
+    right: 40px;
+  }
+}
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+
+  @include tokens.respond-to("lg") {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px; // Figma value
+  max-width: 860px;
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-on-photo);
+  text-wrap: balance;
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px; // Figma value
+}
+
+.club {
+  @include tokens.text("body-small");
+  display: inline-flex;
+  align-items: center;
+  gap: 9px; // Figma value
+  color: var(--color-text-on-photo);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.logo {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+}
+
+.logoImage {
+  object-fit: cover;
+}
+
+.verified {
+  color: var(--color-brand-primary);
+}
+
+.rating {
+  color: var(--color-text-secondary);
+}
+
+// Gallery strip: 84×62 thumbs, 8px apart; the selected one is ringed in lime.
+.gallery {
+  display: flex;
+  gap: tokens.space("xs");
+  max-width: 100%;
+  padding: 2px; // room for the selected thumb's ring, which overflow would otherwise clip
+  margin: -2px;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: none; // five 84px thumbs don't fit a phone: they scroll
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > li {
+    flex-shrink: 0;
+  }
+}
+
+.thumb {
+  position: relative;
+  display: block;
+  width: 84px;
+  height: 62px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 10px; // Figma value
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-border-chip);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.thumbActive,
+.thumbActive:hover {
+  border-color: var(--color-brand-primary);
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.more {
+  @include tokens.text("label");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 10%); // Figma value
+  background-color: rgb(11 16 17 / 76%);
+  color: var(--color-text-on-photo);
+}
+
+// Full gallery.
+.dialog {
+  width: min(960px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+  color: var(--color-text-primary);
+
+  &::backdrop {
+    background-color: var(--color-overlay-backdrop);
+  }
+}
+
+.dialogPanel {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  padding: tokens.space("md");
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: tokens.$target-min;
+  height: tokens.$target-min;
+  border-radius: tokens.radius("full");
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-1);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: tokens.space("xs");
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.gridItem {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: tokens.radius("md");
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}

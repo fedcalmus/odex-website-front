@@ -1,0 +1,38 @@
+@use "abstracts" as tokens;
+
+// Figma "View": surface/1, hairline, radius 14, 4px padding, two 40px segments (radius 10).
+.toggle {
+  display: inline-flex;
+  padding: tokens.space("2xs");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("tile");
+  background-color: var(--color-surface-1);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px; // Figma value
+  color: var(--color-text-secondary);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.active,
+.active:hover {
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+}

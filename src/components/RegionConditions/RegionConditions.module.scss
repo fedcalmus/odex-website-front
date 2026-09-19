@@ -1,0 +1,85 @@
+@use "abstracts" as tokens;
+
+// Figma "Conditions": dark glass at 72%, hairline, radius 16, five equal cells.
+.strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: rgb(11 16 17 / 72%); // Figma value
+  list-style: none;
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.cell {
+  border-right: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-border-default);
+
+  &:nth-child(2n) {
+    border-right: 0;
+  }
+
+  @include tokens.respond-to("lg") {
+    border-bottom: 0;
+
+    &:nth-child(2n) {
+      border-right: 1px solid var(--color-border-default);
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; // Figma value
+  height: 100%;
+  padding: 18px 22px; // Figma values
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-overlay-wash);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    outline-offset: -2px;
+  }
+}
+
+.region {
+  @include tokens.text("meta");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-secondary);
+}
+
+.reading {
+  display: flex;
+  align-items: flex-end;
+  gap: tokens.space("xs");
+}
+
+.temperature {
+  @include tokens.text("h2");
+  color: var(--color-text-primary);
+}
+
+.condition {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.count {
+  @include tokens.text("micro");
+  color: var(--color-brand-primary);
+}

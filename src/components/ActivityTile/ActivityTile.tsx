@@ -46,7 +46,8 @@ export function ActivityTile({
   return (
     <Link href={href} className={className ? `${styles.tile} ${className}` : styles.tile}>
       {/* Decorative: the link text below already names the group. */}
-      <Image src={image} alt="" fill sizes={sizes} priority={priority} className={styles.image} />
+      {/* `preload`, not the deprecated `priority` (Next 16). */}
+      <Image src={image} alt="" fill sizes={sizes} preload={priority} className={styles.image} />
       <span className={styles.scrim} aria-hidden="true" />
       <span className={styles.caption}>
         <span className={styles.title}>{title}</span>

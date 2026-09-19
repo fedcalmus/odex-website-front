@@ -1,0 +1,28 @@
+@use "abstracts" as tokens;
+
+// Figma: surface/1, radius 10, padding 12/14, 10px gap, caption text.
+.notice {
+  @include tokens.text("caption");
+  display: flex;
+  align-items: flex-start;
+  gap: 10px; // Figma value
+  padding: tokens.space("sm") 14px;
+  border-radius: 10px; // Figma value
+  background-color: var(--color-surface-1);
+  color: var(--color-text-secondary);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+// Info: state/info tint ground, light-blue text (Figma "Notice · Info").
+.info {
+  background-color: var(--color-state-info-subtle);
+  color: var(--color-state-info-tint);
+
+  .icon {
+    color: var(--color-state-info-tint);
+  }
+}

@@ -1,0 +1,12 @@
+@use "abstracts" as tokens;
+
+// Figma: the 82px band sits 44px over the hero and 38px below it.
+.overlap {
+  position: relative;
+  z-index: 1; // above the hero photograph
+  margin-top: -44px; // Figma value
+}
+
+.container {
+  @include tokens.page-container;
+}

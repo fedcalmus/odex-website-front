@@ -1,9 +1,11 @@
 import type { HTMLAttributes } from "react";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/components/Icon";
+import { DIFFICULTY_LABELS } from "@/lib/difficulty";
+import type { DifficultyLevel } from "@/lib/difficulty";
 import styles from "./DifficultyChip.module.scss";
 
-export type DifficultyLevel = "easy" | "moderate" | "hard" | "extreme";
+export type { DifficultyLevel };
 
 interface LevelConfig {
   /** Bar glyph with N of 4 bars filled — see src/icons/source/difficulty-bars-*.svg. */
@@ -14,10 +16,10 @@ interface LevelConfig {
 }
 
 const LEVELS: Record<DifficultyLevel, LevelConfig> = {
-  easy: { icon: "difficulty-bars-1", label: "Հեշտ", className: styles.easy },
-  moderate: { icon: "difficulty-bars-2", label: "Միջին", className: styles.moderate },
-  hard: { icon: "difficulty-bars-3", label: "Դժվար", className: styles.hard },
-  extreme: { icon: "difficulty-bars-4", label: "Ծայրահեղ", className: styles.extreme },
+  easy: { icon: "difficulty-bars-1", label: DIFFICULTY_LABELS.easy, className: styles.easy },
+  moderate: { icon: "difficulty-bars-2", label: DIFFICULTY_LABELS.moderate, className: styles.moderate },
+  hard: { icon: "difficulty-bars-3", label: DIFFICULTY_LABELS.hard, className: styles.hard },
+  extreme: { icon: "difficulty-bars-4", label: DIFFICULTY_LABELS.extreme, className: styles.extreme },
 };
 
 // The bar glyph is drawn on a 14px grid (four 2px bars + three 2px gaps), so

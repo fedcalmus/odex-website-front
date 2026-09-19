@@ -1,0 +1,17 @@
+@use "abstracts" as tokens;
+
+.skip {
+  @include tokens.text("label");
+  position: absolute;
+  top: -100px; // parked off-screen until focused
+  left: tokens.space("md");
+  z-index: 100;
+  padding: tokens.space("sm") tokens.space("md");
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+
+  &:focus {
+    top: tokens.space("md");
+  }
+}

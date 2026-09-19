@@ -265,3 +265,35 @@ export const ParticipantForm: Story = {
     );
   },
 };
+
+// The 44px marketplace "Form field": required is marked, optional is LABELLED, and the helper line
+// always reserves its height — an error takes over the same slot so the form never jumps.
+export const FormFieldRequired: Story = {
+  args: { size: "form", label: "Էլ. փոստ", required: true, helper: "Այստեղ կգա ձեր տոմսը" },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("textbox", { name: /Էլ. փոստ/ })).toBeRequired();
+    await expect(canvas.getByText("Այստեղ կգա ձեր տոմսը")).toBeVisible();
+  },
+};
+
+export const FormFieldOptional: Story = {
+  args: { size: "form", label: "Ալերգիաներ", optionalLabel: "ոչ պարտադիր", helper: "Սնունդ, դեղամիջոցներ" },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText("ոչ պարտադիր")).toBeVisible();
+  },
+};
+
+// The error replaces the helper in the SAME slot, and says what to do.
+export const FormFieldError: Story = {
+  args: {
+    size: "form",
+    label: "Էլ. փոստ",
+    required: true,
+    helper: "Այստեղ կգա ձեր տոմսը",
+    error: "Ստուգեք հասցեն. այն պետք է լինի name@mail.com տեսքով",
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("alert")).toBeVisible();
+    await expect(canvas.queryByText("Այստեղ կգա ձեր տոմսը")).not.toBeInTheDocument();
+  },
+};

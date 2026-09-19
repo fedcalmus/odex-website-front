@@ -1,0 +1,50 @@
+@use "abstracts" as tokens;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md"); // Figma: 16
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: tokens.space("md");
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+    align-items: center;
+    gap: tokens.space("sm");
+  }
+}
+
+.login {
+  @include tokens.text("label");
+  flex: 1 1 0;
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+// Below md the primary action goes full width (Figma: Medium and Large go full width).
+.submit {
+  width: 100%;
+
+  @include tokens.respond-to("md") {
+    width: auto;
+  }
+}

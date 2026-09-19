@@ -1,0 +1,49 @@
+@use "abstracts" as tokens;
+
+// Figma: surface/1, radius 12, padding 16, 14px gap, 52px round photo.
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px; // Figma value
+  min-width: 0;
+  padding: tokens.space("md");
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+}
+
+.photo {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-2);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+}
+
+.name {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.role {
+  @include tokens.text("caption");
+  color: var(--color-brand-primary);
+}
+
+.experience {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}

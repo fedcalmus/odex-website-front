@@ -3,6 +3,7 @@
 
 $font-weight-regular: 400;
 $font-weight-medium: 500;
+$font-weight-bold: 700; // hero, wordmark, live-count stat
 
 // --font-sans / --font-mono are set on <html> by next/font in layout.tsx.
 // Mardoto (the licensed Armenian face) isn't available in this environment
@@ -15,16 +16,22 @@ $font-weight-medium: 500;
 // such as in Storybook) — which invalidates the whole font-family list, not
 // just that entry. Giving var() its own fallback list keeps this safe
 // everywhere.
-$font-family-sans: var(
-  --font-sans,
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Roboto,
-  "Helvetica Neue",
-  Arial,
-  sans-serif
-);
+// Roboto (latin subset) has no Armenian glyphs, so every Armenian string would
+// otherwise fall to whatever the OS picks. --font-armenian (Noto Sans Armenian,
+// set in layout.tsx) sits second, so latin renders in Roboto and Armenian in a
+// real Armenian face until Mardoto is supplied.
+$font-family-sans:
+  var(
+    --font-sans,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif
+  ),
+  var(--font-armenian, "Noto Sans Armenian", sans-serif);
 $font-family-mono: var(
   --font-mono,
   "Roboto Mono",
@@ -125,6 +132,78 @@ $type-scale: (
     line-height: 1.5,
     weight: $font-weight-regular,
     mono: true,
+  ),
+  // Marketplace homepage styles (Figma "Web/*"). Tracking is in em so it
+  // scales with the responsive size overrides: Figma px ÷ Figma size.
+  "hero": (
+    size: 68,
+    line-height: 1.06,
+    weight: $font-weight-bold,
+    letter-spacing: -0.025em,
+  ),
+  "display-s": (
+    size: 34,
+    line-height: 1.147,
+    // Figma 39px
+    weight: $font-weight-medium,
+    letter-spacing: -0.02em,
+  ),
+  "lead-s": (
+    // Figma "Web/Lead" — the existing "lead" (20) is the foundations scale
+    size: 18,
+    line-height: 1.55,
+    weight: $font-weight-regular,
+  ),
+  "overline": (
+    size: 11,
+    line-height: normal,
+    weight: $font-weight-regular,
+    letter-spacing: 0.16em,
+  ),
+  "stat": (
+    size: 40,
+    line-height: normal,
+    weight: $font-weight-bold,
+    letter-spacing: -0.03em,
+  ),
+  "countdown": (
+    size: 22,
+    line-height: normal,
+    weight: $font-weight-medium,
+    letter-spacing: -0.02em,
+  ),
+  "unit": (
+    size: 9,
+    line-height: normal,
+    weight: $font-weight-regular,
+    letter-spacing: 0.1em,
+  ),
+  "price": (
+    size: 32,
+    line-height: normal,
+    weight: $font-weight-medium,
+  ),
+  "card-title": (
+    size: 19,
+    line-height: 1.316,
+    // Figma 25px
+    weight: $font-weight-medium,
+  ),
+  "wordmark": (
+    size: 24,
+    line-height: normal,
+    weight: $font-weight-bold,
+    letter-spacing: -0.01em,
+  ),
+  "nav": (
+    size: 14,
+    line-height: normal,
+    weight: $font-weight-regular,
+  ),
+  "action": (
+    size: 14,
+    line-height: normal,
+    weight: $font-weight-medium,
   ),
 );
 

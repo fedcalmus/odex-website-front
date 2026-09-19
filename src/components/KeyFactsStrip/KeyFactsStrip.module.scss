@@ -1,0 +1,60 @@
+@use "abstracts" as tokens;
+
+// Figma: surface/2, hairline, radius 12, four equal cells with a 1px rule between.
+.strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-2);
+  box-shadow: tokens.$shadow-card;
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; // Figma value
+  padding: 18px; // Figma value
+  border-right: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-border-default);
+
+  // Rules only BETWEEN cells: drop the trailing edge of each row/grid.
+  &:nth-child(2n) {
+    border-right: 0;
+  }
+
+  &:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  @include tokens.respond-to("md") {
+    border-bottom: 0;
+
+    &:nth-child(2n) {
+      border-right: 1px solid var(--color-border-default);
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.label {
+  @include tokens.text("caption");
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+}
+
+.value {
+  @include tokens.text("h2");
+  color: var(--color-text-primary);
+}

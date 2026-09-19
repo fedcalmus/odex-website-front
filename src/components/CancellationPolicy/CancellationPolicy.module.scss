@@ -1,0 +1,53 @@
+@use "abstracts" as tokens;
+
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  width: 100%;
+  list-style: none;
+}
+
+// Figma "Cancellation term": surface/1, radius 10, padding 12/14, 16px gap.
+.term {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  padding: tokens.space("sm") 14px;
+  border-radius: 10px; // Figma value
+  background-color: var(--color-surface-1);
+}
+
+.when {
+  @include tokens.text("body-small");
+  display: flex;
+  align-items: center;
+  gap: 10px; // Figma value
+  color: var(--color-text-primary);
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: tokens.radius("full");
+}
+
+.full {
+  background-color: var(--color-state-success);
+}
+
+.partial {
+  background-color: var(--color-state-warning);
+}
+
+.none {
+  background-color: var(--color-state-danger);
+}
+
+.outcome {
+  @include tokens.text("body-small");
+  color: var(--color-text-secondary);
+  text-align: end;
+}

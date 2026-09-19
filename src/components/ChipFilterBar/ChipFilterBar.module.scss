@@ -1,0 +1,39 @@
+@use "abstracts" as tokens;
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; // Figma value
+  list-style: none;
+}
+
+// Figma: pill, padding 9/16, Web/Action 14. Inactive = chip fill + rim; active = lime.
+.chip {
+  @include tokens.text("action");
+  display: inline-flex;
+  align-items: center;
+  padding: 9px tokens.space("md");
+  border: 1px solid var(--color-border-chip);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-chip);
+  color: var(--color-text-secondary);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.active,
+.active:hover {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+}

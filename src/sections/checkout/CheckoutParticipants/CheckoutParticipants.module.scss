@@ -1,0 +1,146 @@
+@use "abstracts" as tokens;
+
+// Figma "Steps": 32 above, 28 below. "Body": Main + a 360 rail, 32px apart, 90 below.
+.steps {
+  @include tokens.page-container;
+  padding-top: tokens.space("md");
+  padding-bottom: tokens.space("sm");
+
+  @include tokens.respond-to("md") {
+    padding-top: tokens.space("xl");
+    padding-bottom: 28px;
+  }
+}
+
+.body {
+  @include tokens.page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-bottom: tokens.space("3xl");
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: minmax(0, 1fr) 360px;
+    align-items: start;
+    padding-bottom: 90px; // Figma value
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // Figma value
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 660px; // Figma value
+  color: var(--color-text-muted);
+}
+
+// Figma "blk" (quantity): surface/0, hairline, radius 16, padding 24, 18px rhythm.
+.quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; // Figma value
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+}
+
+.quantityRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("md") 20px; // Figma value
+}
+
+.quantityText {
+  display: flex;
+  flex: 1 1 240px;
+  flex-direction: column;
+  gap: 3px; // Figma value
+}
+
+.quantityTitle {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.quantityNote {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.mode {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+  }
+}
+
+// Two fields per row from md (Figma: 3 rows of 2).
+.fields {
+  display: grid;
+  gap: tokens.space("md");
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: tokens.space("sm");
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.submit {
+  width: 100%;
+
+  @include tokens.respond-to("md") {
+    width: auto;
+  }
+}
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // Figma value
+
+  @include tokens.respond-to("lg") {
+    position: sticky;
+    top: tokens.space("lg");
+  }
+}

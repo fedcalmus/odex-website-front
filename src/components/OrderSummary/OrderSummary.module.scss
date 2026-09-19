@@ -1,0 +1,113 @@
+@use "abstracts" as tokens;
+
+// Figma 40:224: surface/2, hairline, radius 12, card shadow; sections split by hairlines.
+.summary {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-2);
+  box-shadow: tokens.$shadow-card;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px; // Figma value
+  padding: tokens.space("md") 20px 14px; // Figma values
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.title {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-surface-1);
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.eventText {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+}
+
+.eventTitle {
+  @include tokens.text("body-small");
+  color: var(--color-text-primary);
+}
+
+.eventMeta {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 9px; // Figma value
+  padding: 14px 20px;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Figma value
+}
+
+.lineLabel {
+  @include tokens.text("body-small");
+  flex: 1 1 0;
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+.lineAmount {
+  @include tokens.text("body-small");
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px 18px; // Figma values
+  border-top: 1px solid var(--color-border-default);
+  background-color: var(--color-surface-1);
+}
+
+.totalLabel {
+  @include tokens.text("h3");
+  flex: 1 1 0;
+  color: var(--color-text-primary);
+}
+
+.totalAmount {
+  @include tokens.text("h2");
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}

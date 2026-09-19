@@ -1,0 +1,46 @@
+@use "abstracts" as tokens;
+
+// Clips like the Figma frame (overflow-clip, 152 tall): the cards' drop shadow
+// is cut at the row edge in the design too.
+.row {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Cards are 282 wide (240 below md), 14px apart. The track is as wide as its
+// cards, so it overflows the viewport on any screen.
+.track {
+  display: flex;
+  gap: 14px; // Figma value
+  width: max-content;
+  list-style: none;
+
+  > li {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+
+    @include tokens.respond-to("md") {
+      flex-basis: 282px;
+    }
+  }
+}
+
+// Second row: below md the band is one row; from md it's shifted left by 146px.
+// A negative margin (not scrollLeft) keeps it server-rendered with no layout jump.
+.staggered {
+  display: none;
+
+  @include tokens.respond-to("md") {
+    display: block;
+
+    .track {
+      margin-inline-start: -146px;
+    }
+  }
+}

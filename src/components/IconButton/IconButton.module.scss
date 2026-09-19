@@ -1,0 +1,28 @@
+@use "abstracts" as tokens;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: tokens.$target-min;
+  height: tokens.$target-min;
+  border: 1px solid rgb(255 255 255 / 10%); // Figma value
+  border-radius: tokens.radius("full");
+  background-color: rgb(11 16 17 / 72%); // Figma value — dark glass
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: rgb(11 16 17 / 90%);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.pressed {
+  color: var(--color-brand-primary);
+}

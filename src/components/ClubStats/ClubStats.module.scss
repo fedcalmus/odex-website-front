@@ -1,0 +1,62 @@
+@use "abstracts" as tokens;
+
+// Figma "Card": surface/0, hairline, radius 16, five cells with a rule between.
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.cell {
+  display: flex;
+  flex-direction: column-reverse; // dt (caption) precedes dd (figure) in the DOM; the figure sits on top
+  justify-content: flex-end;
+  gap: 6px; // Figma value
+  padding: 22px tokens.space("lg"); // Figma: 22 / 24
+  border-right: 1px solid var(--color-border-card);
+  border-bottom: 1px solid var(--color-border-card);
+
+  &:nth-child(2n) {
+    border-right: 0;
+  }
+
+  @include tokens.respond-to("lg") {
+    border-bottom: 0;
+
+    &:nth-child(2n) {
+      border-right: 1px solid var(--color-border-card);
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.value {
+  @include tokens.text("h2");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-primary);
+}
+
+.icon {
+  color: var(--color-text-muted);
+}
+
+.accent {
+  color: var(--color-brand-accent);
+}
+
+.label {
+  @include tokens.text("micro-caps");
+  color: var(--color-text-faint);
+}

@@ -1,9 +1,29 @@
+@use "breakpoints" as bp;
+
 @mixin focus-ring {
   // Colour is confirmed (border/focus → lime/400, 14.04 contrast on the
   // page ground). Width/offset weren't specified in the exported
   // foundations; 2px is an interim accessible default pending confirmation.
   outline: 2px solid var(--color-border-focus);
   outline-offset: 2px;
+}
+
+// The marketplace page frame: 1440 max, centred, with side padding that
+// steps 16 → 24 → 40 as the viewport grows (Figma: 40 on every homepage
+// section; 48 on Clubs and the footer, passed as `$desktop-gutter`).
+@mixin page-container($desktop-gutter: 40px) {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 16px;
+
+  @include bp.respond-to("md") {
+    padding-inline: 24px;
+  }
+
+  @include bp.respond-to("lg") {
+    padding-inline: $desktop-gutter;
+  }
 }
 
 @mixin visually-hidden {

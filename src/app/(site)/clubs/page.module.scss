@@ -1,0 +1,89 @@
+@use "abstracts" as tokens;
+
+// Figma "Head": 52 above, 8 below, 24 between the title block and the chips.
+.head {
+  @include tokens.page-container;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  padding-top: tokens.space("xl");
+  padding-bottom: tokens.space("xs");
+
+  @include tokens.respond-to("md") {
+    padding-top: 52px; // Figma value
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+}
+
+.h1 {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 780px; // Figma value
+  color: var(--color-text-muted);
+}
+
+// Figma "Toolbar": 24 above, 20 below.
+.toolbar {
+  @include tokens.page-container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px; // Figma value
+  padding-top: tokens.space("lg");
+  padding-bottom: 20px;
+}
+
+.applied {
+  flex: 1 1 320px;
+}
+
+.body {
+  @include tokens.page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-bottom: 80px; // Figma value
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: 280px minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.sidebar {
+  display: none;
+
+  @include tokens.respond-to("lg") {
+    position: sticky;
+    top: 100px; // clears the 76px sticky header
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Figma value
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  min-width: 0;
+}
+
+.status {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+  text-align: center;
+}

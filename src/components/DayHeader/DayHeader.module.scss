@@ -1,0 +1,57 @@
+@use "abstracts" as tokens;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("md");
+  padding-bottom: tokens.space("2xs");
+}
+
+// Figma "Date": 62×62, surface/1, hairline, radius 14.
+.date {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("tile");
+  background-color: var(--color-surface-1);
+  text-align: center;
+}
+
+.day {
+  @include tokens.text("h2");
+  color: var(--color-text-primary);
+}
+
+.weekday {
+  @include tokens.text("micro-caps");
+  color: var(--color-brand-primary);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+}
+
+.title {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.summary {
+  @include tokens.text("body-small");
+  color: var(--color-text-muted);
+}
+
+.rule {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 1px;
+  background-color: var(--color-border-default);
+}

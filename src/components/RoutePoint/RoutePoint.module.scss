@@ -1,0 +1,62 @@
+@use "abstracts" as tokens;
+
+// Figma "Route point": surface/1, radius 12, padding 14/16, 12px gap.
+.point {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  min-width: 0;
+  padding: 14px tokens.space("md");
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+}
+
+.dot {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: tokens.radius("full");
+}
+
+// Colour = kind: lime meets you, orange is the trailhead (attention), forest brings you home.
+.meeting {
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+}
+
+.departure {
+  background-color: var(--color-brand-accent);
+  color: var(--color-brand-on-accent);
+}
+
+.return {
+  background-color: var(--color-brand-secondary);
+  color: var(--color-brand-on-secondary);
+}
+
+.text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+}
+
+.label {
+  @include tokens.text("micro-caps");
+  color: var(--color-text-faint);
+}
+
+.place {
+  @include tokens.text("body-small");
+  color: var(--color-text-primary);
+}
+
+.time {
+  @include tokens.text("h3");
+  color: var(--color-brand-primary);
+  font-variant-numeric: tabular-nums;
+}

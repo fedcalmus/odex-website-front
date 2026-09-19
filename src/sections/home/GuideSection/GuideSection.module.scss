@@ -1,0 +1,6 @@
+// Figma: two 152px rows stacked with a 14px gap.
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; // Figma value — not on the spacing scale
+}

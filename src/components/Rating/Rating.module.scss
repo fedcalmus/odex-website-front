@@ -1,0 +1,13 @@
+@use "abstracts" as tokens;
+
+.rating {
+  @include tokens.text("body-small");
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; // Figma value
+  color: var(--color-text-secondary);
+}
+
+.star {
+  color: var(--color-brand-primary);
+}

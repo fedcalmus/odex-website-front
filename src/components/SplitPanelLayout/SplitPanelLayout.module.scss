@@ -1,0 +1,48 @@
+@use "abstracts" as tokens;
+
+.split {
+  display: flex;
+  align-items: stretch;
+}
+
+// Figma "Form": 56 top, 88 bottom, 100 left / 60 right at desktop.
+.form {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  min-width: 0;
+  padding: tokens.space("lg") 16px tokens.space("3xl");
+
+  @include tokens.respond-to("md") {
+    padding-inline: 24px;
+  }
+
+  @include tokens.respond-to("lg") {
+    padding: 56px 60px 88px 100px; // Figma values
+  }
+}
+
+.panel {
+  position: relative;
+  display: none;
+  flex: 0 0 520px; // Figma value
+  overflow: hidden;
+  background-color: var(--color-surface-canvas);
+
+  @include tokens.respond-to("lg") {
+    display: block;
+  }
+}
+
+.image {
+  object-fit: cover;
+}
+
+// Figma: the scrim is 540px TALLER than the panel, so the darkening only
+// reaches part-way down — the top is veiled, the foot stays a clear photograph.
+.scrim {
+  position: absolute;
+  inset: 0 0 -540px;
+  background: linear-gradient(to bottom, rgb(6 9 10 / 32%), rgb(6 9 10 / 95%));
+}

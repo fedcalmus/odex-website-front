@@ -1,0 +1,44 @@
+@use "abstracts" as tokens;
+
+// Figma "Body": 40 above, 80 below, main column + a 340 rail, 32px apart.
+.body {
+  @include tokens.page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-top: tokens.space("xl");
+  padding-bottom: tokens.space("3xl");
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+    padding-top: 40px; // Figma value
+    padding-bottom: 80px; // Figma value
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // Figma value
+  min-width: 0;
+}
+
+// Below lg the booking card comes FIRST: on a phone, "can I book this" beats
+// reading the whole page before finding out.
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // Figma value
+  order: -1;
+
+  @include tokens.respond-to("lg") {
+    position: sticky;
+    top: 100px; // clears the 76px sticky header
+    order: 0;
+  }
+}
+
+.description {
+  @include tokens.text("body");
+  color: var(--color-text-secondary);
+}

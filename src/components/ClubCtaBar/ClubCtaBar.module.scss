@@ -1,0 +1,39 @@
+@use "abstracts" as tokens;
+
+// Figma 72:937 — radius 14, 74px tall, solid lime, padding 16 / 16 / 16 / 24.
+.bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: tokens.space("md");
+  padding: tokens.space("md") tokens.space("md") tokens.space("md") tokens.space("lg");
+  border-radius: tokens.radius("tile");
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+    align-items: center;
+    gap: tokens.space("xl");
+    min-height: 74px;
+  }
+}
+
+.text {
+  @include tokens.text("h3");
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+// Inverted button: dark fill, lime label. Figma: 42px tall, 190 wide, 20px padding.
+.bar .action {
+  flex-shrink: 0;
+  height: 42px; // Figma value — the standard Small is 40
+  padding-inline: 20px;
+  background-color: var(--color-surface-canvas);
+  color: var(--color-brand-primary);
+
+  &:hover {
+    background-color: var(--color-surface-1);
+  }
+}

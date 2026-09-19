@@ -1,0 +1,17 @@
+@use "abstracts" as tokens;
+
+// Figma "Countdown": warning-tint pill, 5px gap, padding 4 / 11 / 4 / 9, mono 13.
+.countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; // Figma value
+  padding: tokens.space("2xs") 11px tokens.space("2xs") 9px;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-state-warning-subtle);
+  color: var(--color-state-warning-tint);
+}
+
+.digits {
+  @include tokens.text("mono");
+  font-variant-numeric: tabular-nums;
+}

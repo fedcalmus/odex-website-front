@@ -1,0 +1,141 @@
+@use "abstracts" as tokens;
+
+.stepper {
+  padding-block: tokens.space("xs");
+
+  @include tokens.respond-to("md") {
+    padding-block: 20px; // Figma value
+  }
+}
+
+// Below md: "Քայլ 2 / 4" + the current label.
+.compact {
+  display: flex;
+  align-items: baseline;
+  gap: tokens.space("sm");
+
+  @include tokens.respond-to("md") {
+    display: none;
+  }
+}
+
+.compactCount {
+  @include tokens.text("caption");
+  color: var(--color-text-faint);
+}
+
+.compactLabel {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.steps {
+  display: none;
+  list-style: none;
+
+  @include tokens.respond-to("md") {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+.step {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  min-width: 0;
+  padding-inline-end: 20px; // Figma value
+
+  &.last {
+    padding-inline-end: 0;
+  }
+}
+
+.marker {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+}
+
+.dot {
+  @include tokens.text("caption");
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-1);
+  color: var(--color-text-faint);
+}
+
+.rule {
+  flex: 1 1 0;
+  height: 2px;
+  background-color: var(--color-border-default);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  color: var(--color-text-faint);
+}
+
+.label {
+  @include tokens.text("label");
+}
+
+.hint {
+  @include tokens.text("caption");
+  max-width: 160px;
+}
+
+// Done: lime dot with a check, lime connector, clickable.
+.done {
+  .dot {
+    border-color: var(--color-brand-primary);
+    background-color: var(--color-brand-primary);
+    color: var(--color-brand-on-primary);
+  }
+
+  .rule {
+    background-color: var(--color-brand-primary);
+  }
+
+  .label {
+    color: var(--color-text-primary);
+  }
+}
+
+a.text {
+  border-radius: tokens.radius("xs");
+
+  &:hover .label {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+// Current: a RING (not a fill — a filled current step reads as done).
+.current {
+  .dot {
+    border: 2px solid var(--color-brand-primary);
+    background-color: var(--color-brand-primary-subtle);
+    color: var(--color-brand-primary);
+  }
+
+  .label {
+    color: var(--color-text-primary);
+  }
+
+  .hint {
+    color: var(--color-brand-primary);
+  }
+}

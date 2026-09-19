@@ -23,6 +23,14 @@
 .image {
   object-fit: cover;
   pointer-events: none;
+  transition: transform 0.5s ease;
+}
+
+// Hover: the photo eases in slightly — the tile stays put, so the caption
+// (which sits on the photo) never moves under the pointer.
+.tile:hover .image,
+.tile:focus-visible .image {
+  transform: scale(1.05);
 }
 
 // Overlay: transparent at the top → 90% at the base. Heavier than the event

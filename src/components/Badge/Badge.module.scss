@@ -14,3 +14,7 @@
   white-space: nowrap;
   @include tokens.text("label");
 }
+
+.small {
+  @include tokens.text("meta");
+}

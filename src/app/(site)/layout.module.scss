@@ -1,0 +1,7 @@
+// The marketplace page ground. Cards (surface/0) read as DARKER than it, which
+// is what separates them from the page — the ground is one step lighter (surface/2).
+// Inferred from the Figma screenshots: the frame fill isn't exported as a variable.
+.main {
+  flex: 1 0 auto;
+  background-color: var(--color-surface-2);
+}

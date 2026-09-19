@@ -1,0 +1,38 @@
+@use "abstracts" as tokens;
+
+// Figma chip: white 10% fill, white 16% rim, pill.
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border-chip);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-chip);
+  color: var(--color-text-primary);
+  padding: 7px 13px; // Figma values
+  @include tokens.text("body-small");
+}
+
+// Applied-filter variant: tighter, with the × on the trailing edge.
+.filter {
+  gap: 6px; // Figma value
+  padding: 5px 7px 5px 11px;
+  transition: background-color 0.15s ease;
+  @include tokens.text("caption");
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.remove {
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.filter:hover .remove {
+  color: var(--color-text-primary);
+}

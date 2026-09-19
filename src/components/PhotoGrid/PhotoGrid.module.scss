@@ -1,0 +1,42 @@
+@use "abstracts" as tokens;
+
+.grid {
+  display: flex;
+  gap: 14px; // Figma value
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include tokens.respond-to("md") {
+    overflow: visible;
+  }
+}
+
+.tile {
+  position: relative;
+  flex: 0 0 60%;
+  height: 150px; // Figma value
+  overflow: hidden;
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+  scroll-snap-align: start;
+
+  @include tokens.respond-to("md") {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.tile:hover .image {
+  transform: scale(1.05);
+}

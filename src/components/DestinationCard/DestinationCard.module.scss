@@ -1,0 +1,78 @@
+@use "abstracts" as tokens;
+
+// Figma 72:881 — 282×152, radius 14, Elevation/Card shadow. Width comes from
+// the carousel slot (282, or 240 below md), height is fixed.
+.card {
+  position: relative;
+  height: 152px;
+  overflow: hidden;
+  border-radius: tokens.radius("tile");
+  background-color: var(--color-surface-2); // shows while the photo loads
+  box-shadow: tokens.$shadow-card;
+  color: var(--color-text-on-photo);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.06);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim-guide);
+  pointer-events: none;
+}
+
+.chip {
+  @include tokens.text("unit");
+  position: absolute;
+  top: tokens.space("md");
+  left: tokens.space("md");
+  padding: 4px 9px; // Figma values
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-inverse);
+  color: var(--color-on-inverse);
+  white-space: nowrap;
+}
+
+.caption {
+  position: absolute;
+  inset-inline: tokens.space("md");
+  bottom: tokens.space("md");
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("2xs");
+}
+
+.type {
+  @include tokens.text("caption");
+  color: var(--color-text-secondary);
+}
+
+.title {
+  @include tokens.text("label-large");
+  color: var(--color-text-on-photo);
+}
+
+.link {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: tokens.radius("tile"); // the ring follows the card, not the link
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      @include tokens.focus-ring;
+      outline-offset: -2px;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+@use "abstracts" as tokens;
+
+// Figma: 80px above and below, 36px between heading and content.
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  padding-block: tokens.space("2xl");
+
+  @include tokens.respond-to("md") {
+    gap: 36px; // Figma value — not on the spacing scale
+    padding-block: 80px; // Figma value — between 3xl (64) and 4xl (96)
+  }
+}
+
+.tight {
+  @include tokens.respond-to("md") {
+    padding-top: 40px; // Figma value
+  }
+}
+
+.roomy {
+  @include tokens.respond-to("md") {
+    padding-bottom: tokens.space("5xl");
+  }
+}
+
+.container {
+  @include tokens.page-container;
+}
+
+.containerWide {
+  @include tokens.page-container(48px);
+}

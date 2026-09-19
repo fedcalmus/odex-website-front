@@ -1,0 +1,50 @@
+@use "abstracts" as tokens;
+
+// Figma "blk": surface/1, hairline, radius 16, padding 24, 12px gap.
+.row {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+}
+
+.check {
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+}
+
+.text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+}
+
+.title {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.details {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.change {
+  @include tokens.text("label");
+  flex-shrink: 0;
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

@@ -69,3 +69,8 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+// `small` (12px) is the label used for the scarcity badges over photography.
+export const SmallScarcity: Story = {
+  args: { size: "small", background: "var(--color-brand-accent)", color: "var(--color-brand-on-accent)", children: "1 տեղ մնացել է" },
+};

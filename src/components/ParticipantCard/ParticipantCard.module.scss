@@ -1,0 +1,30 @@
+@use "abstracts" as tokens;
+
+// Figma: surface/0, hairline, radius 16, padding 24, 18px rhythm. Active: 2px lime rim.
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; // Figma value
+  min-width: 0;
+  margin: 0;
+  padding: 23px; // 24 minus the 1px rim, so the box never changes size
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+  transition: border-color 0.15s ease;
+
+  &:focus-within {
+    padding: 22px; // 24 minus the 2px focus rim
+    border-width: 2px;
+    border-color: var(--color-brand-primary);
+  }
+}
+
+.title {
+  @include tokens.text("h3");
+  float: left;
+  width: 100%;
+  margin-bottom: 0; // the card's 18px gap already separates it from what follows
+  padding: 0;
+  color: var(--color-text-primary);
+}

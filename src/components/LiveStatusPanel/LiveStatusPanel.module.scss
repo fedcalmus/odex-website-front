@@ -1,0 +1,59 @@
+@use "abstracts" as tokens;
+
+// Figma 194:16228 — 320×210, radius 18, glass fill, hairline, 20/22 padding.
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  padding: 20px 22px; // Figma values
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-panel-glass);
+  box-shadow: tokens.$shadow-card;
+}
+
+.eyebrow {
+  @include tokens.text("micro");
+  display: flex;
+  align-items: center;
+  gap: 9px; // Figma value
+  color: var(--color-brand-primary);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+}
+
+.count {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px; // Figma value
+  margin-top: tokens.space("md");
+}
+
+// The largest single figure on the homepage: a live count, not a marketing statistic.
+.figure {
+  @include tokens.text("stat");
+  color: var(--color-text-primary);
+}
+
+.countLabel {
+  @include tokens.text("body");
+  color: var(--color-text-secondary);
+}
+
+.details {
+  @include tokens.text("body-small");
+  margin-top: tokens.space("sm");
+  color: var(--color-text-muted);
+}
+
+.privacy {
+  @include tokens.text("meta");
+  margin-top: auto; // Figma "grow" spacer pins this to the bottom
+  padding-top: tokens.space("md");
+  color: var(--color-text-muted);
+}

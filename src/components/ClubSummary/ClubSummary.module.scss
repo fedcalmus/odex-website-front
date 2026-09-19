@@ -1,0 +1,59 @@
+@use "abstracts" as tokens;
+
+// Figma "Club": surface/0, hairline, radius 16, padding 20.
+.club {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  padding: 20px; // Figma value
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+}
+
+.logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+}
+
+.logoImage {
+  object-fit: cover;
+}
+
+.text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px; // Figma value
+  min-width: 0;
+}
+
+.name {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-brand-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.meta {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}

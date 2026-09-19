@@ -1,0 +1,147 @@
+@use "abstracts" as tokens;
+
+// Figma 194:16213 — 1440 fixed, 76px tall, surface/nav, 40px side padding,
+// 36px between the left-group items, a flexible spacer owning the middle so the
+// right group always reaches the margin.
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  background-color: var(--color-surface-nav);
+  transition: border-color 0.2s ease;
+}
+
+.scrolled {
+  border-bottom-color: var(--color-border-default);
+}
+
+.bar {
+  @include tokens.page-container;
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  height: 76px;
+
+  @include tokens.respond-to("xl") {
+    gap: 36px; // Figma value — not on the spacing scale
+  }
+}
+
+.brand {
+  flex-shrink: 0;
+  border-radius: tokens.radius("xs");
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.spacer {
+  flex: 1 1 0;
+}
+
+// Below xl only the wordmark, search icon and hamburger show.
+.nav,
+.search,
+.language,
+.auth {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 28px; // Figma value
+  list-style: none;
+}
+
+// Search field shrinks before the bar overflows at 1200–1400.
+.search {
+  flex: 0 1 260px;
+  min-width: 160px;
+}
+
+.auth {
+  align-items: center;
+  gap: tokens.space("xs");
+}
+
+// The marketplace nav uses 44px auth buttons (the standard Button's Small is 40).
+.header .authButton {
+  height: tokens.$target-min;
+}
+
+.header .signIn {
+  padding-inline: 18px; // Figma value
+  color: var(--color-text-primary);
+}
+
+.header .signUp {
+  padding-inline: 22px; // Figma value
+}
+
+.searchLink,
+.menuTrigger {
+  display: inline-flex;
+}
+
+.searchLink {
+  align-items: center;
+  justify-content: center;
+  width: tokens.$target-min;
+  height: tokens.$target-min;
+  border-radius: tokens.radius("full");
+  color: var(--color-text-primary);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-1);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+@include tokens.respond-to("xl") {
+  .nav {
+    display: block;
+  }
+
+  .search {
+    display: block;
+  }
+
+  .language {
+    display: block;
+  }
+
+  .auth {
+    display: flex;
+  }
+
+  .searchLink,
+  .menuTrigger {
+    display: none;
+  }
+}
+
+// Drawer content (rendered inside <MobileMenu>).
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  list-style: none;
+
+  a {
+    @include tokens.text("h2");
+    display: block;
+  }
+}
+
+.drawerAuth {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+}

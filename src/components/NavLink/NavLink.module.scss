@@ -1,0 +1,23 @@
+@use "abstracts" as tokens;
+
+// Figma "Web/Nav" 14 Regular. Inactive = text/secondary, active = brand lime.
+.link {
+  @include tokens.text("nav");
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.active,
+.active:hover {
+  color: var(--color-brand-primary);
+}

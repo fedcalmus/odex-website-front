@@ -1,0 +1,32 @@
+@use "abstracts" as tokens;
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("xs");
+  min-width: 0;
+}
+
+.count {
+  @include tokens.text("body-small");
+  margin-inline-end: tokens.space("2xs");
+  color: var(--color-text-secondary);
+}
+
+.clear {
+  @include tokens.text("label");
+  padding-inline: tokens.space("2xs");
+  color: var(--color-text-link);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-brand-primary-hover);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

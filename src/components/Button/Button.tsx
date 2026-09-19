@@ -1,6 +1,8 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import Link from "next/link";
+import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ReactNode } from "react";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/components/Icon";
+import { cx } from "@/lib/cx";
 import styles from "./Button.module.scss";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "on-photo";
@@ -26,7 +28,7 @@ const VARIANT_CLASS: Record<ButtonVariant, string> = {
   "on-photo": styles.onPhoto,
 };
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SharedButtonProps {
   children: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -38,32 +40,30 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    */
   iconPosition?: "leading" | "trailing";
   fullWidth?: boolean;
-  /** Shows a spinner in place of `icon` and blocks interaction until it clears. */
-  loading?: boolean;
 }
 
-export function Button({
-  children,
+function buttonClasses({
   variant = "primary",
   size = "medium",
-  icon,
-  iconPosition = "trailing",
   fullWidth,
-  loading,
   className,
-  disabled,
-  ...rest
-}: ButtonProps) {
-  const classes = [
+}: Pick<SharedButtonProps, "variant" | "size" | "fullWidth"> & { className?: string }) {
+  return cx(
     styles.button,
     SIZE_CLASS[size],
     VARIANT_CLASS[variant],
-    fullWidth ? styles.fullWidth : null,
+    fullWidth && styles.fullWidth,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
+}
 
+function ButtonContent({
+  children,
+  size = "medium",
+  icon,
+  iconPosition = "trailing",
+  loading,
+}: Pick<SharedButtonProps, "children" | "size" | "icon" | "iconPosition"> & { loading?: boolean }) {
   const iconEl = loading ? (
     <Icon name="loader" size={ICON_SIZE[size]} className={styles.spinner} />
   ) : icon ? (
@@ -71,15 +71,71 @@ export function Button({
   ) : null;
 
   return (
+    <>
+      {iconEl && iconPosition === "leading" ? iconEl : null}
+      <span>{children}</span>
+      {iconEl && iconPosition === "trailing" ? iconEl : null}
+    </>
+  );
+}
+
+export interface ButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
+    SharedButtonProps {
+  /** Shows a spinner in place of `icon` and blocks interaction until it clears. */
+  loading?: boolean;
+}
+
+export function Button({
+  children,
+  variant,
+  size,
+  icon,
+  iconPosition,
+  fullWidth,
+  loading,
+  className,
+  disabled,
+  ...rest
+}: ButtonProps) {
+  return (
     <button
-      className={classes}
+      className={buttonClasses({ variant, size, fullWidth, className })}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...rest}
     >
-      {iconEl && iconPosition === "leading" ? iconEl : null}
-      <span>{children}</span>
-      {iconEl && iconPosition === "trailing" ? iconEl : null}
+      <ButtonContent size={size} icon={icon} iconPosition={iconPosition} loading={loading}>
+        {children}
+      </ButtonContent>
     </button>
+  );
+}
+
+export interface ButtonLinkProps
+  extends Omit<ComponentPropsWithoutRef<typeof Link>, "children">,
+    SharedButtonProps {}
+
+/**
+ * The same button, for actions that NAVIGATE. A link that looks like a button
+ * must still be a link (right-click, open-in-new-tab, crawlable) — never a
+ * `<button>` wired to `router.push`.
+ */
+export function ButtonLink({
+  children,
+  variant,
+  size,
+  icon,
+  iconPosition,
+  fullWidth,
+  className,
+  ...rest
+}: ButtonLinkProps) {
+  return (
+    <Link className={buttonClasses({ variant, size, fullWidth, className })} {...rest}>
+      <ButtonContent size={size} icon={icon} iconPosition={iconPosition}>
+        {children}
+      </ButtonContent>
+    </Link>
   );
 }

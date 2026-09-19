@@ -1,0 +1,52 @@
+@use "abstracts" as tokens;
+
+// Figma "Safety": forest-subtle ground, radius 16, padding 20.
+.safety {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  padding: 20px; // Figma value
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-brand-secondary-subtle);
+  box-shadow: tokens.$shadow-card;
+}
+
+.title {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; // Figma value
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px; // Figma value
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-brand-primary);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+}
+
+.itemTitle {
+  @include tokens.text("body-small");
+  color: var(--color-text-primary);
+}
+
+.description {
+  @include tokens.text("caption");
+  color: var(--color-text-secondary);
+}
