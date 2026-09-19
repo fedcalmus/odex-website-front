@@ -1,0 +1,30 @@
+@use "../abstracts" as tokens;
+
+body {
+  @include tokens.text("body");
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  @include tokens.text("h1");
+}
+
+h2 {
+  @include tokens.text("h2");
+}
+
+h3 {
+  @include tokens.text("h3");
+}
+
+// Prices, counts, timestamps — every table/price/count column must align vertically.
+.u-tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.u-visually-hidden {
+  @include tokens.visually-hidden;
+}

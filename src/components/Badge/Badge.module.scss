@@ -1,0 +1,16 @@
+@use "abstracts" as tokens;
+
+// Height/padding/radius confirmed pixel-exact from the badge exports
+// (Few places / Last places / New club / Sold out — all 30px tall, rx 15).
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding-inline: tokens.space("sm");
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  @include tokens.text("label");
+}

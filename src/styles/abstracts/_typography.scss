@@ -1,0 +1,132 @@
+@use "sass:map";
+@use "functions" as fn;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+
+// --font-sans / --font-mono are set on <html> by next/font in layout.tsx.
+// Mardoto (the licensed Armenian face) isn't available in this environment
+// yet, so every style is built on Roboto for now — per the foundations
+// README, swapping the font import later is the only change needed.
+// Humanist fallbacks only: Armenian letterforms lose legibility in geometric
+// faces.
+// A var() with no fallback is a *guaranteed-invalid* value the moment
+// --font-sans/--font-mono aren't set (e.g. outside next/font's <html> class,
+// such as in Storybook) — which invalidates the whole font-family list, not
+// just that entry. Giving var() its own fallback list keeps this safe
+// everywhere.
+$font-family-sans: var(
+  --font-sans,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  sans-serif
+);
+$font-family-mono: var(
+  --font-mono,
+  "Roboto Mono",
+  ui-monospace,
+  SFMono-Regular,
+  Menlo,
+  Consolas,
+  monospace
+);
+
+// MARKETING scale (display-xl/l/m, lead) is marketplace-only — the separate
+// admin/Velzon codebase tops out at h1. This repo is the marketplace site,
+// so the full scale is in play.
+$type-scale: (
+  "display-xl": (
+    size: 64,
+    line-height: 1.04,
+    weight: $font-weight-medium,
+  ),
+  "display-l": (
+    size: 48,
+    line-height: 1.1,
+    weight: $font-weight-medium,
+  ),
+  "display-m": (
+    size: 36,
+    line-height: 1.18,
+    weight: $font-weight-medium,
+  ),
+  "lead": (
+    size: 20,
+    line-height: 1.6,
+    weight: $font-weight-regular,
+  ),
+  "h1": (
+    size: 24,
+    line-height: 1.25,
+    weight: $font-weight-medium,
+  ),
+  "h2": (
+    size: 20,
+    line-height: 1.3,
+    weight: $font-weight-medium,
+  ),
+  "h3": (
+    size: 16,
+    line-height: 1.4,
+    weight: $font-weight-medium,
+  ),
+  "body": (
+    size: 15,
+    line-height: 1.55,
+    weight: $font-weight-regular,
+  ),
+  "body-small": (
+    size: 13,
+    line-height: 1.5,
+    weight: $font-weight-regular,
+  ),
+  "label-large": (
+    size: 15,
+    line-height: 1.4,
+    weight: $font-weight-medium,
+  ),
+  "label": (
+    size: 13,
+    line-height: 1.4,
+    weight: $font-weight-medium,
+  ),
+  "caption": (
+    size: 11,
+    line-height: 1.4,
+    weight: $font-weight-regular,
+  ),
+  "caption-strong": (
+    size: 11,
+    line-height: 1.4,
+    weight: $font-weight-medium,
+  ),
+  "mono": (
+    size: 13,
+    line-height: 1.5,
+    weight: $font-weight-regular,
+    mono: true,
+  ),
+);
+
+@mixin text($style) {
+  $t: map.get($type-scale, $style);
+
+  @if not $t {
+    @error "Unknown type style `#{$style}`. Available: #{map.keys($type-scale)}";
+  }
+
+  @if map.get($t, mono) {
+    font-family: $font-family-mono;
+  } @else {
+    font-family: $font-family-sans;
+  }
+  font-size: fn.px-to-rem(map.get($t, size));
+  line-height: map.get($t, line-height);
+  font-weight: map.get($t, weight);
+  // Armenian has no italic tradition — emphasis is carried by weight, never style.
+  font-style: normal;
+}

@@ -1,0 +1,31 @@
+@use "sass:map";
+@use "functions" as fn;
+
+// 4-based scale. 5xl (120) is marketing vertical rhythm; admin (separate
+// codebase) stops at xl (32) — carrying admin density into a marketing page
+// makes it read as a dashboard, so don't reuse 2xl+ for dense UI here.
+$space-scale: (
+  "3xs": 2,
+  "2xs": 4,
+  "xs": 8,
+  "sm": 12,
+  "md": 16,
+  // default — card padding, list rows
+  "lg": 24,
+  "xl": 32,
+  "2xl": 48,
+  "3xl": 64,
+  "4xl": 96,
+  "5xl": 120,
+);
+
+// Touch targets
+$target-min: 44px; // minimum anywhere, never smaller
+$target-field: 56px; // anything tapped outdoors (gloves, cold, one hand)
+
+@function space($key) {
+  @if not map.has-key($space-scale, $key) {
+    @error "Unknown spacing token `#{$key}`. Available: #{map.keys($space-scale)}";
+  }
+  @return fn.px-to-rem(map.get($space-scale, $key));
+}

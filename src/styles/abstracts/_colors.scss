@@ -1,0 +1,102 @@
+// Raw colour ramps — PRIMITIVES.
+// Mirrors Figma: these are scoped to nothing there (won't appear in a colour
+// picker) so nobody consumes a raw value. Only themes/_dark.scss may read
+// this file; components must consume the semantic CSS custom properties it
+// emits (--color-surface-*, --color-text-*, --color-brand-*, etc.), never
+// these maps directly.
+
+$lime: (
+  "050": #f0fccf,
+  "100": #e1f9a2,
+  "200": #d5f76b,
+  "300": #cdf54a,
+  "400": #c5f42d,
+  "500": #a8d420,
+  "600": #87ac19,
+  "700": #688413,
+  "800": #4a5e0e,
+  "900": #2c3808,
+);
+
+$orange: (
+  "050": #ffe7d6,
+  "100": #ffc9a8,
+  "200": #ff9a5c,
+  "300": #ff7a2e,
+  "400": #ff5a00,
+  "500": #d94b00,
+  "600": #b03d00,
+  "700": #822d00,
+  "800": #551e00,
+  "900": #2b0f00,
+);
+
+// Decorative only — data visualisation / quiet decoration. Neither may carry
+// a status or meaning next to lime (both separate from it at <1.3 contrast).
+$amber: (
+  "300": #ffd37a,
+  "400": #ffc24b,
+  "500": #d9a234,
+);
+
+$mint: (
+  "200": #a9ebd3,
+  "300": #7fe0bc,
+  "400": #5cc49f,
+);
+
+$forest: (
+  "050": #eaf6f1,
+  "100": #dce9e2,
+  "200": #b7cfc6,
+  "300": #8fbcaa,
+  "400": #5e9683,
+  "500": #3f7c6b,
+  "600": #2e6b5e,
+  "700": #1b4a3e,
+  "800": #10302a,
+  "900": #0b1f1a,
+);
+
+$slate: (
+  "000": #ffffff,
+  "050": #f2f5f2,
+  "100": #c3ccc8,
+  "200": #9aa6a3,
+  "300": #7b8a88,
+  "400": #5c6a68,
+  "500": #3f4b49,
+  "600": #2a3634,
+  "700": #1f2b29,
+  "750": #1b2523,
+  "800": #172224,
+  "850": #151d1c,
+  "900": #101817,
+  "950": #0b1011,
+  "975": #070c0b,
+);
+
+// Tuned for dark grounds — not reused from any light-mode equivalent.
+$state-success: (
+  "300": #7fe0a8,
+  "400": #3fbf74,
+  "800": #123322,
+);
+
+$state-warning: (
+  "300": #ffd37a,
+  "400": #e8a21f,
+  "800": #3a2a08,
+);
+
+$state-danger: (
+  "300": #ff9b96,
+  "400": #e8554e,
+  "800": #3d1512,
+);
+
+$state-info: (
+  "300": #8fc9f0,
+  "400": #3b9bd6,
+  "800": #0f2a3d,
+);

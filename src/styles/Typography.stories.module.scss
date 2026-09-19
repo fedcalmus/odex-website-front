@@ -1,0 +1,44 @@
+@use "abstracts" as tokens;
+
+.displayXl {
+  @include tokens.text("display-xl");
+}
+.displayL {
+  @include tokens.text("display-l");
+}
+.displayM {
+  @include tokens.text("display-m");
+}
+.lead {
+  @include tokens.text("lead");
+}
+.h1 {
+  @include tokens.text("h1");
+}
+.h2 {
+  @include tokens.text("h2");
+}
+.h3 {
+  @include tokens.text("h3");
+}
+.body {
+  @include tokens.text("body");
+}
+.bodySmall {
+  @include tokens.text("body-small");
+}
+.labelLarge {
+  @include tokens.text("label-large");
+}
+.label {
+  @include tokens.text("label");
+}
+.caption {
+  @include tokens.text("caption");
+}
+.captionStrong {
+  @include tokens.text("caption-strong");
+}
+.mono {
+  @include tokens.text("mono");
+}

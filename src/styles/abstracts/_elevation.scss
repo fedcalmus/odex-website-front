@@ -1,0 +1,10 @@
+// On dark, elevation is carried primarily by surface lightness + a border
+// rim (see themes/_dark.scss surface ladder) — shadow is a secondary cue
+// only, since there's almost nothing left to darken on #101817.
+//
+// Only the card shadow has a confirmed numeric spec (Handoff notes — Web).
+// Elevation/0-3, Focus ring width/offset and Glow/brand exist as Figma
+// effect styles but the exported PDF only shows swatches, not blur/spread
+// values — TODO: pull exact values via get_design_context once file access
+// is live, or ask the designer directly.
+$shadow-card: 0 8px 16px 0 rgb(27 27 27 / 50%);

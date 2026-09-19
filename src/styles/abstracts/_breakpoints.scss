@@ -1,0 +1,26 @@
+@use "sass:map";
+
+// Bootstrap-5-aligned so values stay identical to the admin/Velzon codebase.
+$breakpoints: (
+  "sm": 576,
+  // large phone
+  "md": 768,
+  // tablet — THE PIVOT: tables become cards, filters move to a bottom sheet
+  "lg": 992,
+  // small laptop
+  "xl": 1200,
+  // desktop
+  "2xl": 1400, // large desktop
+);
+
+$container-2xl: 1320px; // web content maximum at a 1440 viewport
+$gutter: 24px;
+
+@mixin respond-to($bp) {
+  @if not map.has-key($breakpoints, $bp) {
+    @error "Unknown breakpoint `#{$bp}`. Available: #{map.keys($breakpoints)}";
+  }
+  @media (min-width: #{map.get($breakpoints, $bp)}px) {
+    @content;
+  }
+}

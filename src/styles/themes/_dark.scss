@@ -1,0 +1,78 @@
+@use "sass:map";
+@use "../abstracts" as tokens;
+
+// Odex is dark-only by design (outdoor events marketplace, Armenia — see
+// Foundations README): every surface across web, app and admin is dark, and
+// this is the single active theme. A future light mode would be a sibling
+// `_light.scss` file exposing the same custom-property names; nothing else
+// in the system would need to change. Do not build a theme switcher.
+:root {
+  // Surface — five steps. Elevation on dark comes from surface lightness,
+  // not shadow: a raised card is a lighter surface with a border rim.
+  --color-surface-canvas: #{map.get(tokens.$slate, "950")}; // deepest — wells, insets, around a modal
+  --color-surface-0: #{map.get(tokens.$slate, "900")}; // the page ground
+  --color-surface-1: #{map.get(tokens.$slate, "850")}; // sidebars, table headers, inset panels
+  --color-surface-2: #{map.get(tokens.$slate, "800")}; // card
+  --color-surface-3: #{map.get(tokens.$slate, "750")}; // nested cards, raised rows, popovers
+  --color-surface-hover: #{map.get(tokens.$slate, "700")}; // row / card hover
+  --color-surface-pressed: #{map.get(tokens.$slate, "600")};
+  --color-surface-locked: #{map.get(tokens.$slate, "850")}; // disabled field — reads inert, not broken
+
+  // Text — floor is text/faint at 5.01 contrast; nothing lighter is legible as body copy.
+  --color-text-primary: #{map.get(tokens.$slate, "050")}; // headings and body
+  --color-text-secondary: #{map.get(tokens.$slate, "100")}; // supporting copy
+  --color-text-muted: #{map.get(tokens.$slate, "200")}; // meta, timestamps, table keys
+  --color-text-faint: #{map.get(tokens.$slate, "300")}; // placeholder / disabled only
+  --color-text-on-photo: #{map.get(tokens.$slate, "000")}; // white over scrimmed photography only
+  --color-text-link: #{map.get(tokens.$lime, "400")};
+
+  // Brand
+  --color-brand-primary: #{map.get(tokens.$lime, "400")}; // THE brand colour — one value, no mode logic
+  --color-brand-primary-hover: #{map.get(tokens.$lime, "500")};
+  --color-brand-primary-pressed: #{map.get(tokens.$lime, "600")};
+  --color-brand-primary-subtle: #{map.get(tokens.$lime, "900")}; // tinted lime panel — selected rows, active nav
+  --color-brand-on-primary: #{map.get(tokens.$slate, "975")}; // near-black on lime (15.02) — NEVER white (1.28, fails)
+
+  --color-brand-secondary: #{map.get(tokens.$forest, "600")}; // section grounds, secondary fills
+  --color-brand-secondary-subtle: #{map.get(tokens.$forest, "900")};
+  --color-brand-on-secondary: #{map.get(tokens.$forest, "050")};
+
+  --color-brand-accent: #{map.get(tokens.$orange, "400")}; // ATTENTION, NEVER ACTION — scarcity, sold out, urgency
+  --color-brand-accent-subtle: #{map.get(tokens.$orange, "900")};
+  --color-brand-on-accent: #{map.get(tokens.$slate, "975")}; // near-black on orange (6.17) — white fails at 3.13
+
+  // Border — alpha rather than solid so one hairline works on every surface step
+  --color-border-default: rgb(255 255 255 / 8%);
+  --color-border-strong: rgb(255 255 255 / 14%); // table headers, card edges
+  --color-border-focus: #{map.get(tokens.$lime, "400")}; // 14.04 on the ground, far above the 3.0 required
+
+  // Difficulty — SAFETY CRITICAL. Single-hue density ramp on Forest, with a
+  // deliberate hue break to orange at Extreme. Colour is never the only
+  // channel: glyph + label are mandatory alongside every one of these,
+  // including in greyscale print.
+  --color-difficulty-easy-bg: #{map.get(tokens.$forest, "800")};
+  --color-difficulty-easy-text: #{map.get(tokens.$forest, "200")};
+  --color-difficulty-moderate-bg: #{map.get(tokens.$forest, "700")};
+  --color-difficulty-moderate-text: #{map.get(tokens.$forest, "100")};
+  --color-difficulty-hard-bg: #{map.get(tokens.$forest, "500")};
+  --color-difficulty-hard-text: #{map.get(tokens.$forest, "050")};
+  --color-difficulty-extreme-bg: #{map.get(tokens.$forest, "300")};
+  --color-difficulty-extreme-text: #{map.get(tokens.$forest, "900")};
+
+  // Overlay
+  --color-overlay-scrim: rgb(7 12 11 / 55%); // photo scrim — mandatory under text/on-photo
+  --color-overlay-backdrop: rgb(7 12 11 / 72%); // modal backdrop
+  --color-overlay-wash: rgb(255 255 255 / 6%); // faint wash for raised elements
+
+  // State — tuned for dark grounds, not reused from any light-mode equivalent
+  --color-state-success: #{map.get(tokens.$state-success, "400")};
+  --color-state-success-subtle: #{map.get(tokens.$state-success, "800")};
+  --color-state-warning: #{map.get(tokens.$state-warning, "400")};
+  --color-state-warning-subtle: #{map.get(tokens.$state-warning, "800")};
+  --color-state-danger: #{map.get(tokens.$state-danger, "400")};
+  --color-state-danger-subtle: #{map.get(tokens.$state-danger, "800")};
+  --color-state-info: #{map.get(tokens.$state-info, "400")};
+  --color-state-info-subtle: #{map.get(tokens.$state-info, "800")};
+
+  color-scheme: dark;
+}

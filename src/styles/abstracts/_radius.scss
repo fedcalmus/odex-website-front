@@ -1,0 +1,22 @@
+@use "sass:map";
+
+$radius-scale: (
+  "xs": 4px,
+  // checkbox only
+  "sm": 8px,
+  // inputs, buttons (admin)
+  "md": 12px,
+  // default — cards
+  "lg": 16px,
+  // large cards, media
+  "xl": 24px,
+  // marketing blocks
+  "full": 999px, // pills, avatars — marketplace buttons use this
+);
+
+@function radius($key) {
+  @if not map.has-key($radius-scale, $key) {
+    @error "Unknown radius token `#{$key}`. Available: #{map.keys($radius-scale)}";
+  }
+  @return map.get($radius-scale, $key);
+}

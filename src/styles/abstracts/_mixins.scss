@@ -1,0 +1,25 @@
+@mixin focus-ring {
+  // Colour is confirmed (border/focus → lime/400, 14.04 contrast on the
+  // page ground). Width/offset weren't specified in the exported
+  // foundations; 2px is an interim accessible default pending confirmation.
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
