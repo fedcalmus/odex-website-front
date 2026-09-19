@@ -52,9 +52,16 @@ async function main() {
     }
     const inner = innerMatch[1].trim().replace(HARDCODED_COLOR, "currentColor");
 
+    // Carry the root <svg fill> onto the <symbol>. The exports are stroke-only
+    // (`fill="none"` on the root); dropping it makes every open path fall back
+    // to the default black fill, which shows as a dark sliver inside a check
+    // or an arrowhead.
+    const rootFill = raw.match(/<svg[^>]*\sfill="([^"]+)"/)?.[1];
+    const fillAttr = rootFill ? ` fill="${rootFill}"` : "";
+
     names.push(name);
     symbols.push(
-      `<symbol id="${toIconId(name)}" viewBox="${viewBox}">${inner}</symbol>`,
+      `<symbol id="${toIconId(name)}" viewBox="${viewBox}"${fillAttr}>${inner}</symbol>`,
     );
   }
 

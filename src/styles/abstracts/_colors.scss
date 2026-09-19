@@ -29,6 +29,7 @@ $orange: (
   "700": #822d00,
   "800": #551e00,
   "900": #2b0f00,
+  "950": #170701, // text on the Extreme difficulty chip (Figma: difficulty/extreme/text)
 );
 
 // Decorative only — data visualisation / quiet decoration. Neither may carry
@@ -74,6 +75,7 @@ $slate: (
   "900": #101817,
   "950": #0b1011,
   "975": #070c0b,
+  "1000": #000000, // disabled control borders (Figma paints these plain black)
 );
 
 // Tuned for dark grounds — not reused from any light-mode equivalent.

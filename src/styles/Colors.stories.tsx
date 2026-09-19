@@ -86,6 +86,15 @@ const border = [
   { token: "--color-border-focus", label: "focus" },
 ];
 
+const overlay = [
+  { token: "--color-overlay-scrim", label: "scrim — flat, under text on photos" },
+  { token: "--color-overlay-scrim-mid", label: "scrim mid — tile stop, 35%" },
+  { token: "--color-overlay-scrim-heavy", label: "scrim heavy — tile base, 90%" },
+  { token: "--gradient-scrim-tile", label: "tile scrim — 0 → 35% @55% → 90%" },
+  { token: "--color-overlay-backdrop", label: "backdrop — modals" },
+  { token: "--color-overlay-wash", label: "wash — raised elements" },
+];
+
 const difficulty = [
   { token: "--color-difficulty-easy-bg", label: "easy bg" },
   { token: "--color-difficulty-easy-text", label: "easy text" },
@@ -115,6 +124,7 @@ export const Overview: Story = {
       <Group title="Text" tokens={text} />
       <Group title="Brand" tokens={brand} />
       <Group title="Border" tokens={border} />
+      <Group title="Overlay" tokens={overlay} />
       <Group title="Difficulty (safety-critical — glyph + label mandatory, never colour alone)" tokens={difficulty} />
       <Group title="State" tokens={state} />
     </div>

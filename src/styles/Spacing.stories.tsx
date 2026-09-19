@@ -25,8 +25,10 @@ const spaceScale = [
 
 const radiusScale = [
   { token: "xs", px: 4, note: "checkbox only" },
+  { token: "checkbox", px: 6, note: "web checkbox indicator (22px box)" },
   { token: "sm", px: 8, note: "inputs, buttons" },
   { token: "md", px: 12, note: "the default — cards" },
+  { token: "tile", px: 14, note: "portrait photo tiles (Activity tile)" },
   { token: "lg", px: 16, note: "large cards, media" },
   { token: "xl", px: 24, note: "marketing blocks" },
   { token: "full", px: 999, note: "pills, avatars" },

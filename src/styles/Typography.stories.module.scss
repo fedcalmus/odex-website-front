@@ -39,6 +39,15 @@
 .captionStrong {
   @include tokens.text("caption-strong");
 }
+.meta {
+  @include tokens.text("meta");
+}
+.micro {
+  @include tokens.text("micro");
+}
+.microCaps {
+  @include tokens.text("micro-caps");
+}
 .mono {
   @include tokens.text("mono");
 }

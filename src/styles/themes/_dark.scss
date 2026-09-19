@@ -45,24 +45,38 @@
   --color-border-default: rgb(255 255 255 / 8%);
   --color-border-strong: rgb(255 255 255 / 14%); // table headers, card edges
   --color-border-focus: #{map.get(tokens.$lime, "400")}; // 14.04 on the ground, far above the 3.0 required
+  --color-border-subtle: #{map.get(tokens.$slate, "1000")}; // disabled controls — recedes below the surface instead of glowing like an active edge
 
-  // Difficulty — SAFETY CRITICAL. Single-hue density ramp on Forest, with a
-  // deliberate hue break to orange at Extreme. Colour is never the only
+  // Difficulty — SAFETY CRITICAL. Three Forest steps ascending in darkness,
+  // then a deliberate hue break to orange at Extreme: Extreme is a different
+  // category of commitment, not one more step. Colour is never the only
   // channel: glyph + label are mandatory alongside every one of these,
   // including in greyscale print.
-  --color-difficulty-easy-bg: #{map.get(tokens.$forest, "800")};
-  --color-difficulty-easy-text: #{map.get(tokens.$forest, "200")};
-  --color-difficulty-moderate-bg: #{map.get(tokens.$forest, "700")};
-  --color-difficulty-moderate-text: #{map.get(tokens.$forest, "100")};
-  --color-difficulty-hard-bg: #{map.get(tokens.$forest, "500")};
+  // Corrected Aug 2026 to the approved homepage (Figma Difficulty chip notes).
+  --color-difficulty-easy-bg: #{map.get(tokens.$forest, "100")};
+  --color-difficulty-easy-text: #{map.get(tokens.$forest, "800")};
+  --color-difficulty-moderate-bg: #{map.get(tokens.$forest, "300")};
+  --color-difficulty-moderate-text: #{map.get(tokens.$forest, "900")};
+  --color-difficulty-hard-bg: #{map.get(tokens.$forest, "600")};
   --color-difficulty-hard-text: #{map.get(tokens.$forest, "050")};
-  --color-difficulty-extreme-bg: #{map.get(tokens.$forest, "300")};
-  --color-difficulty-extreme-text: #{map.get(tokens.$forest, "900")};
+  --color-difficulty-extreme-bg: #{map.get(tokens.$orange, "400")};
+  --color-difficulty-extreme-text: #{map.get(tokens.$orange, "950")};
 
   // Overlay
   --color-overlay-scrim: rgb(7 12 11 / 55%); // photo scrim — mandatory under text/on-photo
   --color-overlay-backdrop: rgb(7 12 11 / 72%); // modal backdrop
   --color-overlay-wash: rgb(255 255 255 / 6%); // faint wash for raised elements
+  --color-overlay-scrim-mid: rgb(7 12 11 / 35%); // mid-stop of the tall-tile scrim
+  --color-overlay-scrim-heavy: rgb(7 12 11 / 90%); // base of the tall-tile scrim
+  // Tall photo tiles (Activity tile): the caption sits directly on the photo
+  // with no card body beneath it, so the scrim is heavier than the event
+  // card's flat 55% — clear at the top, 35% at 55% down, 90% at the base.
+  --gradient-scrim-tile: linear-gradient(
+    to bottom,
+    rgb(7 12 11 / 0%) 0%,
+    var(--color-overlay-scrim-mid) 55%,
+    var(--color-overlay-scrim-heavy) 100%
+  );
 
   // State — tuned for dark grounds, not reused from any light-mode equivalent
   --color-state-success: #{map.get(tokens.$state-success, "400")};

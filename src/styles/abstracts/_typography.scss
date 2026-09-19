@@ -104,6 +104,22 @@ $type-scale: (
     line-height: 1.4,
     weight: $font-weight-medium,
   ),
+  "meta": (
+    size: 12,
+    line-height: normal,
+    weight: $font-weight-regular,
+  ),
+  "micro": (
+    size: 10,
+    line-height: normal,
+    weight: $font-weight-regular,
+  ),
+  "micro-caps": (
+    size: 9,
+    line-height: normal,
+    weight: $font-weight-regular,
+    letter-spacing: 0.12em,
+  ),
   "mono": (
     size: 13,
     line-height: 1.5,
@@ -127,6 +143,9 @@ $type-scale: (
   font-size: fn.px-to-rem(map.get($t, size));
   line-height: map.get($t, line-height);
   font-weight: map.get($t, weight);
+  @if map.has-key($t, letter-spacing) {
+    letter-spacing: map.get($t, letter-spacing);
+  }
   // Armenian has no italic tradition — emphasis is carried by weight, never style.
   font-style: normal;
 }

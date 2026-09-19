@@ -91,6 +91,24 @@ const rows: { className: string; name: string; spec: string; sample: string }[] 
     sample: "ԱՍԹՄԱ",
   },
   {
+    className: styles.meta,
+    name: "Meta",
+    spec: "12 / auto / Regular — field error messages, inline meta",
+    sample: "Հասցեն թերի է — ավելացրու տիրույթը",
+  },
+  {
+    className: styles.micro,
+    name: "Micro",
+    spec: "10 / auto / Regular — counts under a tile title",
+    sample: "48 միջոցառում",
+  },
+  {
+    className: styles.microCaps,
+    name: "Micro caps",
+    spec: "9 / auto / Regular / +12% tracking — compact field labels",
+    sample: "Անուն Ազգանուն",
+  },
+  {
     className: styles.mono,
     name: "Mono",
     spec: "13 / 150% / Regular — booking codes, IBAN, coordinates",

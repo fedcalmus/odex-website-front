@@ -14,31 +14,33 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "formik": "^2.4.9",
     "next": "16.3.5",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.3.5",
-    "sass": "^1.104.1",
-    "typescript": "^5",
-    "storybook": "^10.6.0",
-    "@storybook/nextjs-vite": "^10.6.0",
     "@chromatic-com/storybook": "latest",
-    "@storybook/addon-vitest": "^10.6.0",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/addon-mcp": "^10.6.0",
-    "vite": "latest",
-    "eslint-plugin-storybook": "^10.6.0",
-    "vitest": "latest",
-    "playwright": "latest",
+    "@storybook/addon-vitest": "^10.6.0",
+    "@storybook/nextjs-vite": "^10.6.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@vitest/browser-playwright": "latest",
-    "@vitest/coverage-v8": "latest"
+    "@vitest/coverage-v8": "latest",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "eslint-plugin-storybook": "^10.6.0",
+    "playwright": "latest",
+    "sass": "^1.104.1",
+    "storybook": "^10.6.0",
+    "typescript": "^5",
+    "vite": "latest",
+    "vitest": "latest"
   }
 }

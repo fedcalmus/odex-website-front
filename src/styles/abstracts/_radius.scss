@@ -3,10 +3,14 @@
 $radius-scale: (
   "xs": 4px,
   // checkbox only
+  "checkbox": 6px,
+  // web checkbox indicator (22px box) — sits between xs and sm
   "sm": 8px,
   // inputs, buttons (admin)
   "md": 12px,
   // default — cards
+  "tile": 14px,
+  // portrait photo tiles (Activity tile)
   "lg": 16px,
   // large cards, media
   "xl": 24px,

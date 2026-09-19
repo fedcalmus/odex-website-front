@@ -1,0 +1,58 @@
+@use "abstracts" as tokens;
+
+// Figma "Activity tile" 63:944 — 177×400, radius 14, Elevation/Card shadow.
+// Sized by aspect ratio rather than fixed px so a 7-column grid at 1358 with a
+// 20px gap yields exactly 177×400 while smaller layouts scale the tile.
+.tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 177 / 400;
+  overflow: hidden;
+  border-radius: tokens.radius("tile");
+  background-color: var(--color-surface-2); // shows while the photo loads
+  box-shadow: tokens.$shadow-card;
+  color: var(--color-text-on-photo);
+  text-decoration: none;
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.image {
+  object-fit: cover;
+  pointer-events: none;
+}
+
+// Overlay: transparent at the top → 90% at the base. Heavier than the event
+// card's flat scrim because the caption sits directly on the photo.
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim-tile);
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  inset-inline: 13px; // Figma: 13px in from each edge (151px wide in a 177px tile)
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px; // Figma value — not on the spacing scale
+}
+
+.title {
+  @include tokens.text("label");
+  @include tokens.truncate;
+  color: var(--color-text-on-photo);
+}
+
+// The count is in the brand colour and it is the point: it tells a visitor
+// this category is alive.
+.count {
+  @include tokens.text("micro");
+  @include tokens.truncate;
+  color: var(--color-brand-primary);
+}

@@ -1,0 +1,120 @@
+@use "abstracts" as tokens;
+
+// Figma "Checkbox (web)" 554:2377 — 22px indicator, radius 6, 16px check.
+// 🔴 The box is NOT the tap target: the whole row is, at 44px minimum.
+$box-size: 22px;
+$row-gap: 10px; // Figma value from the Participant form row — not on the spacing scale
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: $row-gap;
+  min-height: tokens.$target-min;
+  // Centres the 22px box in the 44px row for a single-line label.
+  padding-block: calc((#{tokens.$target-min} - #{$box-size}) / 2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.control {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: $box-size;
+  height: $box-size;
+}
+
+// The real, focusable input sits invisibly over the box so keyboard, screen
+// reader and form semantics stay native.
+.input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: $box-size;
+  height: $box-size;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("checkbox");
+  background-color: var(--color-surface-2);
+  color: var(--color-brand-on-primary);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.mark {
+  opacity: 0;
+}
+
+.input:checked + .box {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary);
+
+  .mark {
+    opacity: 1;
+  }
+}
+
+.row:hover .input:not(:disabled):not(:checked) + .box {
+  border-color: var(--color-border-strong);
+}
+
+.row:hover .input:not(:disabled):checked + .box {
+  border-color: var(--color-brand-primary-hover);
+  background-color: var(--color-brand-primary-hover);
+}
+
+.input:focus-visible + .box {
+  @include tokens.focus-ring;
+}
+
+// Not in the Figma checkbox states — added so a required consent box can show
+// a validation error (border + message, never colour alone).
+.hasError .input:not(:checked) + .box {
+  border-color: var(--color-state-danger);
+}
+
+.disabled {
+  cursor: not-allowed;
+
+  .box {
+    opacity: 0.5;
+  }
+
+  .input:not(:checked) + .box {
+    border-color: var(--color-border-subtle);
+  }
+
+  .label {
+    color: var(--color-text-faint);
+  }
+}
+
+// Label type follows the only Figma checkbox+label reference (Participant
+// form health row): caption, text-secondary, first line centred on the box.
+.label {
+  @include tokens.text("caption");
+  min-width: 0;
+  margin-block-start: calc((#{$box-size} - 1lh) / 2);
+  color: var(--color-text-secondary);
+}
+
+.error {
+  @include tokens.text("meta");
+  margin: 0;
+  padding-inline-start: calc(#{$box-size} + #{$row-gap});
+  padding-block-end: tokens.space("2xs");
+  color: var(--color-state-danger);
+}

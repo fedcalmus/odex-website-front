@@ -1,0 +1,135 @@
+@use "abstracts" as tokens;
+
+// Two Figma fields share this component:
+//   default — "Mobile field" 384:1989: 52px box (above the 44px minimum — a
+//             44px box clips Armenian ascenders), radius 12, 15px value.
+//   compact — "Participant form" 110:1269: 42px box, radius 8, 13px value,
+//             9px micro-caps label, on surface-0 inside a card.
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-default);
+  background-color: var(--input-bg);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  // Focus is a 2px brand border, not a glow (a glow on a dark surface reads as
+  // a second element). The 2nd pixel is an inset ring, so the box and the text
+  // inside it never shift between focused and unfocused.
+  &:focus-within {
+    border-color: var(--color-border-focus);
+    box-shadow: inset 0 0 0 1px var(--color-border-focus);
+  }
+}
+
+.control {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0; // the surrounding .box draws the focus state
+  background: transparent;
+  color: var(--color-text-primary);
+  caret-color: var(--color-brand-primary);
+
+  &::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+
+  &:disabled {
+    // -webkit-text-fill-color: Safari otherwise ignores `color` on disabled inputs.
+    -webkit-text-fill-color: var(--color-text-faint);
+    color: var(--color-text-faint);
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: var(--color-text-faint);
+    }
+  }
+}
+
+.hasError {
+  border-color: var(--color-state-danger);
+}
+
+// Recedes rather than looking broken. Always pair with a nearby explanation.
+.disabled {
+  --input-bg: var(--color-surface-locked);
+  border-color: var(--color-border-subtle);
+
+  &:focus-within {
+    border-color: var(--color-border-subtle);
+    box-shadow: none;
+  }
+}
+
+.validIcon {
+  color: var(--color-state-success);
+}
+
+.errorIcon {
+  color: var(--color-state-danger);
+}
+
+.error {
+  @include tokens.text("meta");
+  margin: 0;
+  color: var(--color-state-danger);
+}
+
+// The message sits under the box and pushes content down — it never
+// overlays or replaces the label.
+.default {
+  --input-bg: var(--color-surface-2);
+  gap: 7px; // Figma value — not on the spacing scale
+
+  .label {
+    @include tokens.text("label");
+    color: var(--color-text-secondary);
+  }
+
+  .box {
+    gap: 10px; // Figma value — value-to-icon gap
+    height: 52px;
+    padding-inline: 16px 14px;
+    border-radius: tokens.radius("md");
+  }
+
+  .control {
+    @include tokens.text("body");
+  }
+}
+
+.compact {
+  --input-bg: var(--color-surface-0);
+  gap: 6px; // Figma value — not on the spacing scale
+
+  .label {
+    @include tokens.text("micro-caps");
+    color: var(--color-text-faint);
+  }
+
+  // 42px is below the 44px touch minimum — implemented as designed, flagged
+  // for the design team (see the component handoff notes).
+  .box {
+    gap: tokens.space("xs");
+    height: 42px;
+    padding-inline: tokens.space("sm");
+    border-radius: tokens.radius("sm");
+  }
+
+  .control {
+    @include tokens.text("body-small");
+  }
+}

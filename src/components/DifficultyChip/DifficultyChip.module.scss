@@ -1,0 +1,36 @@
+@use "abstracts" as tokens;
+
+// Height/padding/gap/radius measured from the Figma chip (87:3447):
+// 30px tall pill, 13px side padding, 8px glyph-to-label gap.
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.space("xs");
+  height: 30px;
+  padding-inline: 13px; // Figma value — not on the spacing scale (sm = 12, md = 16)
+  border-radius: tokens.radius("full");
+  white-space: nowrap;
+  @include tokens.text("label");
+}
+
+// The glyph inherits currentColor, so it always matches the label colour.
+.easy {
+  background-color: var(--color-difficulty-easy-bg);
+  color: var(--color-difficulty-easy-text);
+}
+
+.moderate {
+  background-color: var(--color-difficulty-moderate-bg);
+  color: var(--color-difficulty-moderate-text);
+}
+
+.hard {
+  background-color: var(--color-difficulty-hard-bg);
+  color: var(--color-difficulty-hard-text);
+}
+
+.extreme {
+  background-color: var(--color-difficulty-extreme-bg);
+  color: var(--color-difficulty-extreme-text);
+}
