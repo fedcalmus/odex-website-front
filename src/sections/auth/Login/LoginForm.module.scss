@@ -1,0 +1,68 @@
+@use "abstracts" as tokens;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md"); // Figma: 16
+}
+
+.phoneLogin {
+  @include tokens.text("label");
+  display: block;
+  text-align: center;
+  color: var(--color-text-secondary);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.noAccount {
+  @include tokens.text("body-small");
+  margin: 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.inlineLink {
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.clubCta {
+  @include tokens.text("body-small");
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.clubLink {
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

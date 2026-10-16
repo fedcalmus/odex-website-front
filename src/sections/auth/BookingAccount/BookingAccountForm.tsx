@@ -6,36 +6,37 @@ import { useFormik } from "formik";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { Notice } from "@/components/Notice";
-import { registerCopy as copy } from "@/content/auth";
-import { registerAccountSchema, registerInitialValues } from "./register.validation";
-import styles from "./RegisterAccountForm.module.scss";
+import { bookingAccountCopy as copy } from "@/content/auth";
+import { bookingAccountSchema, bookingAccountInitialValues } from "./booking-account.validation";
+import styles from "./BookingAccountForm.module.scss";
 
-export interface RegisterAccountFormProps {
+export interface BookingAccountFormProps {
   /** Where "Շարունակել" goes once the account details are valid. */
   nextHref: string;
   loginHref: string;
 }
 
 /**
- * Registration step 1 — account (email + password). Formik + Yup, with the
- * schema in `register.validation.ts`. Validates on BLUR only: Armenian input
+ * Booking account step — email + password, asked the first time someone
+ * books (not at general sign-up). Formik + Yup, with the schema in
+ * `booking-account.validation.ts`. Validates on BLUR only: Armenian input
  * methods produce intermediate states that would fire constant false errors if
  * we validated per keystroke.
  *
  * There is no backend yet, so a valid submit just moves to the next step; the
  * account is created when the API exists.
  */
-export function RegisterAccountForm({ nextHref, loginHref }: RegisterAccountFormProps) {
+export function BookingAccountForm({ nextHref, loginHref }: BookingAccountFormProps) {
   const router = useRouter();
   const formik = useFormik({
-    initialValues: registerInitialValues,
-    validationSchema: registerAccountSchema,
+    initialValues: bookingAccountInitialValues,
+    validationSchema: bookingAccountSchema,
     validateOnChange: false,
     validateOnBlur: true,
     onSubmit: () => router.push(nextHref),
   });
 
-  const field = (name: keyof typeof registerInitialValues) => ({
+  const field = (name: keyof typeof bookingAccountInitialValues) => ({
     ...formik.getFieldProps(name),
     error: formik.touched[name] ? formik.errors[name] : undefined,
     size: "form" as const,

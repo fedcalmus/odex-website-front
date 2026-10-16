@@ -1,0 +1,169 @@
+@use "abstracts" as tokens;
+
+.wizard {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 560px; // Figma value
+  color: var(--color-text-muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md"); // Figma: 16
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: tokens.space("md");
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+// Below md the primary action goes full width (Figma: Medium and Large go full width).
+.continueButton {
+  width: 100%;
+
+  @include tokens.respond-to("md") {
+    width: auto;
+    flex: 1 1 0;
+  }
+}
+
+.inlineLink {
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.chipField {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; // Figma value, matches Input's "form" variant
+}
+
+.label {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.required {
+  color: var(--color-state-danger);
+}
+
+.chipHelper {
+  @include tokens.text("caption");
+  margin: 0 0 tokens.space("2xs");
+  color: var(--color-text-muted);
+}
+
+.error {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-state-danger);
+}
+
+.guide {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  padding: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+}
+
+.guideHead {
+  display: flex;
+  align-items: flex-end;
+  gap: tokens.space("sm");
+
+  > :first-child {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.removeGuide {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border-chip);
+  border-radius: tokens.radius("sm");
+  background-color: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-state-danger);
+    color: var(--color-state-danger);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.addGuide {
+  @include tokens.text("label");
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-link);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

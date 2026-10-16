@@ -11,6 +11,7 @@ export const ICON_NAMES = [
   "activity-water",
   "alert-circle",
   "alert-triangle",
+  "apple",
   "arrow-down",
   "arrow-left",
   "arrow-right",

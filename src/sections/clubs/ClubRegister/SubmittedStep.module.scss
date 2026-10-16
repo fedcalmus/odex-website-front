@@ -1,0 +1,81 @@
+@use "abstracts" as tokens;
+
+.submitted {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("md");
+  max-width: 480px;
+  padding-block: tokens.space("xl");
+  text-align: center;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary-subtle);
+  color: var(--color-brand-primary);
+}
+
+.title {
+  @include tokens.text("display-s");
+  margin: 0;
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  width: 100%;
+  margin: tokens.space("md") 0 0;
+  padding: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+  text-align: left;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: tokens.space("sm");
+
+  & + & {
+    padding-top: tokens.space("md");
+    border-top: 1px solid var(--color-border-default);
+  }
+}
+
+.rowIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-brand-primary);
+}
+
+.rowTitle {
+  @include tokens.text("label");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.rowMeta {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-muted);
+}

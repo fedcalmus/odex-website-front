@@ -1,4 +1,11 @@
+// `display: flex` here (not just `flex: 1 0 auto`) so SplitPanelLayout's
+// `.split` can itself be flex-grown to fill this — a plain block child can't
+// resolve `min-height: 100%` against a flex-grown ancestor's computed
+// height, only against an explicitly `height`d one (verified: without this,
+// `.split` only grew to its content height on short pages like /login).
 .main {
+  display: flex;
   flex: 1 0 auto;
+  flex-direction: column;
   background-color: var(--color-surface-2);
 }

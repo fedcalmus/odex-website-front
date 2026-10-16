@@ -1,0 +1,89 @@
+@use "abstracts" as tokens;
+
+// Mirrors Input's "form" variant (Figma "Form field" 18:461): radius 8,
+// label 13 Medium in text/primary, helper 11 muted — just a multi-line box
+// instead of a fixed 44px one.
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; // Figma value
+  min-width: 0;
+}
+
+.label {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.required {
+  color: var(--color-state-danger);
+}
+
+.box {
+  display: flex;
+  box-sizing: border-box;
+  padding: tokens.space("sm") 14px;
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-surface-1);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:focus-within {
+    border-color: var(--color-border-focus);
+    box-shadow: inset 0 0 0 1px var(--color-border-focus);
+  }
+}
+
+.control {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 96px; // Figma value, roughly 4 lines
+  padding: 0;
+  border: 0;
+  outline: 0; // the surrounding .box draws the focus state
+  resize: vertical;
+  background: transparent;
+  color: var(--color-text-primary);
+  caret-color: var(--color-brand-primary);
+  font-family: inherit;
+
+  @include tokens.text("body-small");
+
+  &::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+
+  &:disabled {
+    -webkit-text-fill-color: var(--color-text-faint);
+    color: var(--color-text-faint);
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: var(--color-text-faint);
+    }
+  }
+}
+
+.hasError {
+  border-color: var(--color-state-danger);
+}
+
+.disabled {
+  background-color: var(--color-surface-locked);
+  border-color: var(--color-border-subtle);
+}
+
+.helper {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.error {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-state-danger);
+}

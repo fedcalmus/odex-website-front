@@ -1,6 +1,7 @@
 import type { DifficultyExplainerCardProps } from "@/components/DifficultyExplainerCard";
 import type { DestinationCardProps } from "@/components/DestinationCard";
 import type { SearchBandProps } from "@/components/SearchBand";
+import type { LatestClubs } from "@/api/clubs";
 import { ACTIVITIES } from "@/data/activities";
 import { CLUBS, getClub, toClubCardProps } from "@/data/clubs";
 import { getEventBySlug, HOME_WEEKEND_SLUGS, toEventCardProps } from "@/data/events";
@@ -181,14 +182,23 @@ export const guide = {
 // The same club records the directory and the profile pages use, in the design's order.
 const HOME_CLUB_SLUGS = ["armenia-trails", "vertical-yerevan", "tavush-trail", "sevan-water"] as const;
 
+// The four latest clubs come from the API (src/api/clubs.ts). `{count}` in the
+// title is replaced with the API's total.
 export const clubs = {
   heading: {
     eyebrow: "ԱԿՈՒՄԲՆԵՐԻ ՑԱՆՑ",
-    title: `${CLUBS.length} ակումբ, բոլորը ստուգված`,
+    title: "{count} ակումբ, բոլորը ստուգված",
     description: "Ամեն ակումբ անցնում է փաստաթղթերի և գիդերի հավաստագրերի ստուգում։",
     link: { label: "Դիտել բոլոր ակումբները", href: "/clubs" },
   },
-  items: HOME_CLUB_SLUGS.map((slug) => ({ id: slug, ...toClubCardProps(getClub(slug)) })),
+  /** Name of the structured-data list (schema.org ItemList). */
+  listName: "Ակումբներ",
+  // STATIC FALLBACK (the previous mock version), shown until the API has clubs
+  // to return — the public endpoint doesn't exist yet. Delete once it does.
+  fallback: {
+    total: CLUBS.length,
+    clubs: HOME_CLUB_SLUGS.map((slug) => ({ id: slug, ...toClubCardProps(getClub(slug)) })),
+  } satisfies LatestClubs,
 };
 
 // ── Difficulty ("Բարդություն") ────────────────────────────────────────────

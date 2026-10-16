@@ -1,0 +1,71 @@
+@use "abstracts" as tokens;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.providers {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+
+  @include tokens.respond-to("sm") {
+    flex-direction: row;
+  }
+}
+
+// Not the shared Button component: it only takes an IconName, and the
+// Google mark needs its real brand colours, not a themeable glyph.
+.providerButton {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.space("xs");
+  height: tokens.$target-field;
+  padding-inline: tokens.space("lg");
+  border: 1px solid var(--color-border-chip);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-chip);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  @include tokens.text("action");
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  &:active {
+    background-color: var(--color-surface-pressed);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.glyph {
+  flex-shrink: 0;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  color: var(--color-text-muted);
+
+  @include tokens.text("caption");
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1 1 0;
+    height: 1px;
+    background-color: var(--color-border-default);
+  }
+}

@@ -11,13 +11,17 @@ export interface ClubCardProps {
   name: string;
   /** Club page. The whole card is the link (stretched from the name). */
   href: string;
-  cover: ImageProps["src"];
-  logo: ImageProps["src"];
+  /** Absent → a plain surface behind the name. */
+  cover?: ImageProps["src"];
+  /** Absent → a neutral disc with a dash. */
+  logo?: ImageProps["src"];
   /** Caps classification under the name, e.g. "ԱՐՇԱՎ · ԵՐԵՎԱՆ" — it classifies, it doesn't describe. */
   classification: string;
-  description: string;
-  eventsCount: number;
-  guidesCount: number;
+  /** Optional: API-driven cards don't have one. */
+  description?: string;
+  /** A number, or "-" when the API has none. */
+  eventsCount: number | string;
+  guidesCount: number | string;
   /** Shown on a verified club with fewer than three events — an invitation, not a warning. */
   newBadgeLabel?: string;
   eventsLabel?: string;
@@ -55,7 +59,7 @@ export function ClubCard({
   return (
     <article className={cx(styles.card, className)}>
       <div className={styles.cover}>
-        <Image src={cover} alt="" fill sizes={sizes} preload={preload} className={styles.coverImage} />
+        {cover ? <Image src={cover} alt="" fill sizes={sizes} preload={preload} className={styles.coverImage} /> : null}
         <span className={styles.scrim} aria-hidden="true" />
         {newBadgeLabel ? (
           <ScarcityBadge type="new-club" className={styles.badge}>
@@ -66,7 +70,13 @@ export function ClubCard({
 
       <div className={styles.body}>
         <span className={styles.logo}>
-          <Image src={logo} alt="" fill sizes="56px" className={styles.logoImage} />
+          {logo ? (
+            <Image src={logo} alt="" fill sizes="56px" className={styles.logoImage} />
+          ) : (
+            <span className={styles.logoEmpty} aria-hidden="true">
+              -
+            </span>
+          )}
         </span>
 
         <div className={styles.identity}>
@@ -80,7 +90,7 @@ export function ClubCard({
           <p className={styles.classification}>{classification}</p>
         </div>
 
-        <p className={styles.description}>{description}</p>
+        {description ? <p className={styles.description}>{description}</p> : null}
 
         <div className={styles.footer}>
           <dl className={styles.stats}>

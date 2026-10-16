@@ -1,6 +1,6 @@
 import { FocusHeader } from "@/components/FocusHeader";
 import { SkipLink } from "@/components/SkipLink";
-import { registerCopy } from "@/content/auth";
+import { authHeaderCopy } from "@/content/auth";
 import { skipLinkLabel } from "@/content/site";
 import styles from "./layout.module.scss";
 
@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
   return (
     <>
       <SkipLink>{skipLinkLabel}</SkipLink>
-      <FocusHeader back={{ href: "/", label: registerCopy.header.back }} secureLabel={registerCopy.header.secure} />
+      <FocusHeader back={{ href: "/", label: authHeaderCopy.back }} secureLabel={authHeaderCopy.secure} />
       <main id="main" className={styles.main}>
         {children}
       </main>

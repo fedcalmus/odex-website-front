@@ -39,3 +39,21 @@ export const NewClub: Story = {
 };
 
 export const LongName: Story = { args: { name: "Հայաստանի արահետներ և գագաթներ ակումբ" } };
+
+// Every field the API may omit falls back to a dash — the card never breaks.
+export const MissingData: Story = {
+  args: {
+    name: "-",
+    href: "/clubs/unknown",
+    cover: undefined,
+    logo: undefined,
+    classification: "- · -",
+    description: undefined,
+    eventsCount: "-",
+    guidesCount: "-",
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("link", { name: "-" })).toBeVisible();
+    await expect(canvas.getByText("- · -")).toBeVisible();
+  },
+};

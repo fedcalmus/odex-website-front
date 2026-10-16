@@ -9,7 +9,7 @@ export interface BreadcrumbItem {
 }
 
 export interface BreadcrumbProps {
-  items: BreadcrumbItem[];
+  items: readonly BreadcrumbItem[];
   /** Accessible name of the navigation landmark. */
   label: string;
   className?: string;

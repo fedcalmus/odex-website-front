@@ -3,6 +3,13 @@
 .split {
   display: flex;
   align-items: stretch;
+  // Flex-grown (not `min-height: 100%` — that doesn't resolve two levels up
+  // through a flex-grown, non-`height`d ancestor) against `.main`, which the
+  // `(auth)` layout now makes a column flex container for exactly this.
+  // Without it, `.split` only grows to the form column's content height, so
+  // `.panel` (stretched to match it) falls short of the viewport on pages
+  // with little content (login, submitted).
+  flex: 1 0 auto;
 }
 
 // Figma "Form": 56 top, 88 bottom, 100 left / 60 right at desktop.
@@ -10,6 +17,12 @@
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
+  // Centers the content block when it's shorter than the panel (login, the
+  // club wizard's "Submitted" screen) — a short form sitting at the top
+  // read as misaligned once `.split`/`.panel` started filling the full
+  // viewport height. Has no visible effect once content is taller than the
+  // available height (the common case), since there's no extra space to split.
+  justify-content: center;
   gap: tokens.space("lg");
   min-width: 0;
   padding: tokens.space("lg") 16px tokens.space("3xl");

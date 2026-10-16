@@ -1,14 +1,15 @@
 import * as Yup from "yup";
 
-// Validation for registration step 1. Kept apart from the form so the rules
-// (and their messages) can be reused and tested without rendering anything.
+// Validation for the booking account step (email + password), asked the first
+// time someone books — not at general sign-up. Kept apart from the form so the
+// rules (and their messages) can be reused and tested without rendering anything.
 //
 // Messages say WHAT TO DO, not what went wrong ("Figma: Form field"). They
 // fire on BLUR, never on keystroke — Armenian input methods produce
 // intermediate states that would trigger constant false errors. The messages are
 // written for this build and need a native-speaker pass.
 
-export const registerMessages = {
+export const bookingAccountMessages = {
   emailRequired: "Մուտքագրեք էլ. փոստի հասցեն",
   emailInvalid: "Ստուգեք հասցեն. այն պետք է լինի name@mail.com տեսքով",
   passwordRequired: "Ստեղծեք գաղտնաբառ",
@@ -20,30 +21,30 @@ export const registerMessages = {
 
 export const PASSWORD_MIN_LENGTH = 8;
 
-export interface RegisterAccountValues {
+export interface BookingAccountValues {
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-export const registerInitialValues: RegisterAccountValues = {
+export const bookingAccountInitialValues: BookingAccountValues = {
   email: "",
   password: "",
   confirmPassword: "",
 };
 
-export const registerAccountSchema: Yup.ObjectSchema<RegisterAccountValues> = Yup.object({
+export const bookingAccountSchema: Yup.ObjectSchema<BookingAccountValues> = Yup.object({
   email: Yup.string()
     .trim()
-    .required(registerMessages.emailRequired)
-    .email(registerMessages.emailInvalid),
+    .required(bookingAccountMessages.emailRequired)
+    .email(bookingAccountMessages.emailInvalid),
   password: Yup.string()
-    .required(registerMessages.passwordRequired)
-    .min(PASSWORD_MIN_LENGTH, registerMessages.passwordShort)
+    .required(bookingAccountMessages.passwordRequired)
+    .min(PASSWORD_MIN_LENGTH, bookingAccountMessages.passwordShort)
     // A letter (any script — Armenian included) and a digit.
-    .matches(/\p{L}/u, registerMessages.passwordWeak)
-    .matches(/\d/, registerMessages.passwordWeak),
+    .matches(/\p{L}/u, bookingAccountMessages.passwordWeak)
+    .matches(/\d/, bookingAccountMessages.passwordWeak),
   confirmPassword: Yup.string()
-    .required(registerMessages.confirmRequired)
-    .oneOf([Yup.ref("password")], registerMessages.confirmMismatch),
+    .required(bookingAccountMessages.confirmRequired)
+    .oneOf([Yup.ref("password")], bookingAccountMessages.confirmMismatch),
 });
