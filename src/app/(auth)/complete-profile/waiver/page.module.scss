@@ -1,0 +1,61 @@
+@use "abstracts" as tokens;
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 560px; // Figma value
+  color: var(--color-text-muted);
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+}
+
+.quoteText {
+  @include tokens.text("body");
+  margin: 0;
+  color: var(--color-text-on-photo);
+}
+
+.quoteAuthor {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: tokens.radius("full");
+  object-fit: cover;
+}
+
+.quoteName {
+  @include tokens.text("label");
+  margin: 0;
+  color: var(--color-text-on-photo);
+}
+
+.quoteRole {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,120 @@
+@use "abstracts" as tokens;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+}
+
+.cardTitle {
+  @include tokens.text("label-large");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-primary);
+}
+
+.version {
+  @include tokens.text("caption");
+  color: var(--color-text-faint);
+}
+
+.cardBody {
+  @include tokens.text("body-small");
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  color: var(--color-text-secondary);
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("2xs");
+  padding-inline-start: tokens.space("md");
+}
+
+.cardCheckbox {
+  padding-top: tokens.space("xs");
+  border-top: 1px solid var(--color-border-default);
+}
+
+.practical {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  padding: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+}
+
+.practicalTitle {
+  @include tokens.text("label-large");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+
+  li {
+    @include tokens.text("body-small");
+    display: flex;
+    align-items: flex-start;
+    gap: tokens.space("xs");
+    color: var(--color-text-secondary);
+  }
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-brand-primary);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: tokens.space("md");
+
+  @include tokens.respond-to("md") {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.continueButton {
+  width: 100%;
+
+  @include tokens.respond-to("md") {
+    width: auto;
+    flex: 1 1 0;
+  }
+}
+
+.footnote {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-muted);
+}

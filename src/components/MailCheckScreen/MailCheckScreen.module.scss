@@ -1,0 +1,70 @@
+@use "abstracts" as tokens;
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("md");
+  max-width: 480px;
+  text-align: center;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary-subtle);
+  color: var(--color-brand-primary);
+}
+
+.title {
+  @include tokens.text("display-s");
+  margin: 0;
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("body");
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  width: 100%;
+  margin-top: tokens.space("xs");
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("sm");
+  margin-top: tokens.space("xs");
+}
+
+// Both footer lines render as one uniformly lime link — confirmed from the
+// mock, not muted-text + a lime action word.
+.footerLink {
+  @include tokens.text("label");
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

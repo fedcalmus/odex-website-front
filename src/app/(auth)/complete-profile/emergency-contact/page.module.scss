@@ -1,0 +1,23 @@
+@use "abstracts" as tokens;
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Figma value
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.lead {
+  @include tokens.text("lead-s");
+  max-width: 560px; // Figma value
+  color: var(--color-text-muted);
+}
