@@ -1,19 +1,18 @@
-import { FocusHeader } from "@/components/FocusHeader";
 import { SkipLink } from "@/components/SkipLink";
-import { authHeaderCopy } from "@/content/auth";
 import { skipLinkLabel } from "@/content/site";
-import styles from "./layout.module.scss";
 
-// Account creation and sign-in: "the only screens that do not use the
-// marketplace nav" (Figma). A stripped header, no footer — nothing to leave for.
+// Account creation, sign-in, club sign-up and profile-completion screens: "the
+// only screens that do not use the marketplace nav" (Figma). FocusHeader and
+// the page's <main> landmark now live in SplitPanelLayout itself — every
+// page here uses it, and each needs its own back link / secure-mark text
+// (confirmed different across mocks: icon-only at sign-up, "Անվտանգ մուտք" at
+// login, "Ապահով վճարում" in the profile-completion flow) — a single shared
+// layout-level header couldn't express that.
 export default function AuthLayout({ children }: LayoutProps<"/">) {
   return (
     <>
       <SkipLink>{skipLinkLabel}</SkipLink>
-      <FocusHeader back={{ href: "/", label: authHeaderCopy.back }} secureLabel={authHeaderCopy.secure} />
-      <main id="main" className={styles.main}>
-        {children}
-      </main>
+      {children}
     </>
   );
 }

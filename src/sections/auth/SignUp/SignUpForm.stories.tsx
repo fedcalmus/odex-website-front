@@ -42,6 +42,6 @@ export const ValidSubmitContinues: Story = {
     await userEvent.type(canvas.getByLabelText(/^Գաղտնաբառ/), "Odex2026x");
     await userEvent.click(canvas.getByRole("checkbox"));
     await userEvent.click(canvas.getByRole("button", { name: "Ստեղծել հաշիվ" }));
-    await waitFor(() => expect(getRouter().push).toHaveBeenCalledWith("/"));
+    await waitFor(() => expect(getRouter().push).toHaveBeenCalledWith("/?email=anush%40example.am"));
   },
 };

@@ -12,7 +12,7 @@ export interface SelectOption {
 export interface SelectProps extends Omit<ComponentPropsWithRef<"select">, "size"> {
   /** Label rendered ABOVE the box, same convention as `Input`. */
   label?: ReactNode;
-  options: SelectOption[];
+  options: readonly SelectOption[];
   /** First, disabled option shown until something is picked — "Ընտրեք մարզը". */
   placeholder?: string;
   /** Red asterisk after the label, plus `required` for assistive tech. */

@@ -12,7 +12,7 @@ import { signUpSchema, signUpInitialValues } from "./sign-up.validation";
 import styles from "./SignUpForm.module.scss";
 
 export interface SignUpFormProps {
-  /** Where a successful sign-up goes. */
+  /** Where a successful sign-up goes — the submitted email is appended as `?email=`. */
   nextHref: string;
 }
 
@@ -33,7 +33,7 @@ export function SignUpForm({ nextHref }: SignUpFormProps) {
     validationSchema: signUpSchema,
     validateOnChange: false,
     validateOnBlur: true,
-    onSubmit: () => router.push(nextHref),
+    onSubmit: (values) => router.push(`${nextHref}?email=${encodeURIComponent(values.email)}`),
   });
 
   const field = (name: FieldName) => ({

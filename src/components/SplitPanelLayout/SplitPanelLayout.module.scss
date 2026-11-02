@@ -1,14 +1,22 @@
 @use "abstracts" as tokens;
 
+// Was `.main` in `(auth)/layout.module.scss`; moved here since this
+// component now owns the page's `<main>` landmark.
+.page {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  background-color: var(--color-surface-2);
+}
+
 .split {
   display: flex;
   align-items: stretch;
   // Flex-grown (not `min-height: 100%` — that doesn't resolve two levels up
-  // through a flex-grown, non-`height`d ancestor) against `.main`, which the
-  // `(auth)` layout now makes a column flex container for exactly this.
-  // Without it, `.split` only grows to the form column's content height, so
-  // `.panel` (stretched to match it) falls short of the viewport on pages
-  // with little content (login, submitted).
+  // through a flex-grown, non-`height`d ancestor) against `.page`, the column
+  // flex container above. Without it, `.split` only grows to the form
+  // column's content height, so `.panel` (stretched to match it) falls short
+  // of the viewport on pages with little content (login, submitted).
   flex: 1 0 auto;
 }
 
@@ -58,4 +66,12 @@
   position: absolute;
   inset: 0 0 -540px;
   background: linear-gradient(to bottom, rgb(6 9 10 / 32%), rgb(6 9 10 / 95%));
+}
+
+// The Waiver step's guide quote — sits on the scrim's darkened foot.
+.overlay {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: tokens.space("2xl");
 }

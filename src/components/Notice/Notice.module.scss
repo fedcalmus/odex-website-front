@@ -26,3 +26,14 @@
     color: var(--color-state-info-tint);
   }
 }
+
+// Warning: state/warning tint ground, amber text (the under-18 and
+// required-emergency-contact notes in the profile-completion flow).
+.warning {
+  background-color: var(--color-state-warning-subtle);
+  color: var(--color-state-warning-tint);
+
+  .icon {
+    color: var(--color-state-warning-tint);
+  }
+}

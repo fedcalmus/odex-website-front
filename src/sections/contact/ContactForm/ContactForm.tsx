@@ -18,7 +18,7 @@ type FieldName = "name" | "email" | "topic";
  *
  * There is no backend yet — a valid submit just swaps the card for an
  * inline confirmation (there's no "next page" to send a contact message to,
- * unlike the account/booking flows, which redirect).
+ * unlike the account/profile-completion flows, which redirect).
  */
 export function ContactForm() {
   const formik = useFormik({

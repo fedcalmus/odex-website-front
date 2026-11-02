@@ -17,7 +17,11 @@ export const metadata: Metadata = {
 // dynamic route.
 export default function ClubRegisterPage() {
   return (
-    <SplitPanelLayout image="/images/auth/register-panel.png">
+    <SplitPanelLayout
+      image="/images/auth/register-panel.png"
+      back={{ href: "/", label: copy.header.back }}
+      secureLabel={copy.header.secure}
+    >
       <ClubRegisterWizard />
     </SplitPanelLayout>
   );

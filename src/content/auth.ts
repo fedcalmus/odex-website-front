@@ -1,44 +1,11 @@
-// Shared header copy for every screen under the (auth) layout — booking
-// account, sign-up and login all use the same stripped FocusHeader, so its
-// copy lives here instead of inside one page's object.
-//
-// `secure` was "Ապահով վճարում" ("secure payment") until the Login mock
-// ("Login — MP-13") showed this exact header with "Անվտանգ մուտք" ("secure
-// sign-in") instead — a better fit for sign-up/login too, since neither
-// involves a payment. Kept as one shared string across all three screens.
+// Shared across every screen under the (auth) layout — just the back-button
+// label, which is consistent everywhere. The lock-icon text next to it is
+// NOT shared: confirmed different per screen (icon-only at sign-up and club
+// sign-up, "Անվտանգ մուտք" at login, "Ապահով վճարում" in the profile-completion
+// flow — see `content/complete-profile.ts`), so each copy object below sets
+// its own `secure`.
 export const authHeaderCopy = {
   back: "Հետ",
-  secure: "Անվտանգ մուտք",
-} as const;
-
-// Booking account step ("Register · 1 Account — MP-11a", Figma 327:23176)
-// copy. Verbatim from Figma except strings marked "written for this build":
-// the Figma frame uses placeholder fields, so the labels and helpers are
-// ours. Needs a native-speaker pass.
-//
-// This is asked the first time someone books a spot, not at general
-// sign-up — see `signUpCopy` below for the public /register screen.
-export const bookingAccountCopy = {
-  header: authHeaderCopy,
-  stepperLabel: "Գրանցման քայլեր", // written for this build
-  steps: [
-    { label: "Հաշիվ", hint: "էլ. փոստ և գաղտնաբառ" },
-    { label: "Համաձայնագիր", hint: "ռիսկի ընդունում" },
-    { label: "Առողջություն", hint: "ոչ պարտադիր հիմա" },
-    { label: "Կապ", hint: "արտակարգ դեպքի համար" },
-  ],
-  stepOfTotal: (step: number, total: number) => `Քայլ ${step} / ${total}`,
-  title: "Ստեղծել հաշիվ",
-  lead: "Տոմսերը գալիս են էլ. փոստով և պահվում ձեր հաշվում։",
-  fields: {
-    email: { label: "Էլ. փոստ", helper: "Այստեղ կգա ձեր տոմսը" },
-    password: { label: "Գաղտնաբառ", helper: "Առնվազն 8 նիշ՝ տառեր և թվեր" },
-    confirmPassword: { label: "Կրկնեք գաղտնաբառը", helper: "Նույնը՝ սխալից խուսափելու համար" },
-  },
-  emailNotice:
-    "Օգտագործեք այն էլ. փոստը, որին հասանելիություն ունեք սարում — տոմսը և ուղեկցորդի հաղորդագրությունները գնում են այնտեղ։",
-  haveAccount: "Արդեն ունե՞ք հաշիվ · Մուտք",
-  submit: "Շարունակել",
 } as const;
 
 // Public sign-up screen ("Sign up — MP-11a"). Transcribed directly from the
@@ -47,7 +14,8 @@ export const bookingAccountCopy = {
 // best-effort — they need a check against the source Figma frame plus a
 // native-speaker pass, same as the rest of this file.
 export const signUpCopy = {
-  header: authHeaderCopy,
+  // Icon-only — confirmed from both this mock and the club sign-up one, no text next to the lock.
+  header: { back: authHeaderCopy.back, secure: "" },
   title: "Ստեղծել հաշիվ",
   // ⚠️ Least certain line in this file — the opening two words were hard to
   // make out at this image resolution; re-check against Figma.
@@ -97,7 +65,7 @@ export const signUpCopy = {
 // itself, so needs a check against the source frame plus a native-speaker
 // pass.
 export const loginCopy = {
-  header: authHeaderCopy,
+  header: { back: authHeaderCopy.back, secure: "Անվտանգ մուտք" },
   title: "Բարի վերադարձ",
   social: {
     google: "Շարունակել Google-ով",
@@ -108,7 +76,11 @@ export const loginCopy = {
     email: { label: "Էլ. փոստ", placeholder: "anush@example.am" },
     password: { label: "Գաղտնաբառ" },
   },
+  // Not in the Login mock itself, but it links to a real flow now — written
+  // for this build, needs a native-speaker pass same as the rest of this file.
+  forgotPassword: { label: "Մոռացե՞լ եք գաղտնաբառը", href: "/reset-password" },
   submit: "Մուտք գործել",
+  resetSuccess: "Գաղտնաբառը փոխվեց։ Մուտք գործեք նոր գաղտնաբառով։",
   // ⚠️ No phone-based sign-in flow exists in the app yet — this points at a
   // page that isn't built (/login/phone). Flagging rather than silently
   // dropping it or wiring it to something it doesn't do.
@@ -116,4 +88,87 @@ export const loginCopy = {
   noAccount: { text: "Հաշիվ չունե՞ք", actionLabel: "Գրանցվել", href: "/register" },
   // ⚠️ Best-effort reading — confirm exact wording against Figma.
   clubCta: { text: "Ակումբ ե՞ք ներկայացնում", actionLabel: "Գրանցեք ակումբը", href: "/clubs/register" },
+} as const;
+
+// "Check your inbox" screen shown right after sign-up (Figma "Auth · Verify
+// email — MP-13e"). Transcribed directly from the design screenshot, not
+// the Figma file itself (no file link was given), so treat this as
+// best-effort — it needs a check against the source frame plus a
+// native-speaker pass, same as the other screens built this way.
+//
+// There is no email-sending backend yet (see docs/email-verification-api.md)
+// — the "resend" button just restarts its own countdown, and "Շարունակել
+// առանց հաստատման" (continue without confirming) is the only real way
+// forward, matching the notice's own claim that confirmation isn't required
+// to browse, only to book.
+export const verifyEmailCopy = {
+  // Icon-only — same convention as sign-up/club sign-up, no text next to the lock.
+  header: { back: authHeaderCopy.back, secure: "" },
+  title: "Հաստատեք էլ. փոստը",
+  lead: (email: string) => `Նամակ ուղարկվեց ${email} հասցեին: Բացեք այն և սեղմեք հաստատման հղումը:`,
+  fallbackEmail: "ձեր էլ. փոստին",
+  notice: "Կարող եք գնել միջոցառումները առանց հաստատման, բայց ամրագրելու համար հաստատումը պարտադիր է:",
+  openMail: "Բացել փոստը",
+  resend: "Ուղարկել կրկին",
+  // One uniformly lime link, not muted-text + a lime action word — confirmed
+  // from the mock, same treatment as `continueWithoutVerifying` below.
+  wrongAddress: { label: "Սխա՞լ հասցե · Փոխել", href: "/register" },
+  continueWithoutVerifying: { label: "Շարունակել առանց հաստատման", href: "/complete-profile/waiver" },
+} as const;
+
+// Password reset — 3 screens (Figma "Auth · Reset request — MP-13a",
+// "· Reset sent — MP-13b", "· New password — MP-13c"). Transcribed directly
+// from the design screenshots, not the Figma file itself (no file link was
+// given), so treat this as best-effort — it needs a check against the
+// source frames plus a native-speaker pass, same as the other screens built
+// this way.
+//
+// There is no backend yet (see docs/password-reset-api.md) — "Ուղարկել
+// հղումը" just moves to the "sent" screen, "resend" there only restarts its
+// own countdown, and the "new password" screen's submit goes straight to
+// login.
+export const resetPasswordCopy = {
+  // Icon-only — same convention as sign-up/club sign-up, no text next to the lock.
+  header: { back: authHeaderCopy.back, secure: "" },
+
+  request: {
+    title: "Վերականգնել գաղտնաբառը",
+    // ⚠️ The mock's lead line under the title is a single "." with no other
+    // visible text — reads like an emptied Figma text layer, not real copy.
+    // Treated as "no lead" here rather than reproducing a stray period.
+    fields: {
+      email: {
+        label: "Էլ. փոստ",
+        placeholder: "anush@example.am",
+        helper: "Կուղարկենք գաղտնաբառի վերականգնման հղում",
+      },
+    },
+    submit: "Ուղարկել հղումը",
+    // Unlike other footer links in this app, the mock renders this whole
+    // line as one uniformly lime link, not muted-text + a lime action word.
+    rememberedPassword: { label: "Հիշեցի՞ք գաղտնաբառը · Մուտք", href: "/login" },
+  },
+
+  sent: {
+    title: "Ստուգեք ձեր փոստը",
+    lead: (email: string) => `Վերականգնման հղումն ուղարկվեց ${email} հասցեին: Այն գործում է 30 րոպե:`,
+    fallbackEmail: "ձեր էլ. փոստին",
+    notice: "Չե՞ք գտնում նամակը: Ստուգեք «Սպամ» պանակը կամ սպասեք 2 րոպե՝ կրկին ուղարկելուց առաջ:",
+    openMail: "Բացել փոստը",
+    resend: "Ուղարկել կրկին",
+    wrongAddress: { label: "Սխա՞լ հասցե · Փոխել", href: "/reset-password" },
+  },
+
+  newPassword: {
+    title: "Նոր գաղտնաբառ",
+    lead: "Առնվազն 8 նիշ և մեկ թիվ: Հին գաղտնաբառը կդադարի գործել:",
+    fields: {
+      password: { label: "Նոր գաղտնաբառ", helper: "Առնվազն 8 նիշ և մեկ թիվ" },
+      confirmPassword: { label: "Կրկնեք գաղտնաբառը" },
+    },
+    // No visible label on the submit button in the mock — just a trailing
+    // arrow icon. `aria-label` is required for assistive tech since the
+    // button otherwise has no accessible name.
+    submitAriaLabel: "Հաստատել նոր գաղտնաբառը",
+  },
 } as const;

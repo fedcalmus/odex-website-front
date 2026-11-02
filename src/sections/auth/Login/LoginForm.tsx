@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useFormik } from "formik";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
+import { Notice } from "@/components/Notice";
 import { SocialAuthButtons } from "@/components/SocialAuthButtons";
 import { loginCopy as copy } from "@/content/auth";
 import { loginSchema, loginInitialValues } from "./login.validation";
@@ -16,6 +18,19 @@ export interface LoginFormProps {
 }
 
 type FieldName = "email" | "password";
+
+// `useSearchParams` opts a Client Component out of static rendering unless
+// it's isolated behind its own Suspense boundary — kept to just this one
+// line of UI so the rest of the form stays static.
+function ResetSuccessNotice() {
+  const justReset = useSearchParams().get("reset") === "success";
+  if (!justReset) return null;
+  return (
+    <Notice tone="info" icon="check-circle">
+      {copy.resetSuccess}
+    </Notice>
+  );
+}
 
 /**
  * Public sign-in — email + password, plus Google/Apple entry points
@@ -44,6 +59,10 @@ export function LoginForm({ nextHref }: LoginFormProps) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit} className={styles.form}>
+      <Suspense fallback={null}>
+        <ResetSuccessNotice />
+      </Suspense>
+
       <SocialAuthButtons
         googleLabel={copy.social.google}
         appleLabel={copy.social.apple}
@@ -59,12 +78,17 @@ export function LoginForm({ nextHref }: LoginFormProps) {
           autoComplete="email"
           inputMode="email"
         />
-        <Input
-          {...field("password")}
-          type="password"
-          label={copy.fields.password.label}
-          autoComplete="current-password"
-        />
+        <div className={styles.passwordField}>
+          <Input
+            {...field("password")}
+            type="password"
+            label={copy.fields.password.label}
+            autoComplete="current-password"
+          />
+          <Link href={copy.forgotPassword.href} className={styles.forgotPassword}>
+            {copy.forgotPassword.label}
+          </Link>
+        </div>
       </div>
 
       <Button type="submit" size="large" fullWidth loading={formik.isSubmitting}>

@@ -54,6 +54,14 @@ export function formatInteger(value: number): string {
   return `${value < 0 ? "-" : ""}${groupThousands(String(Math.round(Math.abs(value))))}`;
 }
 
+/** "1:47" — a resend/expiry countdown, minutes:seconds, no leading zero on minutes. */
+export function formatCountdown(totalSeconds: number): string {
+  const clamped = Math.max(0, Math.round(totalSeconds));
+  const minutes = Math.floor(clamped / 60);
+  const seconds = clamped % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
 /** "12 000 ֏" — grouped with non-breaking spaces so the price never wraps. */
 export function formatPrice(amount: number, currency = "AMD"): string {
   return `${formatInteger(amount)}${NBSP}${CURRENCY_SYMBOL[currency] ?? currency}`;

@@ -17,7 +17,11 @@ export const metadata: Metadata = {
 // same static photo panel as sign-up rather than faking the numbers.
 export default function LoginPage() {
   return (
-    <SplitPanelLayout image="/images/auth/register-panel.png">
+    <SplitPanelLayout
+      image="/images/auth/register-panel.png"
+      back={{ href: "/", label: copy.header.back }}
+      secureLabel={copy.header.secure}
+    >
       <header className={styles.head}>
         <h1 className={styles.title}>{copy.title}</h1>
       </header>

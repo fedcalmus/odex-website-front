@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { getRouter } from "@storybook/nextjs-vite/navigation.mock";
 import { expect, userEvent, waitFor } from "storybook/test";
-import { BookingAccountForm } from "./BookingAccountForm";
+import { AccountDetailsForm } from "./AccountDetailsForm";
 
 const meta = {
-  title: "Sections/Auth/BookingAccountForm",
-  component: BookingAccountForm,
+  title: "Sections/Profile/AccountDetailsForm",
+  component: AccountDetailsForm,
   tags: ["ai-generated"],
-  args: { nextHref: "/booking-account/agreement", loginHref: "/login" },
+  args: { nextHref: "/complete-profile/waiver", loginHref: "/login" },
   parameters: { layout: "padded" },
   decorators: [(Story) => <div style={{ maxWidth: 560 }}><Story /></div>],
-} satisfies Meta<typeof BookingAccountForm>;
+} satisfies Meta<typeof AccountDetailsForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -40,7 +40,7 @@ export const ValidSubmitContinues: Story = {
     await userEvent.type(canvas.getByLabelText(/^Գաղտնաբառ/), "Odex2026x");
     await userEvent.type(canvas.getByLabelText(/Կրկնեք/), "Odex2026x");
     await userEvent.click(canvas.getByRole("button", { name: "Շարունակել" }));
-    await waitFor(() => expect(getRouter().push).toHaveBeenCalledWith("/booking-account/agreement"));
+    await waitFor(() => expect(getRouter().push).toHaveBeenCalledWith("/complete-profile/waiver"));
   },
 };
 

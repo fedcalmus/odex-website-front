@@ -25,3 +25,8 @@ export const Default: Story = {
 export const InfoTone: Story = {
   args: { tone: "info", icon: "lock", children: "Օգտագործեք այն էլ. փոստը, որին հասանելիություն ունեք սարում։" },
 };
+
+// Warning tone: a condition that needs attention but isn't blocking.
+export const WarningTone: Story = {
+  args: { tone: "warning", children: "18-ից ցածր մասնակիցների համար անհրաժեշտ է խնամակալի համաձայնություն:" },
+};

@@ -6,6 +6,8 @@ const meta = {
   tags: ["ai-generated"],
   args: {
     image: "/images/auth/register-panel.png",
+    back: { href: "/", label: "Հետ" },
+    secureLabel: "Ապահով վճարում",
     children: <div style={{ minHeight: 480, color: "var(--color-text-primary)" }}>Form column</div>,
   },
   parameters: { layout: "fullscreen" },

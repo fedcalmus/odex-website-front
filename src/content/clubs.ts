@@ -118,6 +118,8 @@ export const clubProfileCopy = {
 // activity — worth double-checking against the actual Figma frame in case
 // it's a mock/lorem artifact rather than intended copy.
 export const clubRegisterCopy = {
+  // Icon-only — confirmed from the mock, no text next to the header's lock icon.
+  header: { back: "Հետ", secure: "" },
   stepperLabel: "Գրանցման քայլեր",
   steps: [
     { label: "Հաշիվ", hint: "կոնտակտային անձ" },

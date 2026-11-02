@@ -12,6 +12,29 @@
   gap: tokens.space("md"); // Figma: 16
 }
 
+.passwordField {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+}
+
+// Not in the Login mock itself — see the content file's comment. Right-aligned,
+// the common placement for this link next to a password field.
+.forgotPassword {
+  @include tokens.text("label");
+  align-self: flex-end;
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
 .phoneLogin {
   @include tokens.text("label");
   display: block;
