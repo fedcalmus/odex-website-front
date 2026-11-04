@@ -1,2 +1,2 @@
 export { SortSelect } from "./SortSelect";
-export type { SortSelectProps } from "./SortSelect";
+export type { SortSelectOption, SortSelectProps } from "./SortSelect";

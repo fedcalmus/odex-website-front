@@ -60,6 +60,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   const clubs = getPlaceClubs(place);
 
   const breadcrumb = [
+    { label: "Գլխավոր", href: "/" },
     { label: copy.breadcrumbRoot, href: "/places" },
     { label: place.name, href: `/places/${place.slug}` },
   ];

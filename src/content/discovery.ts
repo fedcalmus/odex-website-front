@@ -19,9 +19,12 @@ export const discoveryCopy = {
 
   toolbar: {
     sortLabel: "Դասավորել՝",
+    // Icons/descriptions (Figma "Sort control" open-state mock): added
+    // where a glyph in the icon set actually fits — not every option needs
+    // one.
     sortOptions: [
-      { value: "soonest", label: "Ամենամոտը" },
-      { value: "cheapest", label: "Ամենաէժանը" }, // written for this build
+      { value: "soonest", label: "Ամենամոտը", description: "Մեկնման ամսաթվով", icon: "clock" }, // description written for this build
+      { value: "cheapest", label: "Ամենաէժանը", description: "Գնով՝ ցածրից բարձր", icon: "wallet" }, // written for this build
     ] as const,
     view: { group: "Տեսք", grid: "Ցանցային տեսք", list: "Ցուցակային տեսք" }, // written for this build
     resultsLabel: "արդյունք",

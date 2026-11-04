@@ -1,7 +1,16 @@
 @use "abstracts" as tokens;
 
-// Figma "Trigger": surface/2, hairline, 48px, pill, 18/16 padding, 10px gap.
 .sort {
+  position: relative;
+  width: 100%;
+
+  @include tokens.respond-to("md") {
+    width: 300px; // Figma value
+  }
+}
+
+// Figma "Trigger": surface/2, hairline, 48px, pill, 18/16 padding, 10px gap.
+.trigger {
   display: flex;
   align-items: center;
   gap: 10px; // Figma value
@@ -12,18 +21,19 @@
   border-radius: tokens.radius("full");
   background-color: var(--color-surface-2);
   cursor: pointer;
+  list-style: none;
   transition: background-color 0.15s ease;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
 
   &:hover {
     background-color: var(--color-surface-3);
   }
 
-  &:focus-within {
+  &:focus-visible {
     @include tokens.focus-ring;
-  }
-
-  @include tokens.respond-to("md") {
-    width: 300px; // Figma value
   }
 }
 
@@ -33,26 +43,98 @@
   color: var(--color-text-muted);
 }
 
-.select {
+.value {
   @include tokens.text("body");
+  @include tokens.truncate;
   flex: 1 1 0;
   min-width: 0;
-  padding: 0;
-  border: 0;
-  outline: 0; // the pill draws the focus ring
-  background: transparent;
   color: var(--color-text-primary);
-  cursor: pointer;
-  appearance: none;
-
-  option {
-    background-color: var(--color-surface-2);
-    color: var(--color-text-primary);
-  }
 }
 
 .chevron {
   flex-shrink: 0;
   color: var(--color-text-muted);
-  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+
+.sort[open] .chevron {
+  transform: rotate(180deg);
+}
+
+// Figma "Open state": a wider panel than the trigger, left-aligned under it.
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  width: max(100%, 320px);
+  max-width: calc(100vw - 32px);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: tokens.space("2xs");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+  box-shadow: tokens.$shadow-card;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: tokens.space("sm");
+  padding: tokens.space("sm");
+  border-radius: tokens.radius("md");
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    outline-offset: -2px;
+  }
+}
+
+.optionIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-text-muted);
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  min-width: 0;
+}
+
+.optionLabel {
+  @include tokens.text("label-large");
+  color: var(--color-text-primary);
+}
+
+.optionDescription {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.check {
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-top: 2px;
+  color: var(--color-brand-primary);
+}
+
+// Same selected treatment as LanguageSwitcher's menu variant: lime-subtle
+// fill, lime text — reused rather than inventing a new pairing.
+.active,
+.active:hover {
+  background-color: var(--color-brand-primary-subtle);
+}
+
+.active .optionIcon,
+.active .optionLabel {
+  color: var(--color-brand-primary);
 }

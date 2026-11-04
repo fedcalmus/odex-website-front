@@ -51,6 +51,7 @@ export default async function PlaceClubsPage({ params }: PageProps<"/places/[slu
   const clubs = getPlaceClubs(place);
 
   const breadcrumb = [
+    { label: "Գլխավոր", href: "/" },
     { label: copy.breadcrumbRoot, href: "/places" },
     { label: place.name, href: `/places/${place.slug}` },
     { label: copy.tabs.clubs, href: `/places/${place.slug}/clubs` },

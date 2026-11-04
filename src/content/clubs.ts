@@ -1,3 +1,4 @@
+import type { IconName } from "@/components/Icon";
 import type { SortSelectProps } from "@/components/SortSelect";
 import type { ClubSortKey } from "@/lib/clubs-params";
 
@@ -15,16 +16,16 @@ export const clubsCopy = {
 
   toolbar: {
     sortLabel: "Դասավորել՝",
-    // Six options (Figma). The design gives each a sub-line; a native <select> can't show one,
-    // so only the labels are used. "Գինը ցածրից / բարձրից" is split into its two directions.
+    // Six options with their own icon + sub-line (Figma "Sort control"
+    // open-state mock — this exact list is what that mock shows).
     sortOptions: [
-      { value: "soonest", label: "Ամենամոտը" },
-      { value: "popular", label: "Ամենապահանջվածը" },
-      { value: "price-asc", label: "Գինը ցածրից" },
-      { value: "price-desc", label: "Գինը բարձրից" },
-      { value: "name", label: "Ա–Ֆ" },
-      { value: "rating", label: "Վարկանիշը" },
-    ] satisfies Array<{ value: ClubSortKey; label: string }> as SortSelectProps["options"],
+      { value: "soonest", label: "Ամենամոտը", description: "Մեկնման ամսաթվով", icon: "clock" },
+      { value: "popular", label: "Ամենապահանջվածը", description: "Ամրագրումների քանակով", icon: "trending-up" },
+      { value: "price-asc", label: "Գինը՝ ցածրից բարձր", description: "Էժանից սկսած", icon: "arrow-up" },
+      { value: "price-desc", label: "Գինը՝ բարձրից ցածր", description: "Թանկից սկսած", icon: "arrow-down" },
+      { value: "name", label: "Ա–Ֆ", description: "Այբբենական", icon: "list" },
+      { value: "rating", label: "Վարկանիշը", description: "Ակումբի գնահատականով", icon: "star" },
+    ] satisfies Array<{ value: ClubSortKey; label: string; description: string; icon: IconName }> as SortSelectProps["options"],
     resultsLabel: "արդյունք",
     clearAll: "Մաքրել բոլորը",
     remove: "Հեռացնել", // written for this build

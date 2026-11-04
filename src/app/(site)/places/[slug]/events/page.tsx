@@ -75,6 +75,7 @@ export default async function PlaceEventsPage({ params, searchParams }: PageProp
   });
 
   const breadcrumb = [
+    { label: "Գլխավոր", href: "/" },
     { label: copy.breadcrumbRoot, href: "/places" },
     { label: place.name, href: `/places/${place.slug}` },
     { label: copy.tabs.events, href: `/places/${place.slug}/events` },

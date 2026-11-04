@@ -1,8 +1,12 @@
 @use "abstracts" as tokens;
 
+// The hero photo sits directly below this, full-bleed — unlike the "head"
+// block on Contact/legal pages (title text right underneath, in the same
+// container), this needs its own bottom breathing room too, not just top.
 .breadcrumbRow {
   @include tokens.page-container;
   padding-top: tokens.space("lg");
+  padding-bottom: tokens.space("lg");
 
   @include tokens.respond-to("md") {
     padding-top: tokens.space("xl");

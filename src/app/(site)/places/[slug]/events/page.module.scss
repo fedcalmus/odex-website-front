@@ -1,8 +1,11 @@
 @use "abstracts" as tokens;
 
+// The hero photo sits directly below this, full-bleed — see the same note
+// in ../page.module.scss.
 .breadcrumbRow {
   @include tokens.page-container;
   padding-top: tokens.space("lg");
+  padding-bottom: tokens.space("lg");
 
   @include tokens.respond-to("md") {
     padding-top: tokens.space("xl");
