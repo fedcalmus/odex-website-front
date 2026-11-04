@@ -1,3 +1,4 @@
+import type { IconName } from "@/components/Icon";
 import type { SortSelectProps } from "@/components/SortSelect";
 import type { PlaceSortKey } from "@/lib/places-params";
 
@@ -16,11 +17,14 @@ export const placesCopy = {
 
   toolbar: {
     sortLabel: "Դասավորել՝",
+    // Icons/descriptions (Figma "Sort control" open-state mock). "nearest"
+    // gets a distance glyph (navigation), not the clock Events/Clubs use for
+    // their own "soonest" — places sort by distance from Yerevan, not time.
     sortOptions: [
-      { value: "nearest", label: "Ամենամոտը" },
-      { value: "popular", label: "Ամենահայտնին" }, // written for this build
-      { value: "name", label: "Ա–Ֆ" },
-    ] satisfies Array<{ value: PlaceSortKey; label: string }> as SortSelectProps["options"],
+      { value: "nearest", label: "Ամենամոտը", description: "Երևանից հեռավորությամբ", icon: "navigation" }, // written for this build
+      { value: "popular", label: "Ամենահայտնին", description: "Միջոցառումների քանակով", icon: "trending-up" }, // written for this build
+      { value: "name", label: "Ա–Ֆ", description: "Այբբենական", icon: "list" },
+    ] satisfies Array<{ value: PlaceSortKey; label: string; description: string; icon: IconName }> as SortSelectProps["options"],
     resultsLabel: "վայր",
     photosLabel: "լուսանկար",
     view: { group: "Տեսք", grid: "Ցանցային տեսք", list: "Ցուցակային տեսք" }, // written for this build
