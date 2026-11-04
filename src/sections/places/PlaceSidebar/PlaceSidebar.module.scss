@@ -1,0 +1,86 @@
+@use "abstracts" as tokens;
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+
+  @include tokens.respond-to("lg") {
+    position: sticky;
+    top: 100px; // clears the 76px sticky header
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+.infoRow {
+  @include tokens.text("body-small");
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: tokens.space("md");
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--color-text-primary);
+    text-align: right;
+  }
+}
+
+.weatherBox {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  padding: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+}
+
+.weatherTemp {
+  @include tokens.text("label-large");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.weatherUpdated {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-faint);
+}
+
+.mapBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.space("2xs");
+  min-height: 120px;
+  padding: tokens.space("md");
+  border: 1px dashed var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+  color: var(--color-text-muted);
+  text-align: center;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.mapAction {
+  color: var(--color-text-link);
+}

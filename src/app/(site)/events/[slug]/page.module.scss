@@ -42,3 +42,15 @@
   @include tokens.text("body");
   color: var(--color-text-secondary);
 }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+}

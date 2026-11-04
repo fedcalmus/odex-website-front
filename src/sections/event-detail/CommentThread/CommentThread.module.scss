@@ -1,0 +1,213 @@
+@use "abstracts" as tokens;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  list-style: none;
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+}
+
+.comment {
+  display: flex;
+  gap: tokens.space("sm");
+}
+
+.avatar {
+  @include tokens.text("label");
+  position: relative;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-2);
+  color: var(--color-text-muted);
+}
+
+.avatarImage {
+  object-fit: cover;
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  min-width: 0;
+}
+
+.author {
+  @include tokens.text("label");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.body {
+  @include tokens.text("body-small");
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  @include tokens.text("caption");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("md");
+  padding-left: 46px; // aligns under the comment body, past the 36px avatar + gap
+  color: var(--color-text-faint);
+}
+
+.like {
+  color: inherit;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-secondary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.likeActive {
+  color: var(--color-brand-primary);
+}
+
+// Same olive/warning pairing as ReviewCard's reply block.
+.reply {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  margin-left: 46px;
+  padding: tokens.space("sm") tokens.space("md");
+  border-left: 2px solid var(--color-state-warning);
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-state-warning-subtle);
+}
+
+.replyHeader {
+  @include tokens.text("caption");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  margin: 0;
+}
+
+.replyAuthor {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.replyBadge {
+  @include tokens.text("micro-caps");
+  padding: 2px 8px;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+}
+
+.replyPosted {
+  color: var(--color-text-faint);
+}
+
+.replyBody {
+  @include tokens.text("body-small");
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  padding-block: tokens.space("sm");
+}
+
+.emptyTitle {
+  @include tokens.text("label-large");
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.emptyDescription {
+  @include tokens.text("body-small");
+  margin: 0;
+  color: var(--color-text-faint);
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  padding-top: tokens.space("md");
+  border-top: 1px solid var(--color-border-default);
+}
+
+.input {
+  @include tokens.text("body-small");
+  flex: 1 1 0;
+  min-width: 0;
+  height: tokens.$target-min;
+  padding-inline: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-1);
+  color: var(--color-text-primary);
+  caret-color: var(--color-brand-primary);
+
+  &::placeholder {
+    color: var(--color-text-faint);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-border-focus);
+  }
+}
+
+.send {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: tokens.$target-min;
+  height: tokens.$target-min;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+
+  &:disabled {
+    background-color: var(--color-surface-chip);
+    color: var(--color-text-faint);
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    background-color: var(--color-brand-primary-hover);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}

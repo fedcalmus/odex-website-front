@@ -1,0 +1,49 @@
+@use "abstracts" as tokens;
+
+.breadcrumbRow {
+  @include tokens.page-container;
+  padding-top: tokens.space("lg");
+
+  @include tokens.respond-to("md") {
+    padding-top: tokens.space("xl");
+  }
+}
+
+.body {
+  @include tokens.page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-block: tokens.space("lg") 80px;
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  min-width: 0;
+}
+
+.count {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.lead {
+  @include tokens.text("body-small");
+  margin: 0 0 tokens.space("xs");
+  color: var(--color-text-muted);
+}
+
+.clubs {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  list-style: none;
+}

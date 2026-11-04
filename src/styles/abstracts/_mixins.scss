@@ -26,6 +26,21 @@
   }
 }
 
+// The narrower 1040px reading column shared by the legal pages (Terms,
+// Privacy, Disclaimer, Cookie policy, Cancellation & refunds) and the
+// Support hub — document-shaped content, not a full marketing section.
+// Below "lg" this is identical to `page-container`; at "lg"+ the mixin's
+// own gutter is zeroed because the reduced max-width plus auto-centering
+// already supplies the margin (keeping it would eat into the 1040px budget).
+@mixin narrow-page-container {
+  @include page-container;
+
+  @include bp.respond-to("lg") {
+    max-width: 1040px;
+    padding-inline: 0;
+  }
+}
+
 @mixin visually-hidden {
   position: absolute;
   width: 1px;

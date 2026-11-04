@@ -1,0 +1,51 @@
+@use "abstracts" as tokens;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("lg");
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: tokens.space("md");
+  padding-block: 64px 80px;
+  text-align: center;
+
+  @include tokens.respond-to("md") {
+    padding-block: 96px 96px;
+  }
+}
+
+.code {
+  @include tokens.text("hero");
+  margin: 0;
+  font-size: tokens.px-to-rem(88);
+  line-height: 1;
+  color: var(--color-brand-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(120);
+  }
+}
+
+.title {
+  @include tokens.text("display-s");
+  max-width: 560px;
+  color: var(--color-text-primary);
+}
+
+.description {
+  @include tokens.text("lead-s");
+  max-width: 480px;
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("lg");
+  width: 100%;
+  max-width: 560px;
+}

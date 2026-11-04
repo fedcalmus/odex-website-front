@@ -1,0 +1,76 @@
+@use "abstracts" as tokens;
+
+// `left` + `right` with no explicit `width` stretches the box to fill the
+// gap between them; `max-width` then caps that at wide viewports, and
+// `margin-inline: auto` splits the leftover space evenly so the capped box
+// centers horizontally instead of staying pinned to `left`.
+.banner {
+  position: fixed;
+  z-index: 40;
+  right: tokens.space("md");
+  bottom: tokens.space("md");
+  left: tokens.space("md");
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  max-width: 1040px; // matches the legal pages' reading column
+  margin-inline: auto;
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-strong);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+  box-shadow: tokens.$shadow-card;
+
+  @include tokens.respond-to("md") {
+    right: tokens.space("lg");
+    left: tokens.space("lg");
+    bottom: tokens.space("lg");
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  min-width: 0;
+
+  @include tokens.respond-to("md") {
+    flex: 1 1 0;
+  }
+}
+
+.title {
+  @include tokens.text("label-large");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.body {
+  @include tokens.text("body-small");
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.policyLink {
+  color: var(--color-text-link);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-brand-primary-hover);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: tokens.space("sm");
+  flex-shrink: 0;
+}

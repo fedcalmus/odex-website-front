@@ -1,3 +1,4 @@
+import type { CookieBannerCopy } from "@/components/CookieBanner";
 import type { FooterProps } from "@/components/Footer";
 import type { HeaderProps } from "@/components/Header";
 import type { LocaleOption } from "@/components/LanguageSwitcher";
@@ -71,6 +72,8 @@ export const footer: FooterProps = {
         { label: "Օգտագործման պայմաններ", href: "/terms" },
         { label: "Գաղտնիություն", href: "/privacy" },
         { label: "Պատասխանատվության հրաժարում", href: "/disclaimer" },
+        { label: "Թխուկների քաղաքականություն", href: "/cookies" },
+        { label: "Չեղարկում և վերադարձ", href: "/refunds" },
         { label: "Կապ", href: "/contact" },
       ],
     },
@@ -84,4 +87,13 @@ export const footer: FooterProps = {
   currentLocale,
   languageLabel: "Լեզու",
   legalName: "ODex",
+};
+
+export const cookieBanner: CookieBannerCopy = {
+  title: "Թխուկներ",
+  body: "Անհրաժեշտները պահում են մուտքը և ամրագրումը: Վիճակագրությունը և մարքեթինգը միայն ձեր թույլտվությամբ:",
+  policyLink: { label: "Թխուկների քաղաքականություն", href: "/cookies" },
+  acceptAll: "Ընդունել բոլորը",
+  necessaryOnly: "Միայն անհրաժեշտները",
+  customize: "Կարգավորել",
 };

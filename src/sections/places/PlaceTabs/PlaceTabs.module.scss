@@ -1,0 +1,41 @@
+@use "abstracts" as tokens;
+
+.tabs {
+  @include tokens.page-container;
+  display: flex;
+  gap: tokens.space("lg");
+  overflow-x: auto;
+  border-bottom: 1px solid var(--color-border-default);
+  padding-block: tokens.space("sm");
+}
+
+.tab {
+  @include tokens.text("label");
+  flex-shrink: 0;
+  padding-block: tokens.space("2xs");
+  // The underline sits 1px below the border-bottom of `.tabs`, so it needs
+  // its own border rather than relying on that shared one.
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+// Figma: white text + a lime underline — confirmed from the Events/Clubs
+// sub-page mocks, which is the only place the active state is visible
+// (the single-page Overview mock never showed another tab active).
+.active {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-brand-primary);
+}

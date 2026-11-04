@@ -1,0 +1,36 @@
+@use "abstracts" as tokens;
+
+.page {
+  @include tokens.narrow-page-container;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("2xl");
+  padding-top: tokens.space("xl");
+  padding-bottom: 80px;
+
+  @include tokens.respond-to("md") {
+    padding-top: 52px;
+  }
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+}
+
+.eyebrow {
+  @include tokens.text("overline");
+  margin-top: tokens.space("xs");
+  color: var(--color-text-faint);
+}
+
+.h1 {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}

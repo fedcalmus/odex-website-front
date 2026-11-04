@@ -88,4 +88,49 @@ export const eventDetailCopy = {
 
   follow: { label: "Հետևել", following: "Հետևում եք" }, // "following" written for this build
   eventsLabel: "միջոցառում",
+
+  // "Reviews" and "Questions to the club" (Figma "Event detail - MP-03 (1)",
+  // the reviews/Q&A revision). The mock treats a review's club reply as a
+  // plain text label ("Ակումբի պատասխանը") but a comment's reply as a lime
+  // badge ("Ակումբ") — unified here on the one badge treatment since both
+  // are the same "a club replied" fact and don't need two different copy
+  // patterns for it.
+  reviews: {
+    title: "Կարծիքներ",
+    link: "Բոլորը",
+    ratingsLabel: "գնահատական",
+    reviewsLabel: "կարծիք",
+    verifiedLabel: "Մասնակցել է",
+    // Suffix after the raw count — "{n} միջոցառում Odex-ում". A plain string
+    // rather than a `(count) => …` function: these two live in content that
+    // crosses into a Client Component (ReviewCard), and functions can't be
+    // passed across that server/client boundary.
+    eventsOnOdexLabel: "միջոցառում Odex-ում",
+    helpful: "Օգտակար",
+    helpfulActive: "Շնորհակալություն", // written for this build — swapped in once the viewer marks a review helpful
+    report: "Բողոքել",
+    reported: "Բողոքված է", // written for this build
+    replyBadge: "Ակումբ",
+    empty: {
+      title: "Դեռ կարծիք չկա", // written for this build
+      description: "Առաջինն եղեք, ով կկիսվի իր փորձով այս միջոցառումից հետո:", // written for this build
+    },
+  },
+
+  comments: {
+    title: "Հարցեր ակումբին",
+    link: "Բոլորը",
+    like: "Հավանել",
+    liked: "Հավանեցիք", // written for this build
+    replyBadge: "Ակումբ",
+    inputLabel: "Նոր հարց կամ մեկնաբանություն", // written for this build
+    inputPlaceholder: "Գրեք հարց կամ մեկնաբանություն...",
+    submit: "Ուղարկել", // written for this build — accessible name of the send button
+    postedJustNow: "Հենց նոր", // written for this build
+    you: "Դուք", // written for this build — stands in for the author name until accounts exist
+    empty: {
+      title: "Դեռ հարց չկա", // written for this build
+      description: "Հարցրեք ակումբին ամրագրումից, երթուղուց կամ պատրաստվածությունից առաջ:", // written for this build
+    },
+  },
 } as const;

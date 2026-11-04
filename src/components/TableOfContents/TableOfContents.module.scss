@@ -1,0 +1,79 @@
+@use "abstracts" as tokens;
+
+.toc {
+  // Grid/flex items default to `min-width: auto`, which refuses to shrink
+  // below the row's unwrapped content width — exactly what the mobile chip
+  // row needs to overflow INTO its own `overflow-x: auto`, not the page.
+  min-width: 0;
+
+  @include tokens.respond-to("lg") {
+    position: sticky;
+    // Clears the 76px sticky header plus breathing room.
+    top: 100px;
+  }
+}
+
+.heading {
+  @include tokens.text("overline");
+  margin: 0 0 tokens.space("sm");
+  padding-left: tokens.space("sm");
+  color: var(--color-text-faint);
+
+  @media (max-width: calc(992px - 1px)) {
+    padding-left: 0;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("2xs");
+  list-style: none;
+
+  // Below the sticky breakpoint the TOC sits inline above the content, so a
+  // horizontally scrollable chip row reads better than a tall stacked list.
+  @media (max-width: calc(992px - 1px)) {
+    flex-direction: row;
+    gap: tokens.space("sm");
+    overflow-x: auto;
+    padding-bottom: tokens.space("2xs");
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.link {
+  @include tokens.text("body-small");
+  display: block;
+  padding: tokens.space("2xs") 0 tokens.space("2xs") tokens.space("sm");
+  border-left: 2px solid transparent;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-secondary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+
+  @media (max-width: calc(992px - 1px)) {
+    padding: tokens.space("2xs") tokens.space("sm");
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+}
+
+.active {
+  border-left-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+
+  @media (max-width: calc(992px - 1px)) {
+    border-left: none;
+    border-bottom-color: var(--color-brand-primary);
+  }
+}

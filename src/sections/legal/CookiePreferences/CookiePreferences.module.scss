@@ -1,0 +1,65 @@
+@use "abstracts" as tokens;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+}
+
+.lockedRow,
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  min-height: tokens.$target-min;
+  padding-bottom: tokens.space("md");
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.toggleRow:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  min-width: 0;
+}
+
+.label {
+  @include tokens.text("label-large");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.description {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.lockIcon {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("sm") tokens.space("md");
+  padding-top: tokens.space("2xs");
+}
+
+.savedNote {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-state-success-tint);
+}

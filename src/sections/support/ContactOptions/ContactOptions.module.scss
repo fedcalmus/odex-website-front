@@ -1,0 +1,49 @@
+@use "abstracts" as tokens;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: tokens.space("md");
+  list-style: none;
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: tokens.space("xs");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+}
+
+.icon {
+  color: var(--color-brand-primary);
+}
+
+.title {
+  @include tokens.text("label-large");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.description {
+  @include tokens.text("body-small");
+  margin: 0 0 tokens.space("xs");
+  color: var(--color-text-muted);
+}
+
+.action {
+  margin-top: auto;
+}

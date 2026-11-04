@@ -1,0 +1,10 @@
+// Figma's reviews mock paints the stars amber, but the rest of this page
+// (and every other Rating badge in the app) already uses the brand lime for
+// star ratings — reusing that existing token instead of introducing a
+// one-off amber that would clash with the hero's own rating badge above it.
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-brand-primary);
+}

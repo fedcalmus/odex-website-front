@@ -20,6 +20,63 @@ export interface EventGuide {
   photo: string;
 }
 
+/**
+ * A club's reply to a review or a question — same shape either place.
+ * `postedLabel` is pre-formatted ("3 օր առաջ"), not an ISO date: this
+ * catalog's events sit on a fixed September 2026 calendar regardless of the
+ * real wall-clock date, so computing "days ago" against real `Date.now()`
+ * would drift into nonsense (or negative numbers) as real time passes.
+ */
+export interface EventReply {
+  authorName: string;
+  postedLabel: string;
+  body: string;
+}
+
+export interface EventReviewTag {
+  label: string;
+  sentiment: "positive" | "negative";
+}
+
+export interface EventReview {
+  id: string;
+  authorName: string;
+  authorPhoto?: string;
+  /** Odex can confirm they actually booked this event. */
+  verifiedParticipant: boolean;
+  eventsOnOdex: number;
+  /** Pre-formatted — see EventReply. */
+  postedLabel: string;
+  rating: number;
+  body: string;
+  tags?: EventReviewTag[];
+  photos?: string[];
+  helpfulCount: number;
+  reply?: EventReply;
+}
+
+export interface EventReviewSummary {
+  average: number;
+  totalRatings: number;
+  /** ≤ totalRatings — not every rating comes with written text. */
+  totalReviews: number;
+  /** Percent of ratings at each star count; sums to ~100. */
+  distribution: Record<1 | 2 | 3 | 4 | 5, number>;
+  /** Per-aspect averages shown beside the distribution (organization, guide, route, safety…). */
+  aspects: Array<{ label: string; value: number }>;
+}
+
+export interface EventComment {
+  id: string;
+  authorName: string;
+  authorPhoto?: string;
+  /** Pre-formatted — see EventReply. */
+  postedLabel: string;
+  body: string;
+  likeCount: number;
+  reply?: EventReply;
+}
+
 export interface EventDetail {
   description?: string;
   /** Meeting point, trailhead and return — each with its local time. */
@@ -36,6 +93,11 @@ export interface EventDetail {
   gallery?: string[];
   /** What the gallery's "+N" tile stands for — "+7". */
   galleryMore?: number;
+  /** Absent → the reviews section shows its empty state (and a brand-new event has none yet). */
+  reviewSummary?: EventReviewSummary;
+  reviews?: EventReview[];
+  /** Absent/empty → the Q&A section shows its empty state, but can still be posted to. */
+  comments?: EventComment[];
 }
 
 export interface EventRecord {
@@ -111,6 +173,80 @@ const ARAGATS_DETAIL: EventDetail = {
     "/images/events/aragats-thumb-4.png",
   ],
   galleryMore: 7,
+  // totalRatings/average intentionally match `rating` above (128 / 4.9) —
+  // totalReviews is lower because not every rating comes with written text.
+  reviewSummary: {
+    average: 4.9,
+    totalRatings: 128,
+    totalReviews: 84,
+    distribution: { 5: 82, 4: 12, 3: 4, 2: 1, 1: 1 },
+    aspects: [
+      { label: "Կազմակերպում", value: 4.9 },
+      { label: "Ուղեկցորդ", value: 4.9 },
+      { label: "Երթուղի", value: 4.7 },
+      { label: "Անվտանգություն", value: 5.0 },
+    ],
+  },
+  reviews: [
+    {
+      id: "r1",
+      authorName: "Լիլիթ Ավետիսյան",
+      verifiedParticipant: true,
+      eventsOnOdex: 8,
+      postedLabel: "3 օր առաջ",
+      rating: 5,
+      body: "Ուղեկցորդը ամեն կանգառում բացատրում էր՝ որտեղ ենք և ինչ է սպասվում: Առաջին անգամ էի 4000 մ-ից բարձր, և ինձ ապահով էի զգում:",
+      tags: [
+        { label: "Ուղեկցորդ", sentiment: "positive" },
+        { label: "Անվտանգություն", sentiment: "positive" },
+      ],
+      photos: [
+        "/images/club-photos/photo-1.png",
+        "/images/club-photos/photo-2.png",
+        "/images/club-photos/photo-3.png",
+        "/images/club-photos/photo-4.png",
+        "/images/club-photos/photo-5.png",
+      ],
+      helpfulCount: 12,
+    },
+    {
+      id: "r2",
+      authorName: "Սոնա Գրիգորյան",
+      verifiedParticipant: true,
+      eventsOnOdex: 3,
+      postedLabel: "5 օր առաջ",
+      rating: 3,
+      body: "Երթուղին հիանալի էր, բայց հավաքի վայրում 40 րոպե սպասեցինք: Ավելի լավ կլիներ նախապես զգուշացնել:",
+      tags: [{ label: "Կազմակերպում", sentiment: "negative" }],
+      helpfulCount: 7,
+      reply: {
+        authorName: "Հայաստանի արահետներ",
+        postedLabel: "4 օր առաջ",
+        body: "Ներողություն սպասելու համար: Տրանսպորտը ուշացավ ճանապարհի փակման պատճառով, հաջորդ անգամ ավելի ճշգրիտ կտեղեկացնենք SMS-ով:",
+      },
+    },
+  ],
+  comments: [
+    {
+      id: "c1",
+      authorName: "Գոռ Սահակյան",
+      postedLabel: "2 օր առաջ",
+      body: "Կարելի՞ է երեխայի հետ գալ, 12 տարեկան է։",
+      likeCount: 4,
+      reply: {
+        authorName: "Հայաստանի արահետներ",
+        postedLabel: "2 օր առաջ",
+        body: "Այո, 12 տարեկանից՝ ծնողի հետ: Երթուղին 2-րդ աստիճանի է:",
+      },
+    },
+    {
+      id: "c2",
+      authorName: "Մարիամ Խաչատրյան",
+      postedLabel: "6 օր առաջ",
+      body: "Գիշերել հնարավո՞ր է Քարի լճի մոտ՝ արշավից առաջ:",
+      likeCount: 2,
+    },
+  ],
 };
 
 export const EVENTS: readonly EventRecord[] = [

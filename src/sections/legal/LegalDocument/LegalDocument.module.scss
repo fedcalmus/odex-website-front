@@ -1,0 +1,137 @@
+@use "abstracts" as tokens;
+
+// Full marketing-page width (matches the Header/Footer's own container) —
+// the hairline below sits on THIS element, so it spans the ordinary page
+// width rather than the narrower 1040px reading column. `.headInner` below
+// is what actually gets capped to that column.
+.head {
+  @include tokens.page-container;
+  padding-top: tokens.space("xl");
+  padding-bottom: tokens.space("lg");
+  border-bottom: 1px solid var(--color-border-default);
+
+  @include tokens.respond-to("md") {
+    padding-top: 52px;
+  }
+}
+
+.headInner {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+
+  // Matches `.body`'s 1040px frame below so the breadcrumb/title stay
+  // aligned with the TOC/content under them.
+  @include tokens.respond-to("lg") {
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+}
+
+.eyebrow {
+  @include tokens.text("overline");
+  margin-top: tokens.space("xs");
+  color: var(--color-text-faint);
+}
+
+.h1 {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(26);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(34);
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+  margin-top: tokens.space("sm");
+  padding-bottom: tokens.space("lg");
+}
+
+.updated {
+  @include tokens.text("caption");
+  color: var(--color-text-faint);
+}
+
+.download {
+  @include tokens.text("label");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.body {
+  @include tokens.narrow-page-container;
+  display: grid;
+  gap: tokens.space("xl");
+  padding-block: tokens.space("xl") 80px;
+
+  @include tokens.respond-to("lg") {
+    // Figma: within the 1040px frame — TOC 246px, content 716px, with
+    // whatever's left between them (1040 − 246 − 716 = 78px) as the gap.
+    // The content column is `minmax(0, 1fr)` rather than a literal 716px so
+    // it still resolves to exactly 716 at the full 1040px frame width, but
+    // shrinks gracefully instead of overflowing between the "lg" breakpoint
+    // and the point where 1040px actually fits.
+    grid-template-columns: 246px minmax(0, 1fr);
+    column-gap: 78px;
+    align-items: start;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xl");
+  min-width: 0;
+
+  @include tokens.respond-to("lg") {
+    padding-left: tokens.space("xl");
+    border-left: 1px solid var(--color-border-default);
+  }
+}
+
+.intro {
+  @include tokens.text("lead-s");
+  color: var(--color-text-secondary);
+}
+
+.section {
+  // Clears the sticky 76px header when a TOC link or an in-page anchor is followed.
+  scroll-margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+}
+
+.h2 {
+  @include tokens.text("h2");
+  color: var(--color-text-primary);
+}
+
+.body2 {
+  @include tokens.text("body");
+  color: var(--color-text-secondary);
+}
+
+.notice {
+  margin-top: tokens.space("sm");
+}

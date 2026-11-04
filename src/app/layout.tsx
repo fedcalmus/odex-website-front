@@ -1,25 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_Armenian, Roboto, Roboto_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Roboto_Mono } from "next/font/google";
+import { CookieBanner } from "@/components/CookieBanner";
+import { cookieBanner } from "@/content/site";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.scss";
 
-// Mardoto (the licensed Armenian face) isn't available in this environment
-// yet. Per the design foundations, every style is built on Roboto in the
-// meantime — swapping this import is the only change needed once Mardoto's
-// files are supplied.
-const fontSans = Roboto({
+// Mardoto (Christian Robertson + Vahan Hovhannisyan, Apache-2.0 —
+// github.com/vahanhovh/mardoto, files + LICENSE vendored in
+// ../fonts/mardoto/) is a Roboto-styled family that covers Armenian AND
+// Latin itself, so it's the one primary face — not a Latin font plus a
+// separate Armenian fallback. Only the three weights the type scale uses
+// (see abstracts/_typography.scss): regular/medium/bold, no italics —
+// Armenian here carries emphasis through weight, never style.
+const fontSans = localFont({
   variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
-
-// Roboto's latin subset has no Armenian glyphs. Without this the whole site —
-// which is Armenian copy — would render in whatever the OS falls back to.
-// Second in the font stack (see abstracts/_typography.scss); drop it when
-// Mardoto lands.
-const fontArmenian = Noto_Sans_Armenian({
-  variable: "--font-armenian",
-  subsets: ["armenian"],
+  display: "swap",
+  src: [
+    { path: "../fonts/mardoto/Mardoto-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/mardoto/Mardoto-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/mardoto/Mardoto-Bold.woff2", weight: "700", style: "normal" },
+  ],
 });
 
 const fontMono = Roboto_Mono({
@@ -51,11 +52,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="hy"
-      className={`${fontSans.variable} ${fontArmenian.variable} ${fontMono.variable}`}
-    >
-      <body>{children}</body>
+    <html lang="hy" className={`${fontSans.variable} ${fontMono.variable}`}>
+      <body>
+        {children}
+        <CookieBanner copy={cookieBanner} />
+      </body>
     </html>
   );
 }

@@ -1,0 +1,123 @@
+@use "abstracts" as tokens;
+
+// Same shell as ClubCard: 118px cover, radius 18, lift-on-hover.
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-0);
+  box-shadow: tokens.$shadow-card;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      tokens.$shadow-card,
+      0 0 0 1px var(--color-border-strong);
+  }
+}
+
+.media {
+  position: relative;
+  flex-shrink: 0;
+  height: 160px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim-card);
+  pointer-events: none;
+}
+
+// White pill over the photo (Figma: region name, or "ՄԱՐԶ" for a region entry).
+.badge {
+  @include tokens.text("unit");
+  position: absolute;
+  top: tokens.space("sm");
+  left: tokens.space("sm");
+  padding: 4px 9px; // Figma value
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-inverse);
+  color: var(--color-on-inverse);
+  white-space: nowrap;
+}
+
+.body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: tokens.space("xs");
+  padding: tokens.space("md") tokens.space("lg") tokens.space("lg");
+}
+
+.title {
+  @include tokens.text("card-title");
+  color: var(--color-text-primary);
+}
+
+.link {
+  transition: color 0.15s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: tokens.radius("card"); // the ring follows the card, not the link
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      @include tokens.focus-ring;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.card:hover .link {
+  color: var(--color-brand-primary);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("md");
+}
+
+.stat {
+  @include tokens.text("body-small");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("3xs");
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.statIcon {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.events {
+  @include tokens.text("caption");
+  margin: tokens.space("3xs") 0 0;
+  color: var(--color-text-faint);
+}

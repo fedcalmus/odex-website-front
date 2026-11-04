@@ -1,0 +1,220 @@
+@use "abstracts" as tokens;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-card);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-0);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+}
+
+.avatar {
+  @include tokens.text("label");
+  position: relative;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-2);
+  color: var(--color-text-muted);
+}
+
+.avatarImage {
+  object-fit: cover;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  min-width: 0;
+}
+
+.name {
+  @include tokens.text("label-large");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.verified {
+  @include tokens.text("caption");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("3xs");
+  color: var(--color-state-success-tint);
+}
+
+.meta {
+  @include tokens.text("caption");
+  margin: 0;
+  color: var(--color-text-faint);
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+}
+
+.postedLabel {
+  @include tokens.text("caption");
+  color: var(--color-text-faint);
+}
+
+.body {
+  @include tokens.text("body");
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: tokens.space("2xs");
+  list-style: none;
+}
+
+.tag {
+  @include tokens.text("caption");
+  padding: 5px 11px;
+}
+
+.tagNegative {
+  color: var(--color-text-muted);
+}
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: tokens.space("xs");
+  list-style: none;
+}
+
+.photo {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-surface-2);
+}
+
+.photoImage {
+  object-fit: cover;
+}
+
+.morePhotos {
+  @include tokens.text("label");
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  color: var(--color-text-muted);
+}
+
+// Same olive/warning pairing as the legal pages' press notice — a club's
+// reply is a quoted aside, not a new top-level entry.
+.reply {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("3xs");
+  padding: tokens.space("sm") tokens.space("md");
+  border-left: 2px solid var(--color-state-warning);
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-state-warning-subtle);
+}
+
+.replyHeader {
+  @include tokens.text("caption");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  margin: 0;
+}
+
+.replyAuthor {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.replyBadge {
+  @include tokens.text("micro-caps");
+  padding: 2px 8px;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+}
+
+.replyPosted {
+  color: var(--color-text-faint);
+}
+
+.replyBody {
+  @include tokens.text("body-small");
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  padding-top: tokens.space("2xs");
+}
+
+.helpful {
+  @include tokens.text("label");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("3xs");
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}
+
+.helpfulActive {
+  color: var(--color-brand-primary);
+}
+
+.report {
+  @include tokens.text("label");
+  color: var(--color-text-faint);
+  transition: color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    color: var(--color-text-secondary);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("xs");
+  }
+}

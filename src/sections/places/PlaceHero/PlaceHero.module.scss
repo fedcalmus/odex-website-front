@@ -1,0 +1,99 @@
+@use "abstracts" as tokens;
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  min-height: 320px;
+  overflow: hidden;
+  padding: tokens.space("lg") 16px;
+  background-color: var(--color-surface-canvas); // shows while the photo loads
+
+  @include tokens.respond-to("md") {
+    padding-inline: 24px;
+  }
+
+  @include tokens.respond-to("lg") {
+    min-height: 420px;
+    padding: tokens.space("xl") 40px;
+  }
+}
+
+.image {
+  z-index: -2;
+  object-fit: cover;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgb(6 9 10 / 10%) 0%, rgb(6 9 10 / 72%) 100%);
+}
+
+.title {
+  @include tokens.text("display-s");
+  font-size: tokens.px-to-rem(34);
+  color: var(--color-text-primary);
+
+  @include tokens.respond-to("md") {
+    font-size: tokens.px-to-rem(48);
+  }
+}
+
+.meta {
+  @include tokens.page-container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  padding-block: tokens.space("lg");
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("lg");
+  list-style: none;
+}
+
+.fact {
+  @include tokens.text("label-large");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  color: var(--color-text-secondary);
+}
+
+.factIcon {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+}
+
+// FollowButton is full-width by default (Figma: the club-profile card it was
+// built for); here it sits inline beside the share/add-photo buttons.
+.follow {
+  width: auto !important;
+}
+
+.addPhoto {
+  @include tokens.text("label");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("2xs");
+  height: 40px;
+  padding-inline: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("sm");
+  color: var(--color-text-faint);
+  cursor: not-allowed;
+}

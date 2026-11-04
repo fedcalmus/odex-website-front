@@ -4,6 +4,7 @@ import { BookingWidget } from "@/components/BookingWidget";
 import { CancellationPolicy } from "@/components/CancellationPolicy";
 import { ClubSummary } from "@/components/ClubSummary";
 import { DetailBlock } from "@/components/DetailBlock";
+import { EmptyState } from "@/components/EmptyState";
 import { EventHero } from "@/components/EventHero";
 import { FollowButton } from "@/components/FollowButton";
 import { GearList } from "@/components/GearList";
@@ -13,6 +14,7 @@ import { KeyFactsStrip } from "@/components/KeyFactsStrip";
 import { RequirementsStrip } from "@/components/RequirementsStrip";
 import { RouteBlock } from "@/components/RouteBlock";
 import { SafetyAssurances } from "@/components/SafetyAssurances";
+import { SectionHeading } from "@/components/SectionHeading";
 import { TeamBlock } from "@/components/TeamBlock";
 import { guide } from "@/content/home";
 import { eventDetailCopy as copy } from "@/content/event-detail";
@@ -24,6 +26,9 @@ import { DEFAULT_PARAMS, discoveryHref } from "@/lib/discovery-params";
 import { formatDecimal, formatEventDate, formatEventTime, formatInteger, formatPrice } from "@/lib/format";
 import { SITE_NAME } from "@/lib/site";
 import { breadcrumbJsonLd, eventJsonLd } from "@/lib/structured-data";
+import { CommentThread } from "@/sections/event-detail/CommentThread";
+import { ReviewCard } from "@/sections/event-detail/ReviewCard";
+import { ReviewSummary } from "@/sections/event-detail/ReviewSummary";
 import { GuideSection } from "@/sections/home/GuideSection";
 import styles from "./page.module.scss";
 
@@ -73,6 +78,8 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
   const club = getClub(event.club);
   const region = getRegion(event.region);
   const detail = event.detail;
+  const reviews = detail?.reviews ?? [];
+  const comments = detail?.comments ?? [];
   const availability = getAvailability(event.capacity.taken, event.capacity.total);
   const price = formatPrice(event.price.amount, event.price.currency);
 
@@ -197,6 +204,33 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
           ) : null}
 
           <CancellationPolicy title={copy.blocks.cancellation} terms={[...copy.cancellationTerms]} />
+
+          <section aria-labelledby="reviews-heading" className={styles.section}>
+            <SectionHeading
+              id="reviews-heading"
+              title={copy.reviews.title}
+              link={reviews.length > 0 ? { label: copy.reviews.link, href: `/events/${event.slug}/reviews` } : undefined}
+            />
+            {reviews.length > 0 ? (
+              <div className={styles.reviews}>
+                {detail?.reviewSummary ? <ReviewSummary summary={detail.reviewSummary} copy={copy.reviews} /> : null}
+                {reviews.map((review) => (
+                  <ReviewCard key={review.id} review={review} copy={copy.reviews} />
+                ))}
+              </div>
+            ) : (
+              <EmptyState title={copy.reviews.empty.title} description={copy.reviews.empty.description} />
+            )}
+          </section>
+
+          <section aria-labelledby="comments-heading" className={styles.section}>
+            <SectionHeading
+              id="comments-heading"
+              title={copy.comments.title}
+              link={comments.length > 0 ? { label: copy.comments.link, href: `/events/${event.slug}/questions` } : undefined}
+            />
+            <CommentThread comments={comments} copy={copy.comments} />
+          </section>
         </div>
 
         <aside className={styles.rail}>

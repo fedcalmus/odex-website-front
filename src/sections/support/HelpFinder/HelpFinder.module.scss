@@ -1,0 +1,166 @@
+@use "abstracts" as tokens;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("2xl");
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+  height: tokens.$target-field;
+  padding-inline: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+  transition: box-shadow 0.15s ease;
+
+  &:focus-within {
+    box-shadow: inset 0 0 0 2px var(--color-border-focus);
+  }
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.searchInput {
+  @include tokens.text("body");
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  caret-color: var(--color-brand-primary);
+  appearance: none;
+
+  &::placeholder {
+    color: var(--color-text-faint);
+    opacity: 1;
+  }
+
+  &::-webkit-search-cancel-button {
+    appearance: none;
+  }
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: tokens.space("md");
+  list-style: none;
+
+  @include tokens.respond-to("sm") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: tokens.space("xs");
+  width: 100%;
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+// Selected state matches RadioCard's convention: lime rim + subtle lime fill.
+.categoryCardActive {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary-subtle);
+}
+
+.categoryIcon {
+  color: var(--color-brand-primary);
+}
+
+.categoryTitle {
+  @include tokens.text("label-large");
+  color: var(--color-text-primary);
+}
+
+.categoryDescription {
+  @include tokens.text("body-small");
+  color: var(--color-text-muted);
+}
+
+.faqSection {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+  list-style: none;
+}
+
+.faqItem {
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+
+  &[open] {
+    .faqChevron {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.faqQuestion {
+  @include tokens.text("label-large");
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  padding: tokens.space("md") tokens.space("lg");
+  color: var(--color-text-primary);
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+    border-radius: tokens.radius("lg");
+  }
+}
+
+.faqChevron {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+  transition: transform 0.15s ease;
+}
+
+.faqAnswer {
+  @include tokens.text("body");
+  margin: 0;
+  padding: 0 tokens.space("lg") tokens.space("lg");
+  color: var(--color-text-secondary);
+}
