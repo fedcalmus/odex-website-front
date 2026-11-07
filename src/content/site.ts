@@ -30,7 +30,11 @@ export const header: HeaderProps = {
   ],
   search: { action: "/events", placeholder: "Գագաթ, ակումբ…", label: "Որոնում" },
   auth: {
-    signIn: { label: "Մուտք", href: "/login" },
+    // Demo shortcut: there is no real auth session yet, so "Sign in" jumps
+    // straight to the Profile section (Figma "MP-09" family) instead of the
+    // login form, so the signed-in pages can be demoed without wiring up a
+    // backend session first. Swap back to "/login" once sessions exist.
+    signIn: { label: "Մուտք", href: "/profile" },
     signUp: { label: "Գրանցվել", href: "/register" },
   },
   locales,

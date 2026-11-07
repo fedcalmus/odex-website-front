@@ -1,0 +1,44 @@
+@use "abstracts" as tokens;
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: tokens.space("sm");
+}
+
+.pill {
+  @include tokens.text("action");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("3xs");
+  padding: 9px tokens.space("md");
+  border: 1px solid var(--color-border-chip);
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-chip);
+  color: var(--color-text-secondary);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.count {
+  @include tokens.text("micro");
+  opacity: 0.75;
+}
+
+.active,
+.active:hover {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-on-primary);
+}

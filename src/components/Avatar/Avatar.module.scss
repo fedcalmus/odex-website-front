@@ -1,0 +1,51 @@
+@use "abstracts" as tokens;
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-2);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.initials {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+
+  &[data-tone="0"] {
+    background-color: var(--color-brand-secondary);
+    color: var(--color-brand-on-secondary);
+  }
+
+  &[data-tone="1"] {
+    background-color: var(--color-surface-3);
+    color: var(--color-text-secondary);
+  }
+
+  &[data-tone="2"] {
+    background-color: var(--color-brand-secondary-subtle);
+    // Mint is decorative-only elsewhere (weather dot); reused here purely as a
+    // third avatar tint, not to signal wind/weather.
+    color: var(--color-weather-wind);
+  }
+}
+
+.sm {
+  @include tokens.text("micro");
+}
+
+.lg {
+  @include tokens.text("body");
+}
+
+.xl {
+  @include tokens.text("h3");
+  border: 3px solid var(--color-surface-0);
+}

@@ -1,0 +1,40 @@
+@use "abstracts" as tokens;
+
+.container {
+  @include tokens.page-container;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  padding-block: tokens.space("lg") tokens.space("3xl");
+  max-width: 760px;
+}
+
+.navWrap {
+  @include tokens.page-container;
+  padding-block: 0;
+}
+
+.title {
+  @include tokens.text("h1");
+  color: var(--color-text-primary);
+}
+
+.summary {
+  @include tokens.text("body");
+  margin-top: tokens.space("3xs");
+  color: var(--color-text-muted);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+.validLabel {
+  @include tokens.text("micro");
+  display: block;
+  margin-bottom: tokens.space("3xs");
+  color: var(--color-brand-primary);
+  text-align: right;
+}

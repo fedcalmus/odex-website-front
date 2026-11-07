@@ -1,0 +1,270 @@
+@use "abstracts" as tokens;
+
+.container {
+  @include tokens.page-container;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("2xl");
+  padding-block: tokens.space("lg") tokens.space("3xl");
+}
+
+.navWrap {
+  @include tokens.page-container;
+  padding-block: 0;
+}
+
+// ── Header block ──────────────────────────────────────────────────────────
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: tokens.space("lg");
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("lg");
+}
+
+.name {
+  @include tokens.text("h1");
+  color: var(--color-text-primary);
+}
+
+.meta {
+  @include tokens.text("body");
+  margin-top: tokens.space("3xs");
+  color: var(--color-text-muted);
+}
+
+.social {
+  @include tokens.text("body");
+  margin-top: tokens.space("xs");
+  color: var(--color-text-secondary);
+
+  strong {
+    color: var(--color-text-primary);
+  }
+}
+
+.manageLink {
+  @include tokens.text("label");
+  margin-left: tokens.space("xs");
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ── Stats row ───────────────────────────────────────────────────────────
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: tokens.space("md");
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// ── Two-column body ─────────────────────────────────────────────────────
+.body {
+  display: grid;
+  gap: tokens.space("lg");
+  grid-template-columns: 1fr;
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.chartPanel {
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+}
+
+.chartHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: tokens.space("lg");
+}
+
+.chartTitle {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.chartYear {
+  @include tokens.text("meta");
+  color: var(--color-text-muted);
+}
+
+.chartNote {
+  @include tokens.text("caption");
+  margin-top: tokens.space("md");
+  color: var(--color-text-muted);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("md");
+}
+
+.card {
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+  margin-bottom: tokens.space("xs");
+}
+
+.cardTitle {
+  @include tokens.text("label");
+  color: var(--color-text-primary);
+}
+
+.requestsMeta {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.badgeProgress {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("md");
+}
+
+.badgeProgressText {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.badgeProgressCaption {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.progressTrack {
+  height: 6px;
+  margin-top: tokens.space("sm");
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-track);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-brand-primary);
+}
+
+.followingList {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+.followingRow {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("sm");
+}
+
+.followingName {
+  @include tokens.text("caption");
+  @include tokens.truncate;
+  color: var(--color-text-primary);
+}
+
+.followingMeta {
+  @include tokens.text("micro");
+  color: var(--color-text-muted);
+}
+
+.privacyNote {
+  @include tokens.text("caption");
+  display: flex;
+  gap: tokens.space("xs");
+  color: var(--color-text-muted);
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--color-text-faint);
+  }
+}
+
+// ── Recent events / gallery ─────────────────────────────────────────────
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+  margin-bottom: tokens.space("md");
+}
+
+.sectionEyebrow {
+  @include tokens.text("overline");
+  color: var(--color-brand-primary);
+}
+
+.sectionTitle {
+  @include tokens.text("h2");
+  margin-top: tokens.space("3xs");
+  color: var(--color-text-primary);
+}
+
+.sectionLink {
+  @include tokens.text("label");
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.space("3xs");
+  color: var(--color-text-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: tokens.space("sm");
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.galleryTile {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-2);
+}
+
+.galleryImage {
+  object-fit: cover;
+}

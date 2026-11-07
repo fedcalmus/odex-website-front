@@ -1,0 +1,90 @@
+@use "abstracts" as tokens;
+
+.container {
+  @include tokens.page-container;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  padding-block: tokens.space("lg") tokens.space("3xl");
+  max-width: 720px;
+}
+
+.title {
+  @include tokens.text("h1");
+  color: var(--color-text-primary);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("md");
+  padding: tokens.space("md");
+  border-radius: tokens.radius("md");
+  background-color: var(--color-surface-1);
+}
+
+.bannerText {
+  @include tokens.text("caption");
+}
+
+.bannerTitle {
+  @include tokens.text("label");
+  display: block;
+  color: var(--color-text-primary);
+}
+
+.bannerBody {
+  color: var(--color-text-muted);
+}
+
+.search {
+  margin-top: tokens.space("sm");
+}
+
+.list {
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+  overflow: hidden;
+}
+
+.clubRow {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("md");
+  padding: tokens.space("md");
+  border-bottom: 1px solid var(--color-border-default);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.clubBody {
+  flex: 1;
+  min-width: 0;
+}
+
+// FollowButton defaults to 100% width (it's meant for a full-width card
+// context) — override for this row context, same fix as PlaceClubRow.
+.follow {
+  flex-shrink: 0;
+  width: auto !important;
+}
+
+.clubName {
+  @include tokens.text("label");
+  @include tokens.truncate;
+  color: var(--color-text-primary);
+}
+
+.clubMeta {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.footnote {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}

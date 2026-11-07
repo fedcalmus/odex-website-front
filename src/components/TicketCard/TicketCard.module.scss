@@ -1,0 +1,53 @@
+@use "abstracts" as tokens;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 280px;
+  padding: tokens.space("md");
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-inverse);
+  color: var(--color-on-inverse);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+  margin-bottom: tokens.space("md");
+}
+
+.title {
+  @include tokens.text("label");
+  color: var(--color-on-inverse);
+}
+
+.valid {
+  @include tokens.text("micro");
+  flex-shrink: 0;
+  padding: 2px tokens.space("xs");
+  border-radius: tokens.radius("full");
+  // A light tint reads correctly on the card's white ground, unlike the
+  // dark-surface badge colours used everywhere else in this (otherwise
+  // all-dark) UI.
+  background-color: var(--color-difficulty-easy-bg);
+  color: var(--color-difficulty-easy-text);
+}
+
+.qrWrap {
+  display: flex;
+  justify-content: center;
+  padding: tokens.space("sm");
+  border-radius: tokens.radius("sm");
+  background-color: #fff;
+}
+
+.code {
+  @include tokens.text("mono");
+  margin-top: tokens.space("md");
+  color: var(--color-on-inverse);
+  text-align: center;
+  letter-spacing: 0.08em;
+}

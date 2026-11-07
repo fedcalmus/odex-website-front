@@ -86,7 +86,8 @@
   display: inline-flex;
 }
 
-.searchLink {
+.searchLink,
+.iconLink {
   align-items: center;
   justify-content: center;
   width: tokens.$target-min;
@@ -98,6 +99,29 @@
   &:hover {
     background-color: var(--color-surface-1);
   }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+// The signed-in trio (search icon / bell / avatar): unlike `.searchLink`
+// (which only appears below xl, in place of the full search field) this is
+// visible at every width — there is no wide "SearchField" equivalent once
+// signed in.
+.iconLink {
+  display: inline-flex;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("xs");
+}
+
+.avatarLink {
+  display: inline-flex;
+  border-radius: tokens.radius("full");
 
   &:focus-visible {
     @include tokens.focus-ring;

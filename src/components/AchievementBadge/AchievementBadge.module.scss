@@ -1,0 +1,42 @@
+@use "abstracts" as tokens;
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-faint);
+}
+
+.earned {
+  color: var(--color-text-primary);
+}
+
+.ring {
+  overflow: visible;
+}
+
+.track {
+  stroke: var(--color-border-default);
+}
+
+.fill {
+  stroke: var(--color-brand-primary);
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+
+.label {
+  @include tokens.text("caption");
+  max-width: 72px;
+  text-align: center;
+  color: inherit;
+}

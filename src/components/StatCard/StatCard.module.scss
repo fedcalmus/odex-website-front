@@ -1,0 +1,26 @@
+@use "abstracts" as tokens;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("xs");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+}
+
+.icon {
+  color: var(--color-brand-primary);
+}
+
+.label {
+  @include tokens.text("meta");
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.value {
+  @include tokens.text("stat");
+  color: var(--color-text-primary);
+}

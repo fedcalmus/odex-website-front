@@ -1,0 +1,141 @@
+@use "abstracts" as tokens;
+
+.row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("md");
+  padding: tokens.space("md");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("lg");
+  background-color: var(--color-surface-1);
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  // Below "md" the action column (price/ticket/rate button) no longer fits
+  // beside date + thumb + text without clipping — wrap it onto its own line.
+  @include tokens.respond-to("md") {
+    flex-wrap: nowrap;
+  }
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  padding-block: tokens.space("xs");
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-surface-2);
+}
+
+.day {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.month {
+  @include tokens.text("micro");
+  color: var(--color-text-muted);
+}
+
+.thumb {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: tokens.radius("sm");
+  background-color: var(--color-surface-2);
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.clubLine {
+  display: flex;
+  align-items: center;
+  gap: tokens.space("3xs");
+  margin-bottom: tokens.space("3xs");
+}
+
+.clubLogo {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: tokens.radius("full");
+  background-color: var(--color-surface-3);
+}
+
+.clubName {
+  @include tokens.text("caption");
+  @include tokens.truncate;
+  color: var(--color-text-muted);
+}
+
+.title {
+  @include tokens.text("label");
+  @include tokens.truncate;
+  color: var(--color-text-primary);
+}
+
+.link {
+  position: relative;
+  color: inherit;
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+// Stretched-link pattern: the whole row is clickable, only the title text is underlined on hover.
+.linkStretch {
+  position: absolute;
+  inset: 0;
+}
+
+.metaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("xs");
+  margin-top: tokens.space("3xs");
+}
+
+.meta {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}
+
+.action {
+  position: relative;
+  flex-shrink: 0;
+  margin-left: auto;
+  text-align: right;
+
+  // Force its own full-width line below "md" (paired with .row's flex-wrap)
+  // instead of letting it squeeze into whatever space is left.
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @include tokens.respond-to("md") {
+    flex-basis: auto;
+    display: block;
+  }
+}

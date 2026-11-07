@@ -1,0 +1,46 @@
+@use "abstracts" as tokens;
+
+.chart {
+  margin: 0;
+}
+
+.bars {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: end;
+  gap: tokens.space("xs");
+  height: 160px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.track {
+  display: flex;
+  align-items: end;
+  flex: 1;
+  width: 100%;
+}
+
+.bar {
+  width: 100%;
+  min-height: 0;
+  border-radius: tokens.radius("xs") tokens.radius("xs") 0 0;
+  background-color: var(--color-brand-primary);
+}
+
+.empty {
+  background-color: var(--color-border-default);
+  min-height: 2px;
+}
+
+.label {
+  @include tokens.text("micro");
+  margin-top: tokens.space("xs");
+  color: var(--color-text-muted);
+}

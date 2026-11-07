@@ -110,6 +110,22 @@ export function getDayLabel(iso: string): DayLabel {
   };
 }
 
+export interface DateBox {
+  /** "28" */
+  day: string;
+  /** Three-letter caps month abbreviation: "ՍԵՊ". */
+  monthShort: string;
+}
+
+/** The stacked date tile used on booking/saved rows (Figma "My events — MP-06 · rows"). */
+export function getDateBox(iso: string): DateBox {
+  const date = new Date(iso);
+  return {
+    day: dayNumberFormat.format(date),
+    monthShort: monthFormat.format(date).slice(0, 3).toLocaleUpperCase("hy"),
+  };
+}
+
 /** "11–13 սեպտեմբերի" (genitive month, as after a date range). */
 export function formatDateRange(fromIso: string, toIso: string): string {
   const from = new Date(fromIso);

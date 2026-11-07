@@ -1,0 +1,152 @@
+@use "abstracts" as tokens;
+
+.container {
+  @include tokens.page-container;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+  padding-block: tokens.space("lg") tokens.space("3xl");
+}
+
+.navWrap {
+  @include tokens.page-container;
+  padding-block: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: tokens.space("md");
+}
+
+.title {
+  @include tokens.text("h1");
+  color: var(--color-text-primary);
+}
+
+.summary {
+  @include tokens.text("body");
+  margin-top: tokens.space("3xs");
+  color: var(--color-text-muted);
+}
+
+.body {
+  display: grid;
+  gap: tokens.space("lg");
+  grid-template-columns: 1fr;
+
+  @include tokens.respond-to("lg") {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("lg");
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+// ── Active ticket hero ──────────────────────────────────────────────────
+.hero {
+  display: grid;
+  gap: tokens.space("lg");
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-brand-primary);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+
+  @include tokens.respond-to("md") {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.heroEyebrow {
+  @include tokens.text("overline");
+  grid-column: 1 / -1;
+  color: var(--color-brand-primary);
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+.heroRow {
+  @include tokens.text("body");
+  display: flex;
+  align-items: center;
+  gap: tokens.space("xs");
+  color: var(--color-text-secondary);
+
+  svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+  }
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: tokens.space("xs");
+  margin-top: tokens.space("xs");
+}
+
+.heroFooter {
+  @include tokens.text("caption");
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: tokens.space("sm");
+  padding-top: tokens.space("md");
+  border-top: 1px solid var(--color-border-default);
+  color: var(--color-text-muted);
+}
+
+.cancelLink {
+  color: var(--color-state-danger);
+}
+
+// ── Status list ─────────────────────────────────────────────────────────
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+.sectionHead {
+  @include tokens.text("meta");
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.space("sm");
+}
+
+.validLabel {
+  @include tokens.text("micro");
+  display: block;
+  margin-bottom: tokens.space("3xs");
+  color: var(--color-brand-primary);
+  text-align: right;
+}
+
+.cancelledNote {
+  @include tokens.text("caption");
+  color: var(--color-text-muted);
+}

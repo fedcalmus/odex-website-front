@@ -1,0 +1,65 @@
+@use "abstracts" as tokens;
+
+.panel {
+  padding: tokens.space("lg");
+  border: 1px solid var(--color-border-default);
+  border-radius: tokens.radius("card");
+  background-color: var(--color-surface-1);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: tokens.space("md");
+}
+
+.title {
+  @include tokens.text("h3");
+  color: var(--color-text-primary);
+}
+
+.count {
+  @include tokens.text("meta");
+  color: var(--color-text-muted);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: tokens.space("xs");
+  margin-bottom: tokens.space("lg");
+}
+
+.tab {
+  @include tokens.text("action");
+  padding: tokens.space("3xs") tokens.space("sm");
+  border: 1px solid transparent;
+  border-radius: tokens.radius("full");
+  background: none;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    @include tokens.focus-ring;
+  }
+}
+
+.active {
+  background-color: var(--color-surface-3);
+  color: var(--color-brand-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: tokens.space("lg") tokens.space("sm");
+}
